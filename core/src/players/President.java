@@ -36,7 +36,7 @@ public class President {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
+    public String getLastName() {
         return secondName;
     }
 

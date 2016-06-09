@@ -9,32 +9,23 @@ import helpers.GameInfo;
 /**
  * Created by Антон on 07.06.2016.
  */
-public class NumberCard implements Card {
-
-    private int number;
-    float x,y;
-    Sprite card;
-    BitmapFont bitmapFont;
-    int positionFromBottom;
+public class NumberCard extends Card {
 
     public NumberCard(Sprite card, int numberOfPresident, int positionFromBottom) {
-        this.number = numberOfPresident;
-        this.card = card;
-        this.positionFromBottom = positionFromBottom;
-        card.flip(true,false);
-        x = -300;
-        y = positionFromBottom * card.getHeight();
-        bitmapFont = new BitmapFont();
+        super(card,numberOfPresident,positionFromBottom);
+        x = -370;
     }
 
+    @Override
     public boolean draw(Batch batch) {
-        batch.draw(card,x,y);
-        bitmapFont.draw(batch,Integer.toString(number),x+285, y+35);
+        super.draw(batch);
+        bitmapFont.draw(batch, Integer.toString(number), x + 360, y + 35);
         updatePushingCard();
-        return (x == -280);
+        return (x == -355);
     }
 
+//    @Override
     private void updatePushingCard() {
-        if (x<=-280) x = x+GameInfo.STEP_FOR_TETRIS_X;
+        if (x <= -355) x = x + GameInfo.STEP_FOR_TETRIS_X;
     }
 }

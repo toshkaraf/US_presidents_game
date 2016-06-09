@@ -14,6 +14,12 @@ public class GameManager {
 
     public static final Array<President> PRESIDENTS_ARRAY = initializePresidentsArray();
 
+    private static GameManager ourInstance = new GameManager();
+
+    public static GameManager getInstance() {
+        return ourInstance;
+    }
+
     private static Array<President> initializePresidentsArray() {
         Array<President> presidentsArray = new Array<President>();
 

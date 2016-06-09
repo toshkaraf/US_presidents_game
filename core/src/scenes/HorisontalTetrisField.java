@@ -14,36 +14,34 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
-import java.util.Map;
-
 import cards.NumberCard;
+import cards.PresidentNameCard;
 import helpers.GameInfo;
-import helpers.GameManager;
-import players.President;
 
 /**
  * Created by Антон on 01.06.2016.
  */
-public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
+public class HorisontalTetrisField extends ScreenAdapter {
 
     SpriteBatch batch;
     Sprite background;
-    Array<President> presidentPlayers;
-    Map<Float, String> namesOfDonePresidents;
+    Array<Integer> presidentsNumbersArray = new Array<Integer>();
     Sprite player;
     Texture blueCard, redCard;
     NumberCard numberCard;
+    PresidentNameCard nameCard;
     private Viewport viewport;
     private OrthographicCamera camera;
-    President currentPlayerPresident;
+
     Boolean isNumberCardPrepared = false;
-    President currentPresident;
+    int currentPresidentNumber;
     Boolean isGameFieldPrepared = false;
     int numberOfFirstVisiblePresident, numberOfLastVisiblePresident;
     int currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom;
-    Array <NumberCard> fixedNumberCardsArray = new Array<NumberCard>();
+    Array<NumberCard> fixedNumberCardsArray = new Array<NumberCard>();
+    Array<PresidentNameCard> fixedNameCardsArray = new Array<PresidentNameCard>();
 
-    public UsaPresidentTetrisHorisontalMove(MainGame game, int numberOfFirstVisiblePresident, int numberOfLastVisiblePresident) {
+    public HorisontalTetrisField(MainGame game, int numberOfFirstVisiblePresident, int numberOfLastVisiblePresident) {
         this.numberOfFirstVisiblePresident = numberOfFirstVisiblePresident;
         this.numberOfLastVisiblePresident = numberOfLastVisiblePresident;
         currentNumberOfPresidentForDrawingGameField = numberOfFirstVisiblePresident;
@@ -53,41 +51,36 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
         redCard = new Texture(Gdx.files.internal("cards/card_of_president_red.png"));
         blueCard = new Texture(Gdx.files.internal("cards/card_of_president.png"));
         background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_clear.jpg")),
-                0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (numberOfLastVisiblePresident - numberOfFirstVisiblePresident+1)));
+                0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (numberOfLastVisiblePresident - numberOfFirstVisiblePresident + 1)));
 
         camera = new OrthographicCamera();
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
 
-        presidentPlayers = GameManager.PRESIDENTS_ARRAY;
-        for (President president:presidentPlayers) {
-            System.out.println(president.getFirstName());
-            System.out.println(president.getSecondName());
-            System.out.println(president.getNumber());
-            System.out.println(president.getInitialDate());
-            System.out.println(president.getFinalDate());
-        }
-        numberCard = new NumberCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField,currentPositionFromBottom);
+        numberCard = new NumberCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom);
+        nameCard = new PresidentNameCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom);
+
+        initPresidentsNumbersArray();
         setNewPresidentAndPosition();
 
     }
 
+    private void initPresidentsNumbersArray() {
+        for (int i = numberOfFirstVisiblePresident; i <= numberOfLastVisiblePresident; i++)
+            presidentsNumbersArray.add(i);
+    }
+
 
     private void prepareGameField() {
-        if (showNumbersOfPresidents()) isGameFieldPrepared = true;
-
-    }
-
-    private boolean showNumbersOfPresidents() {
-
         if (numberCard.draw(batch)) {
             fixedNumberCardsArray.add(numberCard);
+            fixedNameCardsArray.add(nameCard);
             numberCard = new NumberCard(new Sprite(blueCard), ++currentNumberOfPresidentForDrawingGameField, ++currentPositionFromBottom);
-        if (currentNumberOfPresidentForDrawingGameField > numberOfLastVisiblePresident) return  true;
+            nameCard = new PresidentNameCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom);
+            if (currentNumberOfPresidentForDrawingGameField > numberOfLastVisiblePresident)
+                isGameFieldPrepared = true;
         }
-        return false;
     }
-
 
     @Override
     public void render(float delta) {
@@ -100,7 +93,7 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
             batch.begin();
             batch.draw(background, 0, 0);
             prepareGameField();
-            drawFixedNumberCards();
+            drawFixedCards();
             batch.end();
         } else {
             if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
@@ -110,7 +103,7 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
                 batch.setTransformMatrix(camera.view);
                 batch.begin();
                 batch.draw(background, 0, 0);
-                drawFixedNumberCards();
+                drawFixedCards();
                 updatePlayer();
                 batch.draw(player, player.getX(), player.getY());
                 batch.end();
@@ -118,9 +111,12 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
         }
     }
 
-    private void drawFixedNumberCards() {
-        for (NumberCard numbercard :fixedNumberCardsArray){
+    private void drawFixedCards() {
+        for (NumberCard numbercard : fixedNumberCardsArray) {
             numbercard.draw(batch);
+        }
+        for (PresidentNameCard nameCard : fixedNameCardsArray) {
+            nameCard.draw(batch);
         }
     }
 
@@ -176,7 +172,8 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
     }
 
     private void setNewPresidentAndPosition() {
-        if (presidentPlayers.size > 0) currentPlayerPresident = presidentPlayers.removeIndex(0);
+        if (presidentsNumbersArray.size > 0)
+            currentPresidentNumber = presidentsNumbersArray.removeIndex(0);
         else gameOver();
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
@@ -191,8 +188,9 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
     }
 
     private boolean checkAnswer() {
-        return ((player.getX() >= convertDateToCoordinateX(currentPlayerPresident.getInitialDate())) &&
-                (player.getX() <= convertDateToCoordinateX(currentPlayerPresident.getFinalDate())));
+//        return ((player.getX() >= convertDateToCoordinateX(currentPlayerPresident.getInitialDate())) &&
+//                (player.getX() <= convertDateToCoordinateX(currentPlayerPresident.getFinalDate())));
+        return true;
     }
 
     private void gameOver() {
