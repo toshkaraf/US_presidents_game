@@ -41,7 +41,7 @@ public class UsaPresidentTetrisVerticalDrop extends ScreenAdapter {
         camera = new OrthographicCamera();
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
-        presidentPlayers = GameManager.initializePresidentsArray();
+        presidentPlayers = GameManager.PRESIDENTS_ARRAY;
         setNewPresidentAndPosition();
     }
 

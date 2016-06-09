@@ -59,7 +59,7 @@ public class UsaPresidentTetrisHorisontalMove extends ScreenAdapter {
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
 
-        presidentPlayers = GameManager.initializePresidentsArray();
+        presidentPlayers = GameManager.PRESIDENTS_ARRAY;
         for (President president:presidentPlayers) {
             System.out.println(president.getFirstName());
             System.out.println(president.getSecondName());
