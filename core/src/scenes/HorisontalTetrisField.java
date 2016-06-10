@@ -28,22 +28,17 @@ public class HorisontalTetrisField extends ScreenAdapter {
     Sprite background;
     Array<Integer> presidentsNumbersArray = new Array<Integer>();
     Sprite player;
-    Texture blueCard, redCard;
-    NumberCard numberCard;
-    PresidentNameCard nameCard;
     private Viewport viewport;
     private OrthographicCamera camera;
     DecoratorFieldWIthCards decoratorFieldWIthCards;
-    int currentPresidentNumber;
-    Boolean isFieldDecorated = false;
+    int currentWrightPresident;
     int numberOfFirstPresident, numberOfLastPresident;
-    int currentPositionFromBottom;
 
 
     public HorisontalTetrisField(MainGame game, int numberOfFirstPresident, int numberOfLastPresident) {
         this.numberOfFirstPresident = numberOfFirstPresident;
         this.numberOfLastPresident = numberOfLastPresident;
-        decoratorFieldWIthCards = new DecoratorFieldWIthCards(game, 4, numberOfFirstPresident, numberOfLastPresident);
+        decoratorFieldWIthCards = new DecoratorFieldWIthCards(game,22, 4, numberOfFirstPresident, numberOfLastPresident);
         background = decoratorFieldWIthCards.getBackgroundSprite();
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         batch = game.getBatch();
@@ -51,6 +46,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
 
+        GameManager.counterOfPushedCards = 0;
         setNewPresidentAndPosition();
     }
 
@@ -60,11 +56,13 @@ public class HorisontalTetrisField extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
 
-        if (GameManager.counterOfPushedCards <= 2000) {
+        if (GameManager.counterOfPushedCards <= 10000) {
+//            if (true) {
             batch.setProjectionMatrix(camera.projection);
             batch.setTransformMatrix(camera.view);
             decoratorFieldWIthCards.getStage().draw();
             decoratorFieldWIthCards.getStage().act();
+//            decoratorFieldWIthCards.getStage().actAndDraw(camera);
         } else {
             if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
                 queryInput();
@@ -134,7 +132,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
     private void setNewPresidentAndPosition() {
 //        if (presidentsNumbersArray.size > 0)
-//            currentPresidentNumber = presidentsNumbersArray.removeIndex(0);
+//            currentWrightPresident = presidentsNumbersArray.removeIndex(0);
 //        else gameOver();
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);

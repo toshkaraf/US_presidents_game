@@ -12,23 +12,47 @@ import players.President;
  */
 public class GameManager {
 
-    public static int counterOfPushedCards = 0; // count all pushed cards of both kinds on the right and left part of screen (numbers & dates)
-
-    public static final Array<President> PRESIDENTS_ARRAY = initializePresidentsArray();
-
     private static GameManager ourInstance = new GameManager();
+
+    public static int counterOfPushedCards = 0;
+
+    public static final President[] PRESIDENTS_ARRAY = initializePresidentsArray();
+
+    public static int firsPresidentInRange;
+    public static int lastPresidentInRange;
+    public static int currentWrightPresident;
+    public static int quantityOfHints;
+
+    public static void setFirsPresidentInRange(int firsPresidentInRange) {
+        GameManager.firsPresidentInRange = firsPresidentInRange-1;
+    }
+
+    public static void setLastPresidentInRange(int lastPresidentInRange) {
+        GameManager.lastPresidentInRange = lastPresidentInRange-1;
+    }
+
+    public static void setCurrentWrightPresident(int currentWrightPresident) {
+        GameManager.currentWrightPresident = currentWrightPresident-1;
+    }
+
+    public static void setQuantityOfHints(int quantityOfHints) {
+        GameManager.quantityOfHints = quantityOfHints;
+    }
+
+
 
     public static GameManager getInstance() {
         return ourInstance;
     }
 
-    private static Array<President> initializePresidentsArray() {
-        Array<President> presidentsArray = new Array<President>();
+    private static President[] initializePresidentsArray() {
+        President[] presidentsArray = new President[44];
 
         Json json = new Json();
+        int presidentNumber = 0;
         Array<JsonValue> list = json.fromJson(Array.class, Gdx.files.internal("data/presidents.json"));
         for (JsonValue v : list) {
-            presidentsArray.add(json.readValue(President.class, v));
+            presidentsArray[presidentNumber++] = json.readValue(President.class, v);
         }
         return presidentsArray;
     }

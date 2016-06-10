@@ -11,17 +11,19 @@ import helpers.GameManager;
  */
 public class NumberCard extends Card {
 
-    private final int finalPositionOfCard_X = -355;
-
     public NumberCard(Sprite card, int numberOfPresident, int positionFromBottom) {
         super(card, numberOfPresident, positionFromBottom);
-        x = -370;
+        x = -400;
+        finalPositionOfCard_X = -355;
     }
 
     @Override
     public void draw(Batch batch, float parentAlpha) {
-        if (draw(batch)) GameManager.counterOfPushedCards++; //increase counter of pushed to the end
-        bitmapFont.draw(batch, Integer.toString(number), x + 360, y + 35);
+        if (draw(batch)) {
+            isCardDone = true;
+            GameManager.counterOfPushedCards++; //increase counter of pushed to the end
+        }
+        bitmapFont.draw(batch, Integer.toString(number+1), x + 360, y + 35);
     }
 
     @Override

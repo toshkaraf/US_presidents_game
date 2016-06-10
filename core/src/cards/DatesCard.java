@@ -11,18 +11,18 @@ import helpers.GameManager;
  */
 public class DatesCard extends Card {
 
-    private int finalPositionOfCard_X = 440;
-
     public DatesCard (Sprite card, int numberOfPresident, int positionFromBottom) {
         super(card,numberOfPresident,positionFromBottom);
-        x = 800;
+        finalPositionOfCard_X = GameInfo.WORLD_WIDTH - (45 * (GameManager.PRESIDENTS_ARRAY[numberOfPresident].getFinalDate()-
+                GameManager.PRESIDENTS_ARRAY[numberOfPresident].getInitialDate())+1);
+        x = GameInfo.WORLD_WIDTH;
     }
 
     @Override
     public void draw(Batch batch, float parentAlfa) {
-        super.draw(batch);
-        bitmapFont.draw(batch, GameManager.PRESIDENTS_ARRAY.get(number).getInitialDate() +
-                " - " + GameManager.PRESIDENTS_ARRAY.get(number).getFinalDate(),x+35, y+35);
+        if (super.draw(batch)) isCardDone = true;
+        bitmapFont.draw(batch, GameManager.PRESIDENTS_ARRAY[number].getInitialDate() +
+                " - " + GameManager.PRESIDENTS_ARRAY[number].getFinalDate(),x+35, y+35);
     }
 
     public void act(float delta) {

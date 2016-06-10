@@ -19,6 +19,7 @@ import cards.Card;
 import cards.DatesCard;
 import cards.NumberCard;
 import cards.PresidentNameCard;
+import helpers.CardsStage;
 import helpers.GameInfo;
 
 /**
@@ -29,11 +30,11 @@ public class DecoratorFieldWIthCards {
 
     private SpriteBatch batch;
     private MainGame game;
-    private Stage stage;
+    private CardsStage stage;
     private Sprite blueCard, redCard;
     private Sprite backgroundSprite;
     private Viewport gameViewport;
-    private int currentPresident, firstPresident, lastPresident;
+    private int currentWrightPresident, firstPresident, lastPresident;
     private TypeOfCard[] presidentsArray = new TypeOfCard[44];
     private Array<NumberCard> numberCardArray;
     private Array<Card> presidentCardArray;
@@ -42,11 +43,12 @@ public class DecoratorFieldWIthCards {
     enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
 
-    public DecoratorFieldWIthCards(MainGame game, int quantityOfHints, int firstPresident, int lastPresident) {
+    public DecoratorFieldWIthCards(MainGame game, int currentWrightPresident, int quantityOfHints, int firstPresident, int lastPresident) {
 
         this.game = game;
-        this.firstPresident = firstPresident;
-        this.lastPresident = lastPresident;
+        this.firstPresident = firstPresident-1;
+        this.lastPresident = lastPresident-1;
+        this.currentWrightPresident = currentWrightPresident-1;
         numberCardArray = new Array<NumberCard>();
         presidentCardArray = new Array<Card>();
 
@@ -61,30 +63,33 @@ public class DecoratorFieldWIthCards {
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         camera.position.set(backgroundSprite.getWidth() / 2, backgroundSprite.getHeight() / 2, 0);
 
-        stage = new Stage(gameViewport, batch);
-        currentPresident = firstPresident - 1;
+        stage = new CardsStage(gameViewport, batch);
 
         final Actor background = new Actor() {
             public void draw(Batch batch, float alpha) {
-                batch.draw(backgroundSprite, 0,0);
+                batch.draw(backgroundSprite, 0, 0);
             }
         };
 
         stage.addActor(background);
 
-        initPresidentArray(quantityOfHints);
+        initPresidentArray(quantityOfHints-1);
         initCardsArrays();
     }
 
     private void initPresidentArray(int quantityOfHints) {
-        int hint = 1;
-        Random random = new Random(100);
-        for (int president = firstPresident; president <= lastPresident; president++) {
-            boolean isHint = random.nextBoolean();
-            if (isHint && hint++ <= quantityOfHints)
-                this.presidentsArray[president] = TypeOfCard.RedDate;
-            else this.presidentsArray[president] = TypeOfCard.BlueDate;
+        for (int president = firstPresident; president <= lastPresident; president++)
+            this.presidentsArray[president] = TypeOfCard.BlueDate;
+        // replace some values with hint red values
+        Array<Integer> hintArray = new Array<Integer>(quantityOfHints);
+        Random random = new Random();
+        Integer hint;
+        for (int h=0; h<=quantityOfHints; h++) {
+            do hint = firstPresident + random.nextInt(lastPresident - firstPresident);
+            while (hintArray.contains(hint, true) | hint ==currentWrightPresident);
+            this.presidentsArray[hint] = TypeOfCard.RedDate;
         }
+        presidentsArray[currentWrightPresident] = TypeOfCard.RedDate;
     }
 
     private void initCardsArrays() {
@@ -101,7 +106,7 @@ public class DecoratorFieldWIthCards {
         }
     }
 
-    public Stage getStage() {
+    public CardsStage getStage() {
         return stage;
     }
 

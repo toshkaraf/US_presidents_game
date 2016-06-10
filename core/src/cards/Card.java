@@ -3,10 +3,7 @@ package cards;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
-
-import helpers.GameInfo;
 
 /**
  * Created by Антон on 07.06.2016.
@@ -16,7 +13,8 @@ public class Card extends Button{
     float x,y;
     Sprite card;
     BitmapFont bitmapFont;
-    int positionFromBottom;
+    int positionFromBottom, finalPositionOfCard_X;
+    boolean isCardDone = false;
 
     public Card (Sprite card){
         this.card = card;
@@ -33,7 +31,11 @@ public class Card extends Button{
 
     public boolean draw(Batch batch) {
         batch.draw(card, x, y);
-        return false;
+        return (x <= finalPositionOfCard_X) ;
+    }
+
+    public boolean isCardDone() {
+        return isCardDone;
     }
 
 }
