@@ -5,16 +5,25 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Group;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
+import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
+import cards.MenuCard;
 import helpers.GameInfo;
+import scenes.TetrisGameMode;
+import scenes.TetrisLearnMode;
+import scenes.TetrisReview;
+import scenes.TetrisTrainingMode;
 
 
 /**
@@ -26,17 +35,12 @@ public class MainMenuButtons {
     private Stage stage;
     private Viewport gameViewport;
 
-    private Group reviewButton;
-    private Group highscoreButton;
-    private Group playButton;
-    private Group trainingButton;
-    private Group learnButton;
 
-    private ImageButton reviewButtonImage;
-    private ImageButton highscoreButtonImage;
-    private ImageButton playButtonImage;
-    private ImageButton trainingButtonImage;
-    private ImageButton learnButtonImage;
+    private MenuCard reviewButton;
+    private MenuCard highscoreButton;
+    private MenuCard playButton;
+    private MenuCard trainingButton;
+    private MenuCard learnButton;
     private ImageButton musicBtn;
 
     public MainMenuButtons(MainGame game) {
@@ -50,14 +54,13 @@ public class MainMenuButtons {
         Gdx.input.setInputProcessor(stage);
 
         createAndPositionButtons();
-//        addAllListeners();
+        addAllListeners();
 
-        stage.addActor(reviewButtonImage);
-        stage.addActor(learnButtonImage);
-        stage.addActor(trainingButtonImage);
-        stage.addActor(playButtonImage);
-
-        stage.addActor(highscoreButtonImage);
+        stage.addActor(reviewButton);
+        stage.addActor(learnButton);
+        stage.addActor(trainingButton);
+        stage.addActor(playButton);
+        stage.addActor(highscoreButton);
 
 //        stage.addActor(musicBtn);
 
@@ -67,88 +70,79 @@ public class MainMenuButtons {
 
     void createAndPositionButtons() {
 
-        reviewButtonImage = new ImageButton(new SpriteDrawable(new Sprite(
-                new Texture("cards/card_of_president_red.png"))));
+        reviewButton = new MenuCard(new Sprite(new Texture("cards/card_of_president_red.png")),
+                -400, GameInfo.WORLD_WIDTH / 2 - 198 - 100, GameInfo.WORLD_HEIGHT / 2 + 90, "REVIEW PRESIDENT");
 
-        learnButtonImage = new ImageButton(new SpriteDrawable(new Sprite(
-                new Texture("cards/card_of_president.png"))));
+        learnButton = new MenuCard(new Sprite(new Texture("cards/card_of_president.png")),
+                1200, GameInfo.WORLD_WIDTH / 2 - 198 - 50, GameInfo.WORLD_HEIGHT / 2 + 30, "REVIEW PRESIDENT");
 
-        trainingButtonImage = new ImageButton(new SpriteDrawable(new Sprite(
-                new Texture("cards/card_of_president_red.png"))));
+        trainingButton = new MenuCard(new Sprite(new Texture("cards/card_of_president_red.png")),
+                -400, GameInfo.WORLD_WIDTH / 2 - 198, GameInfo.WORLD_HEIGHT / 2 - 30, "REVIEW PRESIDENT");
 
-        playButtonImage = new ImageButton(new SpriteDrawable(new Sprite(
-                new Texture("cards/card_of_president.png"))));
+        playButton = new MenuCard(new Sprite(new Texture("cards/card_of_president.png")),
+                1200, GameInfo.WORLD_WIDTH / 2 - 198 + 50, GameInfo.WORLD_HEIGHT / 2 - 90, "REVIEW PRESIDENT");
 
-        highscoreButtonImage = new ImageButton(new SpriteDrawable(new Sprite(
-                new Texture("cards/card_of_president_red.png"))));
+        highscoreButton = new MenuCard(new Sprite(new Texture("cards/card_of_president_red.png")),
+                -400, GameInfo.WORLD_WIDTH / 2 - 198 + 100, GameInfo.WORLD_HEIGHT / 2 - 150 , "REVIEW PRESIDENT");
 
 
 //        musicBtn = new ImageButton(new SpriteDrawable(new Sprite(
-//                new Texture("Buttons/Main Menu/Music On.png"))));
-
-
-        reviewButtonImage.setPosition(GameInfo.WORLD_WIDTH / 2 - 80, GameInfo.WORLD_HEIGHT / 2 + 50,
-                Align.center);
-
-        learnButtonImage.setPosition(GameInfo.WORLD_WIDTH / 2 - 60, GameInfo.WORLD_HEIGHT / 2 - 20,
-                Align.center);
-
-        trainingButtonImage.setPosition(GameInfo.WORLD_WIDTH / 2 - 40, GameInfo.WORLD_HEIGHT / 2 - 90,
-                Align.center);
-
-        playButtonImage.setPosition(GameInfo.WORLD_WIDTH / 2 - 20, GameInfo.WORLD_HEIGHT / 2 - 160,
-                Align.center);
-
+//                new Texture("cards/card_of_president_red.png"))));
+//
 //        musicBtn.setPosition(GameInfo.WORLD_WIDTH - 13, 13, Align.bottomRight);
 
     }
 
 
-//    void addAllListeners() {
-//        reviewButtonImage.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                // any code that we type will be executed when we press the play button
-//                GameManager.getInstance().gameStartedFromMainMenu = true;
-//
-//                RunnableAction run = new RunnableAction();
-//                run.setRunnable(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        game.setScreen(new Gameplay(game));
-//                    }
-//                });
-//
-//                SequenceAction sa = new SequenceAction();
-//                sa.addAction(Actions.fadeOut(1f));
-//                sa.addAction(run);
-//
-//                stage.addAction(sa);
-//
-//            }
-//        });
-//
-//        highscoreButtonImage.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                game.setScreen(new Highscore(game));
-//            }
-//        });
-//
-//        playButtonImage.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                game.setScreen(new Options(game));
-//            }
-//        });
-//
-//        learnButtonImage.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//
-//            }
-//        });
-//
+        void addAllListeners() {
+        reviewButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                RunnableAction run = new RunnableAction();
+                run.setRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+                        game.setScreen(new TetrisReview(game, 1, 44));
+                    }
+                });
+
+                SequenceAction sa = new SequenceAction();
+                sa.addAction(Actions.fadeOut(1f));
+                sa.addAction(run);
+
+                stage.addAction(sa);
+
+            }
+        });
+
+            learnButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new TetrisLearnMode(game, 1, 44));
+            }
+        });
+
+        trainingButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new TetrisTrainingMode(game, 1, 44));
+            }
+        });
+
+        playButton.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                game.setScreen(new TetrisTrainingMode(game, 1, 44));
+            }
+        });
+
+//            highscoreButton.addListener(new ChangeListener() {
+//                @Override
+//                public void changed(ChangeEvent event, Actor actor) {
+//                    game.setScreen(new (game, 1, 44));
+//                }
+//            });
+
 //        musicBtn.addListener(new ChangeListener() {
 //            @Override
 //            public void changed(ChangeEvent event, Actor actor) {
@@ -162,7 +156,7 @@ public class MainMenuButtons {
 //                GameManager.getInstance().saveData();
 //            }
 //        });
-//    }
+    }
 //
 //    void checkMusic() {
 //        if(GameManager.getInstance().gameData.isMusicOn()) {

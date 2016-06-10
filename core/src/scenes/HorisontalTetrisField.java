@@ -33,7 +33,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private Viewport viewport;
     private OrthographicCamera camera;
 
-    Boolean isNumberCardPrepared = false;
     int currentPresidentNumber;
     Boolean isGameFieldPrepared = false;
     int numberOfFirstVisiblePresident, numberOfLastVisiblePresident;
@@ -42,15 +41,15 @@ public class HorisontalTetrisField extends ScreenAdapter {
     Array<PresidentNameCard> fixedNameCardsArray = new Array<PresidentNameCard>();
 
     public HorisontalTetrisField(MainGame game, int numberOfFirstVisiblePresident, int numberOfLastVisiblePresident) {
-        this.numberOfFirstVisiblePresident = numberOfFirstVisiblePresident;
-        this.numberOfLastVisiblePresident = numberOfLastVisiblePresident;
-        currentNumberOfPresidentForDrawingGameField = numberOfFirstVisiblePresident;
+        this.numberOfFirstVisiblePresident = numberOfFirstVisiblePresident - 1;
+        this.numberOfLastVisiblePresident = numberOfLastVisiblePresident - 1;
+        currentNumberOfPresidentForDrawingGameField = numberOfFirstVisiblePresident - 1;
         currentPositionFromBottom = 0;
         batch = game.getBatch();
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         redCard = new Texture(Gdx.files.internal("cards/card_of_president_red.png"));
         blueCard = new Texture(Gdx.files.internal("cards/card_of_president.png"));
-        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_clear.jpg")),
+        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
                 0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (numberOfLastVisiblePresident - numberOfFirstVisiblePresident + 1)));
 
         camera = new OrthographicCamera();

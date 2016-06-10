@@ -9,7 +9,7 @@ public class GameInfo {
     public static final int WORLD_WIDTH = 800;
     public static final int WORLD_HEIGHT = 480;
 
-
+    public static final float STEP_FOR_MENU = 15;
 
     public static final float STEP_FOR_TETRIS_X = 5;
     public static final float SLOW_STEP_FOR_TETRIS_Y = 0.1f;

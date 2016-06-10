@@ -15,8 +15,8 @@ public class MainGame extends Game {
 	public void create () {
 		new GameManager(); //initialize PRESIDENTS_ARRAY
 		batch = new SpriteBatch();
-//		setScreen(new MainMenu(this));
-	    setScreen(new HorisontalTetrisField(this,1,11));
+		setScreen(new MainMenu(this));
+//	    setScreen(new HorisontalTetrisField(this,1,11));
 	}
 
 	@Override

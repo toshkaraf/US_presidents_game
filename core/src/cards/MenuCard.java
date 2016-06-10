@@ -2,6 +2,9 @@ package cards;
 
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Touchable;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 
 import helpers.GameInfo;
 
@@ -22,16 +25,15 @@ public class MenuCard extends Card {
     }
 
     @Override
-    public boolean draw(Batch batch) {
+    public void draw(Batch batch, float parentAlpha) {
         super.draw(batch);
         bitmapFont.draw(batch, text, x + 35, y + 35);
-        updatePushingCard();
-        return (x == finishX);
     }
 
-    private void updatePushingCard() {
-        if (x > finishX) x = x - GameInfo.STEP_FOR_TETRIS_X;
-        if (x < finishX) x = x + GameInfo.STEP_FOR_TETRIS_X;
+    @Override
+    public void act(float delta) {
+        if (x > finishX) x = x - GameInfo.STEP_FOR_MENU;
+        if (x < finishX) x = x + GameInfo.STEP_FOR_MENU;
+        setBounds(x,this.y,card.getWidth(),card.getHeight());
     }
-
 }

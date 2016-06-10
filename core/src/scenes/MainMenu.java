@@ -2,6 +2,7 @@ package scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -15,7 +16,7 @@ import huds.MainMenuButtons;
 /**
  * Created by Антон on 09.06.2016.
  */
-public class MainMenu implements Screen {
+public class MainMenu extends ScreenAdapter {
 
     private MainGame game;
 
@@ -35,14 +36,9 @@ public class MainMenu implements Screen {
 
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, mainCamera);
 
-        background = new Texture("Backgrounds/USAPresidentsBackground_clear.jpg");
+        background = new Texture("Backgrounds/USAPresidentsBackground.png");
 
         btns = new MainMenuButtons(game);
-
-    }
-
-    @Override
-    public void show() {
 
     }
 
@@ -69,20 +65,6 @@ public class MainMenu implements Screen {
         gameViewport.update(width, height);
     }
 
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
 
     @Override
     public void dispose() {
@@ -90,4 +72,4 @@ public class MainMenu implements Screen {
         btns.getStage().dispose();
     }
 
-} // main menu
+}
