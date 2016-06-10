@@ -12,6 +12,8 @@ import players.President;
  */
 public class GameManager {
 
+    public static int counterOfDoneNumberCards = 0;
+
     public static final Array<President> PRESIDENTS_ARRAY = initializePresidentsArray();
 
     private static GameManager ourInstance = new GameManager();

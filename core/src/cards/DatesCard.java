@@ -17,15 +17,13 @@ public class DatesCard extends Card {
     }
 
     @Override
-    public boolean draw(Batch batch) {
+    public void draw(Batch batch, float parentAlfa) {
         super.draw(batch);
         bitmapFont.draw(batch, GameManager.PRESIDENTS_ARRAY.get(number).getInitialDate() +
                 " - " + GameManager.PRESIDENTS_ARRAY.get(number).getFinalDate(),x+35, y+35);
-        updatePushingCard();
-        return (x == 440);
     }
 
-    private void updatePushingCard() {
+    public void act(float delta) {
         if (x>=440) x = x - GameInfo.STEP_FOR_TETRIS_X;
     }
 }
