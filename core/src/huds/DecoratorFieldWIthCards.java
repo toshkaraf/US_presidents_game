@@ -3,8 +3,10 @@ package huds;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
@@ -29,16 +31,16 @@ public class DecoratorFieldWIthCards {
     private MainGame game;
     private Stage stage;
     private Sprite blueCard, redCard;
-    private Sprite background;
+    private Sprite backgroundSprite;
     private Viewport gameViewport;
     private int currentPresident, firstPresident, lastPresident;
     private TypeOfCard[] presidentsArray = new TypeOfCard[44];
     private Array<NumberCard> numberCardArray;
-    private Array<PresidentNameCard> presidentNameCardArray;
     private Array<Card> presidentCardArray;
     OrthographicCamera camera;
 
     enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
+
 
     public DecoratorFieldWIthCards(MainGame game, int quantityOfHints, int firstPresident, int lastPresident) {
 
@@ -50,17 +52,25 @@ public class DecoratorFieldWIthCards {
 
         redCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_red.png")));
         blueCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president.png")));
-        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
+        backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
                 0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (lastPresident - firstPresident + 1)));
 
         batch = game.getBatch();
         camera = new OrthographicCamera();
         camera.setToOrtho(false, GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT);
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
-        camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
+        camera.position.set(backgroundSprite.getWidth() / 2, backgroundSprite.getHeight() / 2, 0);
 
         stage = new Stage(gameViewport, batch);
         currentPresident = firstPresident - 1;
+
+        final Actor background = new Actor() {
+            public void draw(Batch batch, float alpha) {
+                batch.draw(backgroundSprite, 0,0);
+            }
+        };
+
+        stage.addActor(background);
 
         initPresidentArray(quantityOfHints);
         initCardsArrays();
@@ -95,7 +105,11 @@ public class DecoratorFieldWIthCards {
         return stage;
     }
 
-    public Sprite getBackground() {
-        return background;
+    public Sprite getBackgroundSprite() {
+        return backgroundSprite;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 }

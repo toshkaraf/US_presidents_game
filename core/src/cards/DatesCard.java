@@ -11,6 +11,8 @@ import helpers.GameManager;
  */
 public class DatesCard extends Card {
 
+    private int finalPositionOfCard_X = 440;
+
     public DatesCard (Sprite card, int numberOfPresident, int positionFromBottom) {
         super(card,numberOfPresident,positionFromBottom);
         x = 800;
@@ -24,6 +26,6 @@ public class DatesCard extends Card {
     }
 
     public void act(float delta) {
-        if (x>=440) x = x - GameInfo.STEP_FOR_TETRIS_X;
+        if (x>=finalPositionOfCard_X) x = x - GameInfo.STEP_FOR_TETRIS_X;
     }
 }

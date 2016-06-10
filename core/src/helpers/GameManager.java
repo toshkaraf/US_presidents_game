@@ -12,7 +12,7 @@ import players.President;
  */
 public class GameManager {
 
-    public static int counterOfDoneNumberCards = 0;
+    public static int counterOfPushedCards = 0; // count all pushed cards of both kinds on the right and left part of screen (numbers & dates)
 
     public static final Array<President> PRESIDENTS_ARRAY = initializePresidentsArray();
 

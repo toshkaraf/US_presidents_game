@@ -1,6 +1,5 @@
 package scenes;
 
-
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -17,6 +16,8 @@ import com.toshkaraf.MainGame;
 import cards.NumberCard;
 import cards.PresidentNameCard;
 import helpers.GameInfo;
+import helpers.GameManager;
+import huds.DecoratorFieldWIthCards;
 
 /**
  * Created by Антон on 01.06.2016.
@@ -32,53 +33,25 @@ public class HorisontalTetrisField extends ScreenAdapter {
     PresidentNameCard nameCard;
     private Viewport viewport;
     private OrthographicCamera camera;
-
+    DecoratorFieldWIthCards decoratorFieldWIthCards;
     int currentPresidentNumber;
-    Boolean isGameFieldPrepared = false;
-    int numberOfFirstVisiblePresident, numberOfLastVisiblePresident;
-    int currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom;
-    Array<NumberCard> fixedNumberCardsArray = new Array<NumberCard>();
-    Array<PresidentNameCard> fixedNameCardsArray = new Array<PresidentNameCard>();
+    Boolean isFieldDecorated = false;
+    int numberOfFirstPresident, numberOfLastPresident;
+    int currentPositionFromBottom;
 
-    public HorisontalTetrisField(MainGame game, int numberOfFirstVisiblePresident, int numberOfLastVisiblePresident) {
-        this.numberOfFirstVisiblePresident = numberOfFirstVisiblePresident - 1;
-        this.numberOfLastVisiblePresident = numberOfLastVisiblePresident - 1;
-        currentNumberOfPresidentForDrawingGameField = numberOfFirstVisiblePresident - 1;
-        currentPositionFromBottom = 0;
-        batch = game.getBatch();
+
+    public HorisontalTetrisField(MainGame game, int numberOfFirstPresident, int numberOfLastPresident) {
+        this.numberOfFirstPresident = numberOfFirstPresident;
+        this.numberOfLastPresident = numberOfLastPresident;
+        decoratorFieldWIthCards = new DecoratorFieldWIthCards(game, 4, numberOfFirstPresident, numberOfLastPresident);
+        background = decoratorFieldWIthCards.getBackgroundSprite();
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
-        redCard = new Texture(Gdx.files.internal("cards/card_of_president_red.png"));
-        blueCard = new Texture(Gdx.files.internal("cards/card_of_president.png"));
-        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
-                0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (numberOfLastVisiblePresident - numberOfFirstVisiblePresident + 1)));
-
-        camera = new OrthographicCamera();
+        batch = game.getBatch();
+        camera = decoratorFieldWIthCards.getCamera();
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
 
-        numberCard = new NumberCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom);
-        nameCard = new PresidentNameCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom);
-
-        initPresidentsNumbersArray();
         setNewPresidentAndPosition();
-
-    }
-
-    private void initPresidentsNumbersArray() {
-        for (int i = numberOfFirstVisiblePresident; i <= numberOfLastVisiblePresident; i++)
-            presidentsNumbersArray.add(i);
-    }
-
-
-    private void prepareGameField() {
-        if (numberCard.draw(batch)) {
-            fixedNumberCardsArray.add(numberCard);
-            fixedNameCardsArray.add(nameCard);
-            numberCard = new NumberCard(new Sprite(blueCard), ++currentNumberOfPresidentForDrawingGameField, ++currentPositionFromBottom);
-            nameCard = new PresidentNameCard(new Sprite(blueCard), currentNumberOfPresidentForDrawingGameField, currentPositionFromBottom);
-            if (currentNumberOfPresidentForDrawingGameField > numberOfLastVisiblePresident)
-                isGameFieldPrepared = true;
-        }
     }
 
     @Override
@@ -86,36 +59,25 @@ public class HorisontalTetrisField extends ScreenAdapter {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
-        batch.setProjectionMatrix(camera.projection);
-        batch.setTransformMatrix(camera.view);
-        if (!isGameFieldPrepared) {
-            batch.begin();
-            batch.draw(background, 0, 0);
-            prepareGameField();
-            drawFixedCards();
-            batch.end();
+
+        if (GameManager.counterOfPushedCards <= 2000) {
+            batch.setProjectionMatrix(camera.projection);
+            batch.setTransformMatrix(camera.view);
+            decoratorFieldWIthCards.getStage().draw();
+            decoratorFieldWIthCards.getStage().act();
         } else {
             if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
                 queryInput();
                 camera.update();
+                decoratorFieldWIthCards.getStage().draw();
+                decoratorFieldWIthCards.getStage().act();
                 batch.setProjectionMatrix(camera.projection);
                 batch.setTransformMatrix(camera.view);
                 batch.begin();
-                batch.draw(background, 0, 0);
-                drawFixedCards();
-                updatePlayer();
                 batch.draw(player, player.getX(), player.getY());
                 batch.end();
+                updatePlayer();
             } else presidentIsDone();
-        }
-    }
-
-    private void drawFixedCards() {
-        for (NumberCard numbercard : fixedNumberCardsArray) {
-            numbercard.draw(batch);
-        }
-        for (PresidentNameCard nameCard : fixedNameCardsArray) {
-            nameCard.draw(batch);
         }
     }
 
@@ -141,7 +103,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
     @Override
     public void dispose() {
-//        background.dispose();
+        decoratorFieldWIthCards.getStage().dispose();
 
     }
 
@@ -171,9 +133,9 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
     private void setNewPresidentAndPosition() {
-        if (presidentsNumbersArray.size > 0)
-            currentPresidentNumber = presidentsNumbersArray.removeIndex(0);
-        else gameOver();
+//        if (presidentsNumbersArray.size > 0)
+//            currentPresidentNumber = presidentsNumbersArray.removeIndex(0);
+//        else gameOver();
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
     }

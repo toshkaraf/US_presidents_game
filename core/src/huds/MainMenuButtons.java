@@ -102,7 +102,7 @@ public class MainMenuButtons {
                 run.setRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        game.setScreen(new TetrisReview(game, 1, 44));
+                        game.setScreen(new TetrisReview(game, 10, 30));
                     }
                 });
 
