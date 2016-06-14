@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -18,9 +17,9 @@ import java.util.Random;
 import cards.Card;
 import cards.DatesCard;
 import cards.NumberCard;
-import cards.PresidentNameCard;
 import helpers.CardsStage;
 import helpers.GameInfo;
+import helpers.GameManager;
 
 /**
  * Created by Антон on 10.06.2016.
@@ -34,7 +33,6 @@ public class DecoratorFieldWIthCards {
     private Sprite blueCard, redCard;
     private Sprite backgroundSprite;
     private Viewport gameViewport;
-    private int currentWrightPresident, firstPresident, lastPresident;
     private TypeOfCard[] presidentsArray = new TypeOfCard[44];
     private Array<NumberCard> numberCardArray;
     private Array<Card> presidentCardArray;
@@ -43,19 +41,16 @@ public class DecoratorFieldWIthCards {
     enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
 
-    public DecoratorFieldWIthCards(MainGame game, int currentWrightPresident, int quantityOfHints, int firstPresident, int lastPresident) {
+    public DecoratorFieldWIthCards(MainGame game) {
 
         this.game = game;
-        this.firstPresident = firstPresident-1;
-        this.lastPresident = lastPresident-1;
-        this.currentWrightPresident = currentWrightPresident-1;
         numberCardArray = new Array<NumberCard>();
         presidentCardArray = new Array<Card>();
 
         redCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_red.png")));
         blueCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president.png")));
         backgroundSprite = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
-                0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (lastPresident - firstPresident + 1)));
+                0, 0, GameInfo.WORLD_WIDTH, Math.round(blueCard.getHeight() * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
 
         batch = game.getBatch();
         camera = new OrthographicCamera();
@@ -73,28 +68,28 @@ public class DecoratorFieldWIthCards {
 
         stage.addActor(background);
 
-        initPresidentArray(quantityOfHints-1);
+        initPresidentArray();
         initCardsArrays();
     }
 
-    private void initPresidentArray(int quantityOfHints) {
-        for (int president = firstPresident; president <= lastPresident; president++)
+    private void initPresidentArray() {
+        for (int president = GameManager.firstPresidentInRange; president <= GameManager.lastPresidentInRange; president++)
             this.presidentsArray[president] = TypeOfCard.BlueDate;
         // replace some values with hint red values
-        Array<Integer> hintArray = new Array<Integer>(quantityOfHints);
+        Array<Integer> hintArray = new Array<Integer>(GameManager.quantityOfHints-1);
         Random random = new Random();
         Integer hint;
-        for (int h=0; h<=quantityOfHints; h++) {
-            do hint = firstPresident + random.nextInt(lastPresident - firstPresident);
-            while (hintArray.contains(hint, true) | hint ==currentWrightPresident);
+        for (int h=0; h<=GameManager.quantityOfHints-1; h++) {
+            do hint = GameManager.firstPresidentInRange + random.nextInt(GameManager.lastPresidentInRange - GameManager.firstPresidentInRange);
+            while (hintArray.contains(hint, true) | hint ==GameManager.currentWrightPresident);
             this.presidentsArray[hint] = TypeOfCard.RedDate;
         }
-        presidentsArray[currentWrightPresident] = TypeOfCard.RedDate;
+        presidentsArray[GameManager.currentWrightPresident] = TypeOfCard.RedDate;
     }
 
     private void initCardsArrays() {
         int i = 0;
-        for (int a = firstPresident; a <= lastPresident; a++) {
+        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
             numberCardArray.add(new NumberCard(blueCard, a, i));
             if (presidentsArray[a] == TypeOfCard.RedDate)
                 presidentCardArray.add(new DatesCard(redCard, a, i));

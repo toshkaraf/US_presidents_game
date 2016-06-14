@@ -18,28 +18,10 @@ public class GameManager {
 
     public static final President[] PRESIDENTS_ARRAY = initializePresidentsArray();
 
-    public static int firsPresidentInRange;
-    public static int lastPresidentInRange;
-    public static int currentWrightPresident;
+    public static int firstPresidentInRange; // number in array (fmrom 0)
+    public static int lastPresidentInRange; // number in array
+    public static int currentWrightPresident; // number in array
     public static int quantityOfHints;
-
-    public static void setFirsPresidentInRange(int firsPresidentInRange) {
-        GameManager.firsPresidentInRange = firsPresidentInRange-1;
-    }
-
-    public static void setLastPresidentInRange(int lastPresidentInRange) {
-        GameManager.lastPresidentInRange = lastPresidentInRange-1;
-    }
-
-    public static void setCurrentWrightPresident(int currentWrightPresident) {
-        GameManager.currentWrightPresident = currentWrightPresident-1;
-    }
-
-    public static void setQuantityOfHints(int quantityOfHints) {
-        GameManager.quantityOfHints = quantityOfHints;
-    }
-
-
 
     public static GameManager getInstance() {
         return ourInstance;
@@ -55,5 +37,21 @@ public class GameManager {
             presidentsArray[presidentNumber++] = json.readValue(President.class, v);
         }
         return presidentsArray;
+    }
+
+    public static void setFirstPresidentInRange(int firstPresidentInRange) {
+        GameManager.firstPresidentInRange = firstPresidentInRange - 1;
+    }
+
+    public static void setLastPresidentInRange(int lastPresidentInRange) {
+        GameManager.lastPresidentInRange = lastPresidentInRange - 1;
+    }
+
+    public static void setCurrentWrightPresident(int currentWrightPresident) {
+        GameManager.currentWrightPresident = currentWrightPresident - 1;
+    }
+
+    public static void setQuantityOfHints(int quantityOfHints) {
+        GameManager.quantityOfHints = quantityOfHints;
     }
 }

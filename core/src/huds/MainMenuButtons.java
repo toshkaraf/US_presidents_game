@@ -12,15 +12,13 @@ import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.actions.SequenceAction;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
-import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
 import helpers.GameInfo;
-import scenes.TetrisGameMode;
+import helpers.GameManager;
 import scenes.TetrisLearnMode;
 import scenes.TetrisReview;
 import scenes.TetrisTrainingMode;
@@ -102,7 +100,10 @@ public class MainMenuButtons {
                 run.setRunnable(new Runnable() {
                     @Override
                     public void run() {
-                        game.setScreen(new TetrisReview(game, 1, 30));
+                        GameManager.setFirstPresidentInRange(10);
+                        GameManager.setLastPresidentInRange(21);
+                        GameManager.setQuantityOfHints(3);
+                        game.setScreen(new TetrisReview(game));
                     }
                 });
 
@@ -118,21 +119,21 @@ public class MainMenuButtons {
             learnButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new TetrisLearnMode(game, 1, 44));
+                game.setScreen(new TetrisLearnMode(game));
             }
         });
 
         trainingButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new TetrisTrainingMode(game, 1, 44));
+                game.setScreen(new TetrisTrainingMode(game));
             }
         });
 
         playButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                game.setScreen(new TetrisTrainingMode(game, 1, 44));
+                game.setScreen(new TetrisTrainingMode(game));
             }
         });
 

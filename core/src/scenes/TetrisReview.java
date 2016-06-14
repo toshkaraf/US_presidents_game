@@ -7,8 +7,8 @@ import com.toshkaraf.MainGame;
  */
 public class TetrisReview extends HorisontalTetrisField {
 
-    public TetrisReview(MainGame game, int numberOfFirstVisiblePresident, int numberOfLastVisiblePresident) {
-        super(game, numberOfFirstVisiblePresident, numberOfLastVisiblePresident);
+    public TetrisReview(MainGame game) {
+        super(game);
 
     }
 }
