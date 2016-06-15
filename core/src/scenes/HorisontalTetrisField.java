@@ -16,6 +16,7 @@ import com.toshkaraf.MainGame;
 import helpers.GameInfo;
 import helpers.GameManager;
 import huds.DecoratorFieldWIthCards;
+import huds.PortraitPanel;
 
 /**
  * Created by Антон on 01.06.2016.
@@ -29,24 +30,36 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private Viewport viewport;
     private OrthographicCamera camera;
     DecoratorFieldWIthCards decoratorFieldWIthCards;
+    PortraitPanel portraitPanel;
 
+    enum RenderMode {PrepareField, Portrait, SetNewHints, SetNewPlayer, ShowRightAnswer}
+
+    RenderMode renderMode;
+    boolean isPortraitMode = true;
+    boolean isShowRightMode = false;
+    boolean isPushNewHintsMode = false;
 
     public HorisontalTetrisField(MainGame game) {
+
+        initPresidentsListForQuestionsArray();
+        setNewCurrentPresident();
         decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
+        portraitPanel = new PortraitPanel(game);
         background = decoratorFieldWIthCards.getBackgroundSprite();
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         batch = game.getBatch();
         camera = decoratorFieldWIthCards.getCamera();
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
-
         GameManager.counterOfPushedCards = 0;
-        initPresidentsListForQuestionsArray();
-        setNewPresidentAndPosition();
+        renderMode = RenderMode.PrepareField;
+
+        setInitialPlayerPosition();
     }
 
     private void initPresidentsListForQuestionsArray() {
-    for (int i=GameManager.firstPresidentInRange; i<=GameManager.lastPresidentInRange; i++) presidentsListForQuestions.add(i);
+        for (int i = GameManager.firstPresidentInRange; i <= GameManager.lastPresidentInRange; i++)
+            presidentsListForQuestions.add(i);
         presidentsListForQuestions.shuffle();
     }
 
@@ -56,26 +69,77 @@ public class HorisontalTetrisField extends ScreenAdapter {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         camera.update();
 
-        if (GameManager.counterOfPushedCards <= 1000) {
-//            if (true) {
-            batch.setProjectionMatrix(camera.projection);
-            batch.setTransformMatrix(camera.view);
-            decoratorFieldWIthCards.getStage().draw();
-            decoratorFieldWIthCards.getStage().act();
-//            decoratorFieldWIthCards.getStage().actAndDraw(camera);
-        } else {
-            if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
-                queryInput();
-                camera.update();
-                decoratorFieldWIthCards.getStage().draw();
-                decoratorFieldWIthCards.getStage().act();
-                batch.setProjectionMatrix(camera.projection);
-                batch.setTransformMatrix(camera.view);
-                batch.begin();
-                batch.draw(player, player.getX(), player.getY());
-                batch.end();
-                updatePlayer();
-            } else presidentIsDone();
+        batch.setProjectionMatrix(camera.projection);
+        batch.setTransformMatrix(camera.view);
+        decoratorFieldWIthCards.getStage().draw();
+        decoratorFieldWIthCards.getStage().act();
+
+        switch (renderMode) {
+            case PrepareField:
+                if (GameManager.counterOfPushedCards >= 1000) renderMode = RenderMode.Portrait;
+                break;
+            case Portrait:
+                portraitPanel.getStage().draw();
+                portraitPanel.getStage().act();
+                if (portraitPanel.checkPushed()) {
+                    sleep(1000);
+                    portraitPanel.pullPortraitPanel();
+                }
+                if (portraitPanel.checkPulled()) {
+                    renderMode = RenderMode.SetNewPlayer;
+                    decoratorFieldWIthCards.setHintCards();
+                }
+                break;
+            case SetNewHints:
+
+                break;
+            case SetNewPlayer:
+                if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
+                    queryInput();
+                    camera.update();
+                    batch.setProjectionMatrix(camera.projection);
+                    batch.setTransformMatrix(camera.view);
+                    batch.begin();
+                    batch.draw(player, player.getX(), player.getY());
+                    batch.end();
+                    updatePlayer();
+                } else presidentIsDone();
+        }
+//        batch.setProjectionMatrix(camera.projection);
+//        batch.setTransformMatrix(camera.view);
+//        decoratorFieldWIthCards.getStage().draw();
+//        decoratorFieldWIthCards.getStage().act();
+//        if (GameManager.counterOfPushedCards <= 1000) {
+//
+//        } else {
+//            if (isPortraitMode) {
+//                portraitPanel.getStage().draw();
+//                portraitPanel.getStage().act();
+//                if (portraitPanel.checkPushed()) {
+//                    sleep();
+//                    portraitPanel.pullPortraitPanel();
+//                }
+//                if (portraitPanel.checkPulled()) isPortraitMode = false;
+//            } else
+//            if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
+//                queryInput();
+//                camera.update();
+//                decoratorFieldWIthCards.getStage().draw();
+//                decoratorFieldWIthCards.getStage().act();
+//                batch.setProjectionMatrix(camera.projection);
+//                batch.setTransformMatrix(camera.view);
+//                batch.begin();
+//                batch.draw(player, player.getX(), player.getY());
+//                batch.end();
+//                updatePlayer();
+//            } else presidentIsDone();
+//        }
+    }
+
+    private void sleep(long delay) {
+        try {
+            Thread.sleep(delay);
+        } catch (Exception e) {
         }
     }
 
@@ -131,12 +195,14 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
 
-    private void setNewPresidentAndPosition() {
+    private void setNewCurrentPresident() {
         if (presidentsListForQuestions.size > 0) {
-            GameManager.setCurrentWrightPresident(presidentsListForQuestions.removeIndex(0)+1);
+            GameManager.setCurrentWrightPresident(presidentsListForQuestions.removeIndex(0) + 1);
             System.out.println(GameManager.currentWrightPresident);
-        }
-        else gameOver();
+        } else gameOver();
+    }
+
+    private void setInitialPlayerPosition() {
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
     }
@@ -144,14 +210,16 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private void presidentIsDone() {
         if (checkAnswer()) {
             System.out.println("You are right");
-
+            isPortraitMode = true;
+            decoratorFieldWIthCards.pushRightPresidentNameCard();
         } else System.out.println("You are wrong");
-        setNewPresidentAndPosition();
+        setNewCurrentPresident();
+        setInitialPlayerPosition();
     }
 
     private boolean checkAnswer() {
-        return ((player.getY()+29 >= (GameManager.currentWrightPresident-GameManager.firstPresidentInRange)*60 &&
-                (player.getY()+29 <= (GameManager.currentWrightPresident-GameManager.firstPresidentInRange)*60 + 60)));
+        return ((player.getY() + 29 >= (GameManager.currentWrightPresident - GameManager.firstPresidentInRange) * 60 &&
+                (player.getY() + 29 <= (GameManager.currentWrightPresident - GameManager.firstPresidentInRange) * 60 + 60)));
     }
 
     private void gameOver() {

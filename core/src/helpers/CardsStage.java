@@ -3,16 +3,11 @@ package helpers;
 import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 import cards.Card;
-import cards.DatesCard;
-import cards.NumberCard;
-import cards.PresidentNameCard;
-import huds.DecoratorFieldWIthCards;
 
 /**
  * Created by Антон on 10.06.2016.
@@ -38,7 +33,7 @@ public class CardsStage extends Stage {
             } else {
                 checkActor = (Card) actor;
                 do {
-//                    if (!checkActor.isCardDone()) {
+//                    if (!checkActor.isCardPushed()) {
                     getBatch().setProjectionMatrix(camera.projection);
                     getBatch().setTransformMatrix(camera.view);
                     getBatch().begin();
@@ -48,7 +43,7 @@ public class CardsStage extends Stage {
 //                    long i=0;
 //                    do {i++;} while (i!=10000000);
 //                        return;}
-                }while (!checkActor.isCardDone());
+                }while (!checkActor.isCardPushed());
             }
             long i=0;
             do {i++;} while (i!=10000000);
@@ -67,7 +62,7 @@ public class CardsStage extends Stage {
 //                    actor.draw(getBatch(),1);
 //                    getBatch().end();
 //                    actor.act(delta);
-//                }while (!checkActor.isCardDone());
+//                }while (!checkActor.isCardPushed());
 //            }
 //        }
 //    }
@@ -83,7 +78,7 @@ public class CardsStage extends Stage {
 //            } else {
 //                checkActor = (Card) actor;
 //                do {
-//                    if (!checkActor.isCardDone()) {
+//                    if (!checkActor.isCardPushed()) {
 //                        getBatch().begin();
 //                        actor.draw(getBatch(), 1);
 //                        actor.act();

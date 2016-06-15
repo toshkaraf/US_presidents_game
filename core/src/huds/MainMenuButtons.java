@@ -16,7 +16,8 @@ import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
-import cards.MenuCard;
+import cards.MenuCardToLeft;
+import cards.MenuCardToRight;
 import helpers.GameInfo;
 import helpers.GameManager;
 import scenes.TetrisLearnMode;
@@ -34,11 +35,11 @@ public class MainMenuButtons {
     private Viewport gameViewport;
 
 
-    private MenuCard reviewButton;
-    private MenuCard highscoreButton;
-    private MenuCard playButton;
-    private MenuCard trainingButton;
-    private MenuCard learnButton;
+    private MenuCardToRight reviewButton;
+    private MenuCardToRight highscoreButton;
+    private MenuCardToRight playButton;
+    private MenuCardToRight trainingButton;
+    private MenuCardToRight learnButton;
     private ImageButton musicBtn;
 
     public MainMenuButtons(MainGame game) {
@@ -68,20 +69,20 @@ public class MainMenuButtons {
 
     void createAndPositionButtons() {
 
-        reviewButton = new MenuCard(new Sprite(new Texture("cards/card_of_president_red.png")),
+        reviewButton = new MenuCardToRight(new Sprite(new Texture("cards/card_of_president_red.png")),
                 -400, GameInfo.WORLD_WIDTH / 2 - 198 - 100, GameInfo.WORLD_HEIGHT / 2 + 90, "REVIEW PRESIDENT");
 
-        learnButton = new MenuCard(new Sprite(new Texture("cards/card_of_president.png")),
-                1200, GameInfo.WORLD_WIDTH / 2 - 198 - 50, GameInfo.WORLD_HEIGHT / 2 + 30, "REVIEW PRESIDENT");
+        learnButton = new MenuCardToLeft(new Sprite(new Texture("cards/card_of_president.png")),
+                800, GameInfo.WORLD_WIDTH / 2 - 198 - 50, GameInfo.WORLD_HEIGHT / 2 + 30, "REVIEW PRESIDENT");
 
-        trainingButton = new MenuCard(new Sprite(new Texture("cards/card_of_president_red.png")),
+        trainingButton = new MenuCardToRight(new Sprite(new Texture("cards/card_of_president_red.png")),
                 -400, GameInfo.WORLD_WIDTH / 2 - 198, GameInfo.WORLD_HEIGHT / 2 - 30, "REVIEW PRESIDENT");
 
-        playButton = new MenuCard(new Sprite(new Texture("cards/card_of_president.png")),
-                1200, GameInfo.WORLD_WIDTH / 2 - 198 + 50, GameInfo.WORLD_HEIGHT / 2 - 90, "REVIEW PRESIDENT");
+        playButton = new MenuCardToLeft(new Sprite(new Texture("cards/card_of_president.png")),
+                800, GameInfo.WORLD_WIDTH / 2 - 198 + 50, GameInfo.WORLD_HEIGHT / 2 - 90, "REVIEW PRESIDENT");
 
-        highscoreButton = new MenuCard(new Sprite(new Texture("cards/card_of_president_red.png")),
-                -400, GameInfo.WORLD_WIDTH / 2 - 198 + 100, GameInfo.WORLD_HEIGHT / 2 - 150 , "REVIEW PRESIDENT");
+        highscoreButton = new MenuCardToRight(new Sprite(new Texture("cards/card_of_president_red.png")),
+                -400, GameInfo.WORLD_WIDTH / 2 - 198 + 100, GameInfo.WORLD_HEIGHT / 2 - 150, "REVIEW PRESIDENT");
 
 
 //        musicBtn = new ImageButton(new SpriteDrawable(new Sprite(
@@ -92,7 +93,7 @@ public class MainMenuButtons {
     }
 
 
-        void addAllListeners() {
+    void addAllListeners() {
         reviewButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
@@ -116,7 +117,7 @@ public class MainMenuButtons {
             }
         });
 
-            learnButton.addListener(new ChangeListener() {
+        learnButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 game.setScreen(new TetrisLearnMode(game));
@@ -158,7 +159,8 @@ public class MainMenuButtons {
 //            }
 //        });
     }
-//
+
+    //
 //    void checkMusic() {
 //        if(GameManager.getInstance().gameData.isMusicOn()) {
 //            GameManager.getInstance().playMusic();

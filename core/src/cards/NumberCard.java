@@ -11,8 +11,8 @@ import helpers.GameManager;
  */
 public class NumberCard extends Card {
 
-    public NumberCard(Sprite card, int numberOfPresident, int positionFromBottom) {
-        super(card, numberOfPresident, positionFromBottom);
+    public NumberCard(Sprite card, int numberOfPresident) {
+        super(card, numberOfPresident);
         x = -400;
         finalPositionOfCard_X = -355;
     }
@@ -20,7 +20,7 @@ public class NumberCard extends Card {
     @Override
     public void draw(Batch batch, float parentAlpha) {
         if (draw(batch)) {
-            isCardDone = true;
+            isCardPushed = true;
             GameManager.counterOfPushedCards++; //increase counter of pushed to the end
         }
         bitmapFont.draw(batch, Integer.toString(number+1), x + 360, y + 35);

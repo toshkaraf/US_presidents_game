@@ -23,6 +23,8 @@ public class GameManager {
     public static int currentWrightPresident; // number in array
     public static int quantityOfHints;
 
+//    public enum PushDirection {Right, Left}
+
     public static GameManager getInstance() {
         return ourInstance;
     }

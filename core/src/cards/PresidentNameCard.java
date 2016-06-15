@@ -11,20 +11,21 @@ import helpers.GameManager;
  */
 public class PresidentNameCard extends Card {
 
-    public PresidentNameCard(Sprite card, int numberOfPresident, int positionFromBottom) {
-        super(card, numberOfPresident, positionFromBottom);
+    public PresidentNameCard(Sprite card, int numberOfPresident) {
+        super(card, numberOfPresident);
         x = GameInfo.WORLD_WIDTH;
         finalPositionOfCard_X = 440;
     }
 
     @Override
     public void draw(Batch batch, float parentAlfa) {
-        if (super.draw(batch)) isCardDone = true;
+        if (super.draw(batch)) isCardPushed = true;
         bitmapFont.draw(batch, GameManager.PRESIDENTS_ARRAY[number].getFirstName() +
                 " " + GameManager.PRESIDENTS_ARRAY[number].getLastName(), x + 35, y + 35);
     }
 
     public void act(float delta) {
         if (x >= finalPositionOfCard_X) x = x - GameInfo.STEP_FOR_TETRIS_X;
+        setBounds(x, this.y, card.getWidth(), card.getHeight());
     }
 }
