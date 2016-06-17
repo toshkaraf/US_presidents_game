@@ -25,7 +25,7 @@ public class GameManager {
 
 //    public enum PushDirection {Right, Left}
 
-    public enum RenderMode {PrepareField, Portrait, SetNewHints, SetNewPlayer, ShowRightAnswer}
+    public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, ShowRightAnswer}
 
     public static RenderMode renderMode = RenderMode.PrepareField;
 

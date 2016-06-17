@@ -32,8 +32,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
     DecoratorFieldWIthCards decoratorFieldWIthCards;
     PortraitPanel portraitPanel;
     boolean isPortraitMode = true;
-    boolean isShowRightMode = false;
-    boolean isPushNewHintsMode = false;
+
 
     public HorisontalTetrisField(MainGame game) {
 
@@ -76,9 +75,12 @@ public class HorisontalTetrisField extends ScreenAdapter {
                 portraitPanel.getStage().draw();
                 portraitPanel.getStage().act();
                 break;
-            case SetNewHints:
-                decoratorFieldWIthCards.setHintCards();
+            case PullOldHints:
+                decoratorFieldWIthCards.generateHints();
+                decoratorFieldWIthCards.pullHintCards();
                 break;
+            case PushNewHints:
+                decoratorFieldWIthCards.pushHintCards();
             case SetNewPlayer:
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
                     queryInput();

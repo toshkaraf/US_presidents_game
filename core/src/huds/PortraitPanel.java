@@ -78,7 +78,7 @@ public class PortraitPanel {
                 GameManager.PRESIDENTS_ARRAY[GameManager.currentWrightPresident].getLastName(),
                 new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).center();
         nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), 1f),
-                delay(5f), moveTo(-nameCard.getWidth(), nameCard.getY(), 1f)));
+                delay(5f), moveTo(-nameCard.getWidth(), nameCard.getY(), 1f),new RenderModeAction(GameManager.RenderMode.PullOldHints)));
     }
 
     public Stage getStage() {
