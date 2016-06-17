@@ -24,8 +24,8 @@ public class PresidentNameCard extends Card {
                 " " + GameManager.PRESIDENTS_ARRAY[number].getLastName(), x + 35, y + 35);
     }
 
-    public void act(float delta) {
-        if (x >= finalPositionOfCard_X) x = x - GameInfo.STEP_FOR_TETRIS_X;
-        setBounds(x, this.y, card.getWidth(), card.getHeight());
-    }
+//    public void act(float delta) {
+//        if (x >= finalPositionOfCard_X) x = x - GameInfo.STEP_FOR_TETRIS_X;
+//        setBounds(x, this.y, card.getWidth(), card.getHeight());
+//    }
 }

@@ -15,7 +15,7 @@ public class Card extends Button{
     float x,y;
     Sprite card;
     BitmapFont bitmapFont;
-    int positionFromBottom, finalPositionOfCard_X;
+    int finalPositionOfCard_X;
     boolean isCardPushed = false;
     boolean isCardPulled = false;
     boolean isPush = true;
@@ -28,14 +28,13 @@ public class Card extends Button{
     public Card(Sprite card, int numberOfPresident) {
         this.number = numberOfPresident;
         this.card = card;
-        this.positionFromBottom = numberOfPresident-GameManager.firstPresidentInRange;
         bitmapFont = new BitmapFont();
-        y = positionFromBottom * card.getHeight();
+        y = (numberOfPresident-GameManager.firstPresidentInRange) * card.getHeight();
         setBounds(x, this.y, card.getWidth(), card.getHeight());
     }
 
     public boolean draw(Batch batch) {
-        batch.draw(card, x, y);
+        batch.draw(card, x, y, getWidth(),getHeight());
         return (x <= finalPositionOfCard_X) ;
     }
 

@@ -97,23 +97,27 @@ public class MainMenuButtons {
         reviewButton.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
-                RunnableAction run = new RunnableAction();
-                run.setRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        GameManager.setFirstPresidentInRange(10);
-                        GameManager.setLastPresidentInRange(21);
-                        GameManager.setQuantityOfHints(3);
-                        game.setScreen(new TetrisReview(game));
-                    }
-                });
+//                RunnableAction run = new RunnableAction();
+//                run.setRunnable(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        GameManager.setFirstPresidentInRange(1);
+//                        GameManager.setLastPresidentInRange(10);
+//                        GameManager.setQuantityOfHints(3);
+//                        game.setScreen(new TetrisReview(game));
+//                    }
+//                });
+//
+//                SequenceAction sa = new SequenceAction();
+//                sa.addAction(Actions.fadeOut(1f));
+//                sa.addAction(run);
+//
+//                stage.addAction(sa);
 
-                SequenceAction sa = new SequenceAction();
-                sa.addAction(Actions.fadeOut(1f));
-                sa.addAction(run);
-
-                stage.addAction(sa);
-
+                GameManager.setFirstPresidentInRange(1);
+                GameManager.setLastPresidentInRange(10);
+                GameManager.setQuantityOfHints(3);
+                game.setScreen(new TetrisReview(game));
             }
         });
 

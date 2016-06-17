@@ -2,7 +2,7 @@
     {
       "firstName": "George",
       "secondName": "Washington",
-      "portraitFileName": "players/tetris_player.jpg",
+      "portraitFileName": "portraits/01_George_Washington.png",
       "number": "1",
       "initialDate": "1789",
       "finalDate": "1797",
@@ -15,7 +15,7 @@
     {
       "firstName": "John",
       "secondName": "Adams",
-      "portraitFileName": "players/tetris_player.jpg",
+      "portraitFileName": "portraits/01_George_Washington.png",
       "number": "2",
       "initialDate": "1797",
       "finalDate": "1801",
@@ -28,7 +28,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "3",
      "initialDate": "1889",
      "finalDate": "1896",
@@ -41,7 +41,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "4",
      "initialDate": "8",
      "finalDate": "15",
@@ -54,7 +54,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "5",
      "initialDate": "4",
      "finalDate": "10",
@@ -67,7 +67,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "6",
      "initialDate": "7",
      "finalDate": "11",
@@ -80,7 +80,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "7",
      "initialDate": "1",
      "finalDate": "9",
@@ -93,7 +93,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "8",
      "initialDate": "8",
      "finalDate": "12",
@@ -106,7 +106,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "9",
      "initialDate": "3",
      "finalDate": "4",
@@ -119,7 +119,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "10",
      "initialDate": "1889",
      "finalDate": "1896",
@@ -132,7 +132,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "11",
      "initialDate": "1889",
      "finalDate": "1893",
@@ -145,7 +145,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "12",
      "initialDate": "1889",
      "finalDate": "1896",
@@ -158,7 +158,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "13",
      "initialDate": "1889",
      "finalDate": "1896",
@@ -171,7 +171,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "14",
      "initialDate": "1889",
      "finalDate": "1896",
@@ -184,7 +184,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "15",
      "initialDate": "1889",
      "finalDate": "1896",
@@ -197,7 +197,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "16",
      "initialDate": "1889",
      "finalDate": "1895",
@@ -210,7 +210,7 @@
    {
      "firstName": "George",
      "secondName": "Washington",
-     "portraitFileName": "players/tetris_player.jpg",
+     "portraitFileName": "portraits/01_George_Washington.png",
      "number": "17",
      "initialDate": "1889",
      "finalDate": "1896",

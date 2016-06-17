@@ -31,10 +31,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private OrthographicCamera camera;
     DecoratorFieldWIthCards decoratorFieldWIthCards;
     PortraitPanel portraitPanel;
-
-    enum RenderMode {PrepareField, Portrait, SetNewHints, SetNewPlayer, ShowRightAnswer}
-
-    RenderMode renderMode;
     boolean isPortraitMode = true;
     boolean isShowRightMode = false;
     boolean isPushNewHintsMode = false;
@@ -52,7 +48,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
         GameManager.counterOfPushedCards = 0;
-        renderMode = RenderMode.PrepareField;
 
         setInitialPlayerPosition();
     }
@@ -72,26 +67,17 @@ public class HorisontalTetrisField extends ScreenAdapter {
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
         decoratorFieldWIthCards.getStage().draw();
-        decoratorFieldWIthCards.getStage().act();
+        decoratorFieldWIthCards.getStage().act(Gdx.graphics.getDeltaTime());
 
-        switch (renderMode) {
+        switch (GameManager.renderMode) {
             case PrepareField:
-                if (GameManager.counterOfPushedCards >= 1000) renderMode = RenderMode.Portrait;
                 break;
             case Portrait:
                 portraitPanel.getStage().draw();
                 portraitPanel.getStage().act();
-                if (portraitPanel.checkPushed()) {
-                    sleep(1000);
-                    portraitPanel.pullPortraitPanel();
-                }
-                if (portraitPanel.checkPulled()) {
-                    renderMode = RenderMode.SetNewPlayer;
-                    decoratorFieldWIthCards.setHintCards();
-                }
                 break;
             case SetNewHints:
-
+                decoratorFieldWIthCards.setHintCards();
                 break;
             case SetNewPlayer:
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
