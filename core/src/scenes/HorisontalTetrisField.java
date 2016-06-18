@@ -31,7 +31,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private OrthographicCamera camera;
     DecoratorFieldWIthCards decoratorFieldWIthCards;
     PortraitPanel portraitPanel;
-    boolean isPortraitMode = true;
+    boolean switcher;
 
 
     public HorisontalTetrisField(MainGame game) {
@@ -76,11 +76,18 @@ public class HorisontalTetrisField extends ScreenAdapter {
                 portraitPanel.getStage().act();
                 break;
             case PullOldHints:
-                decoratorFieldWIthCards.generateHints();
-                decoratorFieldWIthCards.pullHintCards();
-                break;
+                if (!switcher) {
+                    switcher = true;
+                    decoratorFieldWIthCards.generateHints();
+                    decoratorFieldWIthCards.pullHintCards();
+                }
+                    break;
             case PushNewHints:
-                decoratorFieldWIthCards.pushHintCards();
+                if(switcher) {
+                    switcher = false;
+                    decoratorFieldWIthCards.pushHintCards();
+                }
+                break;
             case SetNewPlayer:
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
                     queryInput();
@@ -198,7 +205,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private void presidentIsDone() {
         if (checkAnswer()) {
             System.out.println("You are right");
-            isPortraitMode = true;
             decoratorFieldWIthCards.pushRightPresidentNameCard();
         } else System.out.println("You are wrong");
         setNewCurrentPresident();

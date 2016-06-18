@@ -44,6 +44,10 @@ public class DecoratorFieldWIthCards {
     //    private Array<Card> presidentCardsArray;
     OrthographicCamera camera;
 
+
+
+
+
     enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
 
@@ -130,6 +134,7 @@ public class DecoratorFieldWIthCards {
             }
         }
     }
+
 
 //        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
 //            if (presidentsArray[a] == TypeOfCard.RedDate) {
