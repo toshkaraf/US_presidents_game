@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
@@ -19,6 +21,9 @@ import helpers.GameManager;
 import scenes.TetrisLearnMode;
 import scenes.TetrisReview;
 import scenes.TetrisTrainingMode;
+
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
 /**
@@ -111,28 +116,22 @@ public class MainMenuButtons {
         reviewButton.addListener(new InputListener(){
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-//                RunnableAction run = new RunnableAction();
-//                run.setRunnable(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        GameManager.setFirstPresidentInRange(1);
-//                        GameManager.setLastPresidentInRange(10);
-//                        GameManager.setQuantityOfHints(3);
-//                        game.setScreen(new TetrisReview(game));
-//                    }
-//                });
-//
-//                SequenceAction sa = new SequenceAction();
-//                sa.addAction(Actions.fadeOut(1f));
-//                sa.addAction(run);
-//
-//                stage.addAction(sa);
 
-//                addHideActions();
+                addHideActions();
                 GameManager.setFirstPresidentInRange(1);
-                GameManager.setLastPresidentInRange(10);
+                GameManager.setLastPresidentInRange(20);
                 GameManager.setQuantityOfHints(3);
-                game.setScreen(new TetrisReview(game));
+
+                RunnableAction run = new RunnableAction();
+                run.setRunnable(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        game.setScreen(new TetrisReview(game));
+                    }
+                });
+
+                stage.addAction(sequence(delay(1f),run));
                 return true;
             }
         });

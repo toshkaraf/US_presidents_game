@@ -16,7 +16,7 @@ public class GameInfo {
     public static final float FAll_STEP_FOR_TETRIS_Y = 20f;
 
     public static final float STEP_FOR_TETRIS_Y = 8;
-    public static final float SLOW_STEP_FOR_TETRIS_X = 0.1f;
+    public static final float SLOW_STEP_FOR_TETRIS_X = 0.3f;
     public static final float FAll_STEP_FOR_TETRIS_X = 20f;
 
     public static final int FINFALE_DATE_OF_LAST_PRESIDENT = 2017;

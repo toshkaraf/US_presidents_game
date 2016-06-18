@@ -1,5 +1,6 @@
 package scenes;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -32,12 +33,15 @@ public class HorisontalTetrisField extends ScreenAdapter {
     DecoratorFieldWIthCards decoratorFieldWIthCards;
     PortraitPanel portraitPanel;
     boolean switcher;
+    private boolean isRightAnswer;
+    MainGame game;
 
 
     public HorisontalTetrisField(MainGame game) {
 
         initPresidentsListForQuestionsArray();
         setNewCurrentPresident();
+        this.game = game;
         decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
         portraitPanel = new PortraitPanel(game);
         background = decoratorFieldWIthCards.getBackgroundSprite();
@@ -46,7 +50,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
         camera = decoratorFieldWIthCards.getCamera();
         viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         viewport.apply();
-        GameManager.counterOfPushedCards = 0;
 
         setInitialPlayerPosition();
     }
@@ -81,9 +84,9 @@ public class HorisontalTetrisField extends ScreenAdapter {
                     decoratorFieldWIthCards.generateHints();
                     decoratorFieldWIthCards.pullHintCards();
                 }
-                    break;
+                break;
             case PushNewHints:
-                if(switcher) {
+                if (switcher) {
                     switcher = false;
                     decoratorFieldWIthCards.pushHintCards();
                 }
@@ -98,37 +101,47 @@ public class HorisontalTetrisField extends ScreenAdapter {
                     batch.draw(player, player.getX(), player.getY());
                     batch.end();
                     updatePlayer();
-                } else presidentIsDone();
+                } else GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
+                break;
+            case MoveCamToRightAnswer:
+                if (moveCameraToY((GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 30)) {
+                    GameManager.renderMode = GameManager.RenderMode.ShowRightAnswer;
+                    isRightAnswer = checkAnswer();
+                }
+                break;
+            case ShowRightAnswer:
+                if (!switcher) {
+                    switcher = true;
+                    if (isRightAnswer) decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
+                    else decoratorFieldWIthCards.showRightNameCardIfWrongAnswer();
+                }
+                break;
+            case MoveCamToStartPosition:
+                if (moveCameraToY(background.getHeight() / 2)) {
+                    setNewCurrentPresident();
+                    portraitPanel.getStage().dispose();
+                    portraitPanel = new PortraitPanel(game);
+                    setInitialPlayerPosition();
+                    GameManager.renderMode = GameManager.RenderMode.Portrait;
+                }
+                break;
         }
-//        batch.setProjectionMatrix(camera.projection);
-//        batch.setTransformMatrix(camera.view);
-//        decoratorFieldWIthCards.getStage().draw();
-//        decoratorFieldWIthCards.getStage().act();
-//        if (GameManager.counterOfPushedCards <= 1000) {
-//
-//        } else {
-//            if (isPortraitMode) {
-//                portraitPanel.getStage().draw();
-//                portraitPanel.getStage().act();
-//                if (portraitPanel.checkPushed()) {
-//                    sleep();
-//                    portraitPanel.pullPortraitPanel();
-//                }
-//                if (portraitPanel.checkPulled()) isPortraitMode = false;
-//            } else
-//            if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
-//                queryInput();
-//                camera.update();
-//                decoratorFieldWIthCards.getStage().draw();
-//                decoratorFieldWIthCards.getStage().act();
-//                batch.setProjectionMatrix(camera.projection);
-//                batch.setTransformMatrix(camera.view);
-//                batch.begin();
-//                batch.draw(player, player.getX(), player.getY());
-//                batch.end();
-//                updatePlayer();
-//            } else presidentIsDone();
-//        }
+    }
+
+    private boolean moveCameraToY(float y) {
+        if (camera.position.y > y && camera.position.y >= GameInfo.WORLD_HEIGHT / 2 + 5) {
+            camera.position.y = camera.position.y - 5;
+            if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 5)
+                return true;
+        }
+        if (camera.position.y < y && camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 5) {
+            camera.position.y = camera.position.y + 5;
+            if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 5)
+                return true;
+        }
+        if (camera.position.y == y)
+            return true;
+        return false;
     }
 
     private void sleep(long delay) {
@@ -138,31 +151,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
         }
     }
 
-    @Override
-    public void resize(int width, int height) {
-        viewport.update(width, height);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-        decoratorFieldWIthCards.getStage().dispose();
-
-    }
 
     //check for bounds
     //update player's and cameras coordinates
@@ -192,8 +180,8 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
     private void setNewCurrentPresident() {
         if (presidentsListForQuestions.size > 0) {
-            GameManager.setCurrentWrightPresident(presidentsListForQuestions.removeIndex(0) + 1);
-            System.out.println(GameManager.currentWrightPresident);
+            GameManager.setCurrentRightPresident(presidentsListForQuestions.removeIndex(0) + 1);
+            System.out.println(GameManager.currentRightPresident);
         } else gameOver();
     }
 
@@ -205,19 +193,44 @@ public class HorisontalTetrisField extends ScreenAdapter {
     private void presidentIsDone() {
         if (checkAnswer()) {
             System.out.println("You are right");
-            decoratorFieldWIthCards.pushRightPresidentNameCard();
+            decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
         } else System.out.println("You are wrong");
         setNewCurrentPresident();
         setInitialPlayerPosition();
     }
 
     private boolean checkAnswer() {
-        return ((player.getY() + 29 >= (GameManager.currentWrightPresident - GameManager.firstPresidentInRange) * 60 &&
-                (player.getY() + 29 <= (GameManager.currentWrightPresident - GameManager.firstPresidentInRange) * 60 + 60)));
+        return ((player.getY() + 29 >= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 &&
+                (player.getY() + 29 <= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 60)));
     }
 
     private void gameOver() {
         System.out.println("Game over");
     }
 
+    @Override
+    public void resize(int width, int height) {
+        viewport.update(width, height);
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
+    public void hide() {
+
+    }
+
+    @Override
+    public void dispose() {
+        decoratorFieldWIthCards.getStage().dispose();
+
+    }
 }

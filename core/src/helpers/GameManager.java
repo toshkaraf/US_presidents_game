@@ -20,12 +20,12 @@ public class GameManager {
 
     public static int firstPresidentInRange; // number in array (fmrom 0)
     public static int lastPresidentInRange; // number in array
-    public static int currentWrightPresident; // number in array
+    public static int currentRightPresident; // number in array
     public static int quantityOfHints;
 
 //    public enum PushDirection {Right, Left}
 
-    public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, ShowRightAnswer}
+    public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition }
 
     public static RenderMode renderMode = RenderMode.PrepareField;
 
@@ -53,8 +53,8 @@ public class GameManager {
         GameManager.lastPresidentInRange = lastPresidentInRange - 1;
     }
 
-    public static void setCurrentWrightPresident(int currentWrightPresident) {
-        GameManager.currentWrightPresident = currentWrightPresident - 1;
+    public static void setCurrentRightPresident(int currentRightPresident) {
+        GameManager.currentRightPresident = currentRightPresident - 1;
     }
 
     public static void setQuantityOfHints(int quantityOfHints) {

@@ -7,18 +7,11 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -66,19 +59,19 @@ public class PortraitPanel {
         portraitCard.setBackground(new SpriteDrawable(new Sprite(bg)));
         portraitCard.setBounds(portraitCard.getX(), portraitCard.getY(), bg.getWidth(), bg.getHeight());
         portraitCard.setPosition(-portraitCard.getWidth(), GameInfo.WORLD_HEIGHT / 2 - 190);
-        portraitCard.add(new Image(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentWrightPresident].getPortraitFileName()))).padBottom(70);
+        portraitCard.add(new Image(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getPortraitFileName()))).padBottom(70);
         portraitCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 170, portraitCard.getY(), 1f),
-                delay(5f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), 1f)));
+                delay(1f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), 1f)));
 
         nameCard = new Table();
         nameCard.setBackground(new SpriteDrawable(new Sprite(bgName)));
         nameCard.setBounds(nameCard.getX(), nameCard.getY(), bgName.getWidth(), bgName.getHeight());
         nameCard.setPosition(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT / 2 - 170);
-        nameCard.add(new Label(GameManager.PRESIDENTS_ARRAY[GameManager.currentWrightPresident].getFirstName() + " " +
-                GameManager.PRESIDENTS_ARRAY[GameManager.currentWrightPresident].getLastName(),
+        nameCard.add(new Label(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getFirstName() + " " +
+                GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getLastName(),
                 new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).center();
         nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), 1f),
-                delay(5f), moveTo(-nameCard.getWidth(), nameCard.getY(), 1f),new RenderModeAction(GameManager.RenderMode.PullOldHints)));
+                delay(1f), moveTo(-nameCard.getWidth(), nameCard.getY(), 1f),new RenderModeAction(GameManager.RenderMode.PullOldHints)));
     }
 
     public Stage getStage() {
