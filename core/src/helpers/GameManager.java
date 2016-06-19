@@ -13,25 +13,21 @@ import players.President;
 public class GameManager {
 
     private static GameManager ourInstance = new GameManager();
-
+    static Array<Integer> presidentsListForQuestions = new Array<Integer>();
     public static int counterOfPushedCards = 0;
 
     public static final President[] PRESIDENTS_ARRAY = initializePresidentsArray();
 
-    public static int firstPresidentInRange; // number in array (fmrom 0)
+    public static int firstPresidentInRange; // number in array (from 0)
     public static int lastPresidentInRange; // number in array
     public static int currentRightPresident; // number in array
     public static int quantityOfHints;
 
-//    public enum PushDirection {Right, Left}
-
-    public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition }
+    public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition}
+    public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
     public static RenderMode renderMode = RenderMode.PrepareField;
 
-    public static GameManager getInstance() {
-        return ourInstance;
-    }
 
     private static President[] initializePresidentsArray() {
         President[] presidentsArray = new President[44];
@@ -43,6 +39,20 @@ public class GameManager {
             presidentsArray[presidentNumber++] = json.readValue(President.class, v);
         }
         return presidentsArray;
+    }
+
+    public static void initPresidentsListForQuestionsArray() {
+        for (int i = GameManager.firstPresidentInRange; i <= GameManager.lastPresidentInRange; i++)
+            presidentsListForQuestions.add(i);
+        presidentsListForQuestions.shuffle();
+    }
+
+    public static boolean setNewCurrentPresident() {
+        if (presidentsListForQuestions.size > 0) {
+            GameManager.setCurrentRightPresident(presidentsListForQuestions.removeIndex(0) + 1);
+            System.out.println(GameManager.currentRightPresident);
+            return true;
+        } else return false;
     }
 
     public static void setFirstPresidentInRange(int firstPresidentInRange) {
@@ -59,5 +69,13 @@ public class GameManager {
 
     public static void setQuantityOfHints(int quantityOfHints) {
         GameManager.quantityOfHints = quantityOfHints;
+    }
+
+    public static Array<Integer> getPresidentsListForQuestions() {
+        return presidentsListForQuestions;
+    }
+
+    public static GameManager getInstance() {
+        return ourInstance;
     }
 }

@@ -26,21 +26,20 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
     SpriteBatch batch;
     Sprite background;
-    Array<Integer> presidentsListForQuestions = new Array<Integer>();
     Sprite player;
     private Viewport viewport;
     private OrthographicCamera camera;
     DecoratorFieldWIthCards decoratorFieldWIthCards;
     PortraitPanel portraitPanel;
-    boolean switcher;
+    boolean switcher = true;
     private boolean isRightAnswer;
     MainGame game;
 
 
     public HorisontalTetrisField(MainGame game) {
 
-        initPresidentsListForQuestionsArray();
-        setNewCurrentPresident();
+        GameManager.initPresidentsListForQuestionsArray();
+        GameManager.setNewCurrentPresident();
         this.game = game;
         decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
         portraitPanel = new PortraitPanel(game);
@@ -52,12 +51,6 @@ public class HorisontalTetrisField extends ScreenAdapter {
         viewport.apply();
 
         setInitialPlayerPosition();
-    }
-
-    private void initPresidentsListForQuestionsArray() {
-        for (int i = GameManager.firstPresidentInRange; i <= GameManager.lastPresidentInRange; i++)
-            presidentsListForQuestions.add(i);
-        presidentsListForQuestions.shuffle();
     }
 
     @Override
@@ -78,16 +71,10 @@ public class HorisontalTetrisField extends ScreenAdapter {
                 portraitPanel.getStage().draw();
                 portraitPanel.getStage().act();
                 break;
-            case PullOldHints:
-                if (!switcher) {
-                    switcher = true;
-                    decoratorFieldWIthCards.generateHints();
-                    decoratorFieldWIthCards.pullHintCards();
-                }
-                break;
             case PushNewHints:
                 if (switcher) {
                     switcher = false;
+                    decoratorFieldWIthCards.generateHints();
                     decoratorFieldWIthCards.pushHintCards();
                 }
                 break;
@@ -118,7 +105,8 @@ public class HorisontalTetrisField extends ScreenAdapter {
                 break;
             case MoveCamToStartPosition:
                 if (moveCameraToY(background.getHeight() / 2)) {
-                    setNewCurrentPresident();
+                    decoratorFieldWIthCards.renewData(isRightAnswer);
+                    if (!GameManager.setNewCurrentPresident()) gameOver();
                     portraitPanel.getStage().dispose();
                     portraitPanel = new PortraitPanel(game);
                     setInitialPlayerPosition();
@@ -178,26 +166,19 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
 
-    private void setNewCurrentPresident() {
-        if (presidentsListForQuestions.size > 0) {
-            GameManager.setCurrentRightPresident(presidentsListForQuestions.removeIndex(0) + 1);
-            System.out.println(GameManager.currentRightPresident);
-        } else gameOver();
-    }
-
     private void setInitialPlayerPosition() {
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
     }
 
-    private void presidentIsDone() {
-        if (checkAnswer()) {
-            System.out.println("You are right");
-            decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
-        } else System.out.println("You are wrong");
-        setNewCurrentPresident();
-        setInitialPlayerPosition();
-    }
+//    private void presidentIsDone() {
+//        if (checkAnswer()) {
+//            System.out.println("You are right");
+//            decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
+//        } else System.out.println("You are wrong");
+//        GameManager.setNewCurrentPresident();
+//        setInitialPlayerPosition();
+//    }
 
     private boolean checkAnswer() {
         return ((player.getY() + 29 >= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 &&

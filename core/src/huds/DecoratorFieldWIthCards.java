@@ -10,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.SnapshotArray;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -40,13 +41,10 @@ public class DecoratorFieldWIthCards {
     private Sprite backgroundSprite;
     private Viewport gameViewport;
     private Group presidentCardsArray;
-    private TypeOfCard[] presidentsArray = new TypeOfCard[44];
+    private GameManager.TypeOfCard[] presidentsArray = new GameManager.TypeOfCard[44];
     private Group numberCardsArray;
     //    private Array<Card> presidentCardsArray;
     OrthographicCamera camera;
-
-
-    enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
 
     public DecoratorFieldWIthCards(MainGame game) {
@@ -84,111 +82,108 @@ public class DecoratorFieldWIthCards {
 
     private void initPresidentArray() {
         for (int president = GameManager.firstPresidentInRange; president <= GameManager.lastPresidentInRange; president++)
-            this.presidentsArray[president] = TypeOfCard.BlueDate;
+            this.presidentsArray[president] = GameManager.TypeOfCard.BlueDate;
     }
 
     private void initCardsArrays() {
         for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
             numberCardsArray.addActor(new NumberCard(blueCard, a));
-            presidentCardsArray.addActor(new DatesCard(blueCard, a));
+            presidentCardsArray.addActor(new DatesCard(blueCard, GameManager.TypeOfCard.BlueDate, a));
         }
-
         numberCardsArray.setBounds(numberCardsArray.getX(), numberCardsArray.getY(), numberCardsArray.getWidth(), numberCardsArray.getHeight());
         numberCardsArray.setPosition(-400, 0);
         numberCardsArray.addAction(sequence(moveTo(-355, 0, 1f), delay(1f), new RenderModeAction(GameManager.RenderMode.Portrait)));
     }
 
     public void generateHints() {
-        // replace some values of presidentsArray with hint red values
+        int quantityOfHints = GameManager.quantityOfHints;
+        if (GameManager.quantityOfHints >= GameManager.getPresidentsListForQuestions().size - 1)
+            quantityOfHints = GameManager.getPresidentsListForQuestions().size - 1;
         Array<Integer> hintArray = new Array<Integer>(GameManager.quantityOfHints - 1);
         Random random = new Random();
         int hint;
-        for (int h = 0; h <= GameManager.quantityOfHints - 1; h++) {
+        for (int h = 0; h <= quantityOfHints - 1; h++) {
             do
-                hint = GameManager.firstPresidentInRange + random.nextInt(GameManager.lastPresidentInRange - GameManager.firstPresidentInRange);
+                hint = GameManager.firstPresidentInRange + GameManager.getPresidentsListForQuestions().get(random.nextInt(GameManager.getPresidentsListForQuestions().size));
             while (hintArray.contains(hint, true) || hint == GameManager.currentRightPresident);
-            presidentsArray[hint] = TypeOfCard.RedDate;
+            presidentsArray[hint] = GameManager.TypeOfCard.RedDate;
         }
         // add right answer
-        presidentsArray[GameManager.currentRightPresident] = TypeOfCard.RedDate;
+        presidentsArray[GameManager.currentRightPresident] = GameManager.TypeOfCard.RedDate;
     }
 
-    public void pullHintCards() {
-        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
-            if (presidentsArray[a] == TypeOfCard.RedDate) {
-                DatesCard actor = (DatesCard) presidentCardsArray.findActor("date_of_" + a);
-                actor.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, actor.getY(), 1f), new RenderModeAction(GameManager.RenderMode.PushNewHints)));
-            }
-        }
-    }
+//    public void pullHintCards() {
+//        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
+//            if (presidentsArray[a] == GameManager.TypeOfCard.RedDate) {
+//                DatesCard actor = (DatesCard) presidentCardsArray.findActor("blue_date_of_" + a);
+//                actor.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, actor.getY(), 1f), new RenderModeAction(GameManager.RenderMode.PushNewHints)));
+//            }
+//        }
+//    }
 
     public void pushHintCards() {
         for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
-            if (presidentsArray[a] == TypeOfCard.RedDate) {
-                presidentCardsArray.findActor("date_of_" + a).remove();
-                DatesCard actor = new DatesCard(redCard, a);
-                actor.addAction(new RenderModeAction(GameManager.RenderMode.SetNewPlayer));
-                presidentCardsArray.addActor(actor);
+            if (presidentsArray[a] == GameManager.TypeOfCard.RedDate) {
+                DatesCard actor = (DatesCard) presidentCardsArray.findActor("blue_date_of_" + a);
+                actor.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, actor.getY(), 1f), delay(1f), new RenderModeAction(GameManager.RenderMode.SetNewPlayer)));
+                DatesCard newActor = new DatesCard(redCard, GameManager.TypeOfCard.RedDate, a);
+                presidentCardsArray.addActor(newActor);
             }
         }
     }
 
     public void pushRightNameCardIfRightAnswer() {
-        DatesCard currentPresidentCard = presidentCardsArray.findActor("date_of_" + GameManager.currentRightPresident);
-        currentPresidentCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, currentPresidentCard.getY(), 1f),delay(3f),
-                new RenderModeAction(GameManager.RenderMode.MoveCamToStartPosition)));
-        PresidentNameCard rightNameCard = new PresidentNameCard(blueCard, GameManager.currentRightPresident);
-        rightNameCard.addAction(moveTo(GameInfo.WORLD_WIDTH-370, rightNameCard.getY(), 1f));
-        presidentCardsArray.addActor(rightNameCard);
+        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
+            if (presidentsArray[a] == GameManager.TypeOfCard.RedDate) {
+                DatesCard pullDateCard = (DatesCard) presidentCardsArray.findActor("red_date_of_" + a);
+                pullDateCard.addAction(moveTo(GameInfo.WORLD_WIDTH, pullDateCard.getY(), 1f));
+                if (a != GameManager.currentRightPresident) {
+                    DatesCard pushDateCard = (DatesCard) presidentCardsArray.findActor("blue_date_of_" + a);
+                    pushDateCard.push();
+                } else {
+                    PresidentNameCard rightNameCard = new PresidentNameCard(blueCard, GameManager.currentRightPresident);
+                    rightNameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH - 370, rightNameCard.getY(), 1f), delay(3f),
+                            new RenderModeAction(GameManager.RenderMode.MoveCamToStartPosition)));
+                    presidentCardsArray.addActor(rightNameCard); //push right name card
+                }
+            }
+        }
     }
 
     public void showRightNameCardIfWrongAnswer() {
-        DatesCard currentPresidentCard = presidentCardsArray.findActor("date_of_" + GameManager.currentRightPresident);
-        currentPresidentCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, currentPresidentCard.getY(),1f)));
-        PresidentNameCard rightNameCard = new PresidentNameCard(blueCard, GameManager.currentRightPresident);
-        presidentCardsArray.addActor(rightNameCard);
-        rightNameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH-370, rightNameCard.getY(), 1f),delay(3f),moveTo(GameInfo.WORLD_WIDTH, currentPresidentCard.getY(), 1f),
-                new RenderModeAction(GameManager.RenderMode.MoveCamToStartPosition)));
-
+        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
+            if (presidentsArray[a] == GameManager.TypeOfCard.RedDate) {
+                DatesCard pullDateCard = (DatesCard) presidentCardsArray.findActor("red_date_of_" + a);
+                pullDateCard.addAction(moveTo(GameInfo.WORLD_WIDTH, pullDateCard.getY(), 1f));
+                if (a != GameManager.currentRightPresident) {
+                    DatesCard pushDateCard = (DatesCard) presidentCardsArray.findActor("blue_date_of_" + a);
+                    pushDateCard.push();
+                } else {
+                    PresidentNameCard rightNameCard = new PresidentNameCard(blueCard, GameManager.currentRightPresident);
+                    rightNameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH - 370, rightNameCard.getY(), 1f), delay(3f),
+                            moveTo(GameInfo.WORLD_WIDTH, rightNameCard.getY(), 1f),
+                            new RenderModeAction(GameManager.RenderMode.MoveCamToStartPosition)));
+                    presidentCardsArray.addActor(rightNameCard); //push right name card
+                }
+            }
+        }
+        DatesCard pushRightDateCard = (DatesCard) presidentCardsArray.findActor("blue_date_of_" + GameManager.currentRightPresident);
+        pushRightDateCard.addAction(delay(4f));
+        pushRightDateCard.push();
     }
 
+    public void renewData(boolean answer){
+        clearPresidentCardsArrayFromRedCards();
+        if (!answer) presidentCardsArray.findActor("name_of_" + GameManager.currentRightPresident).remove();
+        initPresidentArray();
+    }
 
-//        final DatesCard actor = (DatesCard) presidentCardsArray.hit(795, (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 30, true);
-//        actor.setIsPush(false);
-//        System.out.println(actor.getNumberPresident());
-
-//        actor.addAction(sequence(moveAction,
-//                run(new Runnable(){
-//                    @Override
-//                    public void run() {
-//                        Gdx.app.log("STATUS", "Action complete");
-//                    }
-//
-//                })));
-
-//        RunnableAction run = new RunnableAction();
-//        run.setRunnable(new Runnable() {
-//            @Override
-//            public void run() {
-//                presidentCardsArray.removeActor(actor);
-//                presidentCardsArray.addActor(new PresidentNameCard(blueCard, (GameManager.currentRightPresident)));
-//            }
-//        });
-//
-//        actor.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, actor.getY(), 5f), run));
-
-
-//        ((DatesCard) (presidentCardsArray.getChildren().get(GameManager.currentRightPresident - GameManager.firstPresidentInRange))).setIsPush(false);
-//        SnapshotArray<Actor> array =  presidentCardsArray.getChildren();
-//        for (int i=0;  i < array.size; i++){
-//            System.out.println(((DatesCard) array.get(i)).getNumberPresident());
-//        }
-//        presidentCardsArray.getChildren().set(GameManager.currentRightPresident - GameManager.firstPresidentInRange + 1, new PresidentNameCard(blueCard, (GameManager.currentRightPresident)));
-
-
-
-    public void setNewHints() {
-
+    private void clearPresidentCardsArrayFromRedCards() {
+        for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
+            if (presidentsArray[a] == GameManager.TypeOfCard.RedDate)
+                presidentCardsArray.findActor("red_date_of_" + a).remove();
+        }
+//        presidentCardsArray.findActor("red_date_of_" + GameManager.currentRightPresident).remove();
     }
 
     public Stage getStage() {

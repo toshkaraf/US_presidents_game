@@ -17,12 +17,13 @@ public class PresidentNameCard extends Table {
 
     public PresidentNameCard(Sprite card, int numberOfPresident) {
         super();
+        setName("name_of_" + numberOfPresident);
         setBackground(new SpriteDrawable(card));
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
-        setPosition(GameInfo.WORLD_WIDTH,(numberOfPresident - GameManager.firstPresidentInRange) * card.getHeight());
+        setPosition(GameInfo.WORLD_WIDTH, (numberOfPresident - GameManager.firstPresidentInRange) * card.getHeight());
         this.left();
         add(new Label(GameManager.PRESIDENTS_ARRAY[numberOfPresident].getFirstName() +
-                        " " + GameManager.PRESIDENTS_ARRAY[numberOfPresident].getLastName(),
+                " " + GameManager.PRESIDENTS_ARRAY[numberOfPresident].getLastName(),
                 new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).padLeft(22);
     }
 
