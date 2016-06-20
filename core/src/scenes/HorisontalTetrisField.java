@@ -39,7 +39,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
     public HorisontalTetrisField(MainGame game) {
 
         GameManager.initPresidentsListForQuestionsArray();
-        GameManager.setNewCurrentPresident();
+        GameManager.setNewCurrentPresident(true);
         this.game = game;
         decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
         portraitPanel = new PortraitPanel(game);
@@ -106,7 +106,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
             case MoveCamToStartPosition:
                 if (moveCameraToY(background.getHeight() / 2)) {
                     decoratorFieldWIthCards.renewData(isRightAnswer);
-                    if (!GameManager.setNewCurrentPresident()) gameOver();
+                    if (!GameManager.setNewCurrentPresident(isRightAnswer)) gameOver();
                     portraitPanel.getStage().dispose();
                     portraitPanel = new PortraitPanel(game);
                     setInitialPlayerPosition();
@@ -117,11 +117,14 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
     private boolean moveCameraToY(float y) {
+        if (camera.position.y > y && camera.position.y <= GameInfo.WORLD_HEIGHT / 2) return true;
         if (camera.position.y > y && camera.position.y >= GameInfo.WORLD_HEIGHT / 2 + 5) {
             camera.position.y = camera.position.y - 5;
             if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 5)
                 return true;
         }
+        if (camera.position.y < y && camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2)
+            return true;
         if (camera.position.y < y && camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 5) {
             camera.position.y = camera.position.y + 5;
             if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 5)
@@ -186,7 +189,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
     private void gameOver() {
-        System.out.println("Game over");
+        game.setScreen(new MainMenu(game));
     }
 
     @Override
