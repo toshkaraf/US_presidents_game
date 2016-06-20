@@ -1,7 +1,6 @@
 package scenes;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,11 +11,12 @@ import com.toshkaraf.MainGame;
 
 import helpers.GameInfo;
 import huds.MainMenuButtons;
+import huds.MenuButtons;
 
 /**
  * Created by Антон on 09.06.2016.
  */
-public class MainMenu extends ScreenAdapter {
+public class Menu extends ScreenAdapter {
 
     private MainGame game;
 
@@ -25,9 +25,9 @@ public class MainMenu extends ScreenAdapter {
 
     private Texture background;
 
-    private MainMenuButtons btns;
+    private MenuButtons btns;
 
-    public MainMenu(MainGame game) {
+    public Menu(MainGame game, MenuButtons menuButtons) {
         this.game = game;
 
         mainCamera = new OrthographicCamera();
@@ -38,7 +38,7 @@ public class MainMenu extends ScreenAdapter {
 
         background = new Texture("Backgrounds/USAPresidentsBackground.png");
 
-        btns = new MainMenuButtons(game);
+        btns = menuButtons;
 
     }
 

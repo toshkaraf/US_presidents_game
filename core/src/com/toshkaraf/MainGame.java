@@ -4,8 +4,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import helpers.GameManager;
-import scenes.HorisontalTetrisField;
-import scenes.MainMenu;
+import huds.MainMenuButtons;
+import scenes.Menu;
 
 public class MainGame extends Game {
 	SpriteBatch batch;
@@ -15,7 +15,7 @@ public class MainGame extends Game {
 	public void create () {
 		new GameManager(); //initialize PRESIDENTS_ARRAY
 		batch = new SpriteBatch();
-		setScreen(new MainMenu(this));
+		setScreen(new Menu(this, new MainMenuButtons(this)));
 //	    setScreen(new HorisontalTetrisField(this,1,11));
 	}
 

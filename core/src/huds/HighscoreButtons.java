@@ -22,7 +22,7 @@
 //
 //import helpers.GameInfo;
 //import helpers.GameManager;
-//import scenes.MainMenu;
+//import scenes.Menu;
 //
 ///**
 // * Created by Fahir on 4/28/16.
@@ -86,7 +86,7 @@
 ////        backBtn.addListener(new ChangeListener() {
 ////            @Override
 ////            public void changed(ChangeEvent event, Actor actor) {
-////                game.setScreen(new MainMenu(game));
+////                game.setScreen(new Menu(game));
 ////            }
 ////        });
 ////

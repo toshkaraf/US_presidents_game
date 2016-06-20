@@ -41,7 +41,6 @@ public class GameManager {
         GameManager.firstPresidentInRange = firstPresidentInRange-1;
         GameManager.lastPresidentInRange = lastPresidentInRange-1;
         GameManager.quantityOfHints = quantityOfHints;
-
     }
 
     public static void initPresidentsListForQuestionsArray() {

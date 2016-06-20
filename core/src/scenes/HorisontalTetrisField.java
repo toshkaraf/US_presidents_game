@@ -1,6 +1,5 @@
 package scenes;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ScreenAdapter;
@@ -9,7 +8,6 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -17,6 +15,7 @@ import com.toshkaraf.MainGame;
 import helpers.GameInfo;
 import helpers.GameManager;
 import huds.DecoratorFieldWIthCards;
+import huds.MainMenuButtons;
 import huds.PortraitPanel;
 
 /**
@@ -189,7 +188,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
     private void gameOver() {
-        game.setScreen(new MainMenu(game));
+        game.setScreen(new Menu(game, new MainMenuButtons(game)));
     }
 
     @Override
