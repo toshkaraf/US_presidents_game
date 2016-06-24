@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -62,8 +61,8 @@ public class PortraitPanel {
         portraitCard.setBounds(portraitCard.getX(), portraitCard.getY(), bg.getWidth(), bg.getHeight());
         portraitCard.setPosition(-portraitCard.getWidth(), GameInfo.WORLD_HEIGHT / 2 - 190);
         portraitCard.add(new Image(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getPortraitFileName()))).padBottom(70);
-        portraitCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 170, portraitCard.getY(), 1f),
-                delay(1f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), 1f)));
+        portraitCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 170, portraitCard.getY(), .5f),
+                delay(1f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), .5f)));
 
         nameCard = new Table();
         nameCard.setBackground(new SpriteDrawable(new Sprite(bgName)));
@@ -72,8 +71,8 @@ public class PortraitPanel {
         nameCard.add(new Label(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getFirstName() + " " +
                 GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getLastName(),
                 new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).center();
-        nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), 1f),
-                delay(1f), moveTo(-nameCard.getWidth(), nameCard.getY(), 1f),new RenderModeAction(GameManager.RenderMode.PushNewHints)));
+        nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), .5f),
+                delay(1f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f),new RenderModeAction(GameManager.RenderMode.PushNewHints)));
     }
 
     public Stage getStage() {

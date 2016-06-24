@@ -20,7 +20,11 @@ public class NumberCard extends Table {
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
         setY((numberOfPresident - GameManager.firstPresidentInRange) * card.getHeight());
         this.right();
-        add(new Label(Integer.toString(numberOfPresident + 1),
-                new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).padRight(22);
+        if (numberOfPresident >= 10)
+            add(new Label(Integer.toString(numberOfPresident + 1),
+                    new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).padRight(15);
+        else
+            add(new Label(Integer.toString(numberOfPresident + 1),
+                    new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).padRight(22);
     }
 }
