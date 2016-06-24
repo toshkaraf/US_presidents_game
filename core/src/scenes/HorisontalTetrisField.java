@@ -2,6 +2,7 @@ package scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
@@ -21,7 +23,7 @@ import huds.PortraitPanel;
 /**
  * Created by Антон on 01.06.2016.
  */
-public class HorisontalTetrisField extends ScreenAdapter {
+public class HorisontalTetrisField implements Screen {
 
     SpriteBatch batch;
     Sprite background;
@@ -42,14 +44,25 @@ public class HorisontalTetrisField extends ScreenAdapter {
         this.game = game;
         decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
         portraitPanel = new PortraitPanel(game);
-        background = decoratorFieldWIthCards.getBackgroundSprite();
+//        background = decoratorFieldWIthCards.getBackgroundSprite();
+        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
+                0, 0, GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
+
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         batch = game.getBatch();
         camera = decoratorFieldWIthCards.getCamera();
-        viewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
-        viewport.apply();
+//        camera = new OrthographicCamera();
+        camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
+        viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
+
+//        viewport.apply();
 
         setInitialPlayerPosition();
+    }
+
+    @Override
+    public void show() {
+
     }
 
     @Override
@@ -60,6 +73,9 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
+        batch.begin();
+        batch.draw(background, 0, 0);
+        batch.end();
         decoratorFieldWIthCards.getStage().draw();
         decoratorFieldWIthCards.getStage().act(Gdx.graphics.getDeltaTime());
 
@@ -87,7 +103,8 @@ public class HorisontalTetrisField extends ScreenAdapter {
                     batch.draw(player, player.getX(), player.getY());
                     batch.end();
                     updatePlayer();
-                } else GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
+                } else
+                    GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
                 break;
             case MoveCamToRightAnswer:
                 if (moveCameraToY((GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 30)) {
@@ -100,45 +117,45 @@ public class HorisontalTetrisField extends ScreenAdapter {
                     switcher = true;
                     if (isRightAnswer) decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
                     else decoratorFieldWIthCards.showRightNameCardIfWrongAnswer();
+//                    game.setScreen(new Menu(game, new MainMenuButtons(game)));
                 }
                 break;
             case MoveCamToStartPosition:
                 if (moveCameraToY(background.getHeight() / 2)) {
                     decoratorFieldWIthCards.renewData(isRightAnswer);
                     if (!GameManager.setNewCurrentPresident(isRightAnswer)) gameOver();
-                    portraitPanel.getStage().dispose();
-                    portraitPanel = new PortraitPanel(game);
-                    setInitialPlayerPosition();
-                    GameManager.renderMode = GameManager.RenderMode.Portrait;
+                    else {
+                        portraitPanel.getStage().dispose();
+                        portraitPanel = new PortraitPanel(game);
+                        setInitialPlayerPosition();
+                        GameManager.renderMode = GameManager.RenderMode.Portrait;
+                    }
                 }
                 break;
         }
     }
 
     private boolean moveCameraToY(float y) {
-        if (camera.position.y > y && camera.position.y <= GameInfo.WORLD_HEIGHT / 2) return true;
-        if (camera.position.y > y && camera.position.y >= GameInfo.WORLD_HEIGHT / 2 + 5) {
-            camera.position.y = camera.position.y - 5;
-            if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 5)
-                return true;
-        }
-        if (camera.position.y < y && camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2)
+        if (y <= GameInfo.WORLD_HEIGHT / 2 + 10 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10)
             return true;
-        if (camera.position.y < y && camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 5) {
-            camera.position.y = camera.position.y + 5;
-            if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 5)
+
+        if (camera.position.y > y && y >= GameInfo.WORLD_HEIGHT / 2 + 10) {
+            camera.position.y = camera.position.y - 10;
+            if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10)
                 return true;
         }
+
+        if (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10 && camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10)
+            return true;
+        if (camera.position.y < y && y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10) {
+            camera.position.y = camera.position.y + 10;
+            if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10)
+                return true;
+        }
+
         if (camera.position.y == y)
             return true;
         return false;
-    }
-
-    private void sleep(long delay) {
-        try {
-            Thread.sleep(delay);
-        } catch (Exception e) {
-        }
     }
 
 
@@ -170,17 +187,7 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
     private void setInitialPlayerPosition() {
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
-        camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
     }
-
-//    private void presidentIsDone() {
-//        if (checkAnswer()) {
-//            System.out.println("You are right");
-//            decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
-//        } else System.out.println("You are wrong");
-//        GameManager.setNewCurrentPresident();
-//        setInitialPlayerPosition();
-//    }
 
     private boolean checkAnswer() {
         return ((player.getY() + 29 >= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 &&
@@ -188,7 +195,11 @@ public class HorisontalTetrisField extends ScreenAdapter {
     }
 
     private void gameOver() {
+//        MainGame.getInstance().setNewScreen(MainGame.KindsOfMenu.mainMenu);
+//        game.setScreen(new MainMenu1(game));
+//        batch.dispose();
         game.setScreen(new Menu(game, new MainMenuButtons(game)));
+        dispose();
     }
 
     @Override
@@ -213,7 +224,10 @@ public class HorisontalTetrisField extends ScreenAdapter {
 
     @Override
     public void dispose() {
+        player.getTexture().dispose();
+        background.getTexture().dispose();
         decoratorFieldWIthCards.getStage().dispose();
+        portraitPanel.getStage().dispose();
 
     }
 }

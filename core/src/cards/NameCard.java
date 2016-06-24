@@ -13,9 +13,9 @@ import helpers.MyFontGenerator;
 /**
  * Created by Антон on 09.06.2016.
  */
-public class PresidentNameCard extends Table {
+public class NameCard extends Table {
 
-    public PresidentNameCard(Sprite card, int numberOfPresident) {
+    public NameCard(Sprite card, int numberOfPresident) {
         super();
         setName("name_of_" + numberOfPresident);
         setBackground(new SpriteDrawable(card));

@@ -62,7 +62,7 @@ public class GameModeButtons extends MenuButtons {
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(1, 44, 44);
+                GameManager.initNewGame(1, 44, 43);
                 hideMenu_startNewScreen(new TetrisLearnMode(game));
                 return true;
             }

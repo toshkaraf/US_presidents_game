@@ -13,6 +13,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.SpriteDrawable;
 import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
@@ -39,9 +40,10 @@ public class PortraitPanel {
 
 
     public PortraitPanel(MainGame game) {
-
         this.game = game;
-        gameViewport = new FitViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
+
+
+        gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
                 new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
 

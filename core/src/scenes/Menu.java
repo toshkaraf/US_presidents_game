@@ -19,27 +19,25 @@ import huds.MenuButtons;
 public class Menu extends ScreenAdapter {
 
     private MainGame game;
-
     private OrthographicCamera mainCamera;
     private Viewport gameViewport;
-
     private Texture background;
-
     private MenuButtons btns;
 
     public Menu(MainGame game, MenuButtons menuButtons) {
         this.game = game;
+        btns = menuButtons;
+        background = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png"));
 
+    }
+
+    @Override
+    public void show() {
         mainCamera = new OrthographicCamera();
         mainCamera.setToOrtho(false, GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT);
         mainCamera.position.set(GameInfo.WORLD_WIDTH / 2f, GameInfo.WORLD_HEIGHT / 2f, 0);
-
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, mainCamera);
-
-        background = new Texture("Backgrounds/USAPresidentsBackground.png");
-
-        btns = menuButtons;
-
+        btns.show();
     }
 
     @Override
@@ -47,14 +45,15 @@ public class Menu extends ScreenAdapter {
 
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-
-        game.getBatch().begin();
-
-        game.getBatch().draw(background, 0, 0);
-
-        game.getBatch().end();
-
         game.getBatch().setProjectionMatrix(btns.getStage().getCamera().combined);
+//        game.getBatch().setProjectionMatrix(mainCamera.combined);
+//        game.getBatch().setTransformMatrix(mainCamera.view);
+        btns.getStage().getBatch().begin();
+        btns.getStage().getBatch().draw(background, 0, 0);
+        btns.getStage().getBatch().end();
+
+
+//        game.getBatch().setTransformMatrix(btns.getStage().getCamera().view);
         btns.getStage().draw();
         btns.getStage().act();
 
@@ -62,14 +61,15 @@ public class Menu extends ScreenAdapter {
 
     @Override
     public void resize(int width, int height) {
-        gameViewport.update(width, height);
+        gameViewport.update(width, height, true);
     }
 
 
     @Override
     public void dispose() {
-        background.dispose();
-        btns.getStage().dispose();
+//        background.dispose();
+//        btns.getStage().dispose();
+
     }
 
 }

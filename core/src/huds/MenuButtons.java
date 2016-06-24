@@ -6,6 +6,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.scenes.scene2d.Stage;
@@ -47,13 +48,10 @@ public abstract class MenuButtons {
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
                 new OrthographicCamera());
 
-        stage = new Stage(gameViewport, game.getBatch());
-
-        Gdx.input.setInputProcessor(stage);
+        stage = new Stage(gameViewport, new SpriteBatch());
 
         createAndPositionButtons();
         addAllListeners();
-        addShowActions();
 
         stage.addActor(button_1);
         stage.addActor(button_2);
@@ -63,6 +61,11 @@ public abstract class MenuButtons {
 
 //        stage.addActor(musicBtn);
 //        checkMusic();
+    }
+
+    public void show(){
+        Gdx.input.setInputProcessor(stage);
+        addShowActions();
     }
 
     void createAndPositionButtons() {
@@ -113,6 +116,7 @@ public abstract class MenuButtons {
             @Override
             public void run() {
                 game.setScreen(screen);
+                stage.dispose();
             }
         });
         stage.addAction(sequence(delay(1f), run));

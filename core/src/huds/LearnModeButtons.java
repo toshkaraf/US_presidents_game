@@ -37,7 +37,7 @@ public class LearnModeButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(1, 11, 11);
+                GameManager.initNewGame(1, 2, 0);
                 hideMenu_startNewScreen(new TetrisLearnMode(game));
                 return true;
             }
@@ -70,7 +70,10 @@ public class LearnModeButtons extends MenuButtons {
 
         button_5.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new MainMenuButtons(game)));
+                addHideActions();
+//                MainGame.getInstance().setNewScreen(MainGame.KindsOfMenu.mainMenu);
+                game.setScreen(new Menu(game, new MainMenuButtons(game)));
+
                 return true;
             }
         });

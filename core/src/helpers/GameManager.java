@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
+import com.sun.org.apache.bcel.internal.generic.INEG;
 
 import players.President;
 
@@ -13,6 +14,7 @@ import players.President;
 public class GameManager {
 
     public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition}
+
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
     private static GameManager ourInstance = new GameManager();
@@ -22,7 +24,7 @@ public class GameManager {
     public static int lastPresidentInRange; // number in array
     public static int currentRightPresident; // number in array
     public static int quantityOfHints;
-    public static RenderMode renderMode = RenderMode.PrepareField;
+    public static RenderMode renderMode;
 
 
     private static President[] initializePresidentsArray() {
@@ -37,9 +39,10 @@ public class GameManager {
         return presidentsArray;
     }
 
-    public static void initNewGame(int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints){
-        GameManager.firstPresidentInRange = firstPresidentInRange-1;
-        GameManager.lastPresidentInRange = lastPresidentInRange-1;
+    public static void initNewGame(int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints) {
+        renderMode = RenderMode.PrepareField;
+        GameManager.firstPresidentInRange = firstPresidentInRange - 1;
+        GameManager.lastPresidentInRange = lastPresidentInRange - 1;
         GameManager.quantityOfHints = quantityOfHints;
     }
 
@@ -52,25 +55,29 @@ public class GameManager {
     public static boolean setNewCurrentPresident(boolean isRightAnswer) {
         if (presidentsListForQuestions.size > 0) {
             if (isRightAnswer) {
-                setCurrentRightPresident(presidentsListForQuestions.removeIndex(0) + 1);
-                System.out.println(GameManager.currentRightPresident+1);
+                GameManager.currentRightPresident = presidentsListForQuestions.removeIndex(0);
+                System.out.println(GameManager.currentRightPresident + 1);
                 return true;
             } else {
-                presidentsListForQuestions.add(currentRightPresident);
+                presidentsListForQuestions.add(GameManager.currentRightPresident);
                 presidentsListForQuestions.shuffle();
-                setCurrentRightPresident(presidentsListForQuestions.removeIndex(0) + 1);
-                System.out.println(GameManager.currentRightPresident+1);
+                GameManager.currentRightPresident = presidentsListForQuestions.removeIndex(0);
+                System.out.println(GameManager.currentRightPresident + 1);
                 return true;
             }
         } else return false;
     }
 
-    public static void setCurrentRightPresident(int currentRightPresident) {
-        GameManager.currentRightPresident = currentRightPresident - 1;
-    }
-
     public static Array<Integer> getPresidentsListForQuestions() {
         return presidentsListForQuestions;
+    }
+
+    public static Array<Integer> getCloneOfPresidentsListForQuestions() {
+        Array<Integer> tempArray = new Array<Integer>();
+        for (Integer number : presidentsListForQuestions) {
+            tempArray.add(new Integer(number));
+        }
+        return tempArray;
     }
 
     public static GameManager getInstance() {
