@@ -28,29 +28,31 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Антон on 10.06.2016.
  */
-public class DecoratorFieldWIthCards {
+public class DecoratorWIthCards {
 
 
     private SpriteBatch batch;
     private MainGame game;
     private Stage stage;
-    private Sprite blueCard, redCard;
+    Sprite blueCard;
+    Sprite redCard;
+    Sprite purpleCard;
     private Sprite backgroundSprite;
     private Viewport gameViewport;
-    private Group presidentCardsArray;
-    private GameManager.TypeOfCard[] presidentsArray = new GameManager.TypeOfCard[44];
-    private Group numberCardsArray;
-    //    private Array<Card> presidentCardsArray;
+    Group presidentCardsArray;
+    GameManager.TypeOfCard[] presidentsArray = new GameManager.TypeOfCard[44];
+    Group numberCardsArray;
     OrthographicCamera camera;
 
 
-    public DecoratorFieldWIthCards(MainGame game) {
+    public DecoratorWIthCards(MainGame game) {
 
         this.game = game;
         numberCardsArray = new Group();
         presidentCardsArray = new Group();
         redCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_red.png")));
         blueCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president.png")));
+        purpleCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_purple.png")));
 
         batch = game.getBatch();
         camera = new OrthographicCamera();
@@ -62,15 +64,14 @@ public class DecoratorFieldWIthCards {
         stage.addActor(presidentCardsArray);
         initPresidentArray();
         initCardsArrays();
-
     }
 
-    private void initPresidentArray() {
+    void initPresidentArray() {
         for (int president = GameManager.firstPresidentInRange; president <= GameManager.lastPresidentInRange; president++)
             this.presidentsArray[president] = GameManager.TypeOfCard.BlueDate;
     }
 
-    private void initCardsArrays() {
+    void initCardsArrays() {
         for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
             numberCardsArray.addActor(new NumberCard(blueCard, a));
             presidentCardsArray.addActor(new DatesCard(blueCard, GameManager.TypeOfCard.BlueDate, a));
@@ -137,7 +138,7 @@ public class DecoratorFieldWIthCards {
                     DatesCard pushDateCard = presidentCardsArray.findActor("blue_date_of_" + a);
                     pushDateCard.push();
                 } else {
-                    NameCard rightNameCard = new NameCard(blueCard, GameManager.currentRightPresident);
+                    NameCard rightNameCard = new NameCard(purpleCard, GameManager.currentRightPresident);
                     rightNameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH - 370, rightNameCard.getY(), 1f), delay(3f),
                             moveTo(GameInfo.WORLD_WIDTH, rightNameCard.getY(), 1f),
                             new RenderModeAction(GameManager.RenderMode.MoveCamToStartPosition)));
@@ -145,8 +146,9 @@ public class DecoratorFieldWIthCards {
                 }
             }
         }
+        // return blue date card
         DatesCard pushRightDateCard = presidentCardsArray.findActor("blue_date_of_" + GameManager.currentRightPresident);
-        pushRightDateCard.addAction(delay(4f));
+        pushRightDateCard.addAction(delay(3f));
         pushRightDateCard.push();
     }
 

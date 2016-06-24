@@ -3,20 +3,19 @@ package scenes;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
 import helpers.GameInfo;
 import helpers.GameManager;
-import huds.DecoratorFieldWIthCards;
+import huds.DecoratorChooseFromAll;
+import huds.DecoratorWIthCards;
 import huds.MainMenuButtons;
 import huds.PortraitPanel;
 
@@ -29,11 +28,11 @@ public class HorisontalTetrisField implements Screen {
     Sprite background;
     Sprite player;
     private Viewport viewport;
-    private OrthographicCamera camera;
-    DecoratorFieldWIthCards decoratorFieldWIthCards;
+    OrthographicCamera camera;
+    DecoratorWIthCards decoratorWithCards;
     PortraitPanel portraitPanel;
     boolean switcher = true;
-    private boolean isRightAnswer;
+    boolean isRightAnswer;
     MainGame game;
 
 
@@ -42,13 +41,16 @@ public class HorisontalTetrisField implements Screen {
         GameManager.initPresidentsListForQuestionsArray();
         GameManager.setNewCurrentPresident(true);
         this.game = game;
-        decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
+
+        if (GameManager.quantityOfHints == 0) decoratorWithCards = new DecoratorChooseFromAll(game);
+        else decoratorWithCards = new DecoratorWIthCards(game);
         portraitPanel = new PortraitPanel(game);
+
         background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
                 0, 0, GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         batch = game.getBatch();
-        camera = decoratorFieldWIthCards.getCamera();
+        camera = decoratorWithCards.getCamera();
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
         viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
 
@@ -71,8 +73,8 @@ public class HorisontalTetrisField implements Screen {
         batch.begin();
         batch.draw(background, 0, 0);
         batch.end();
-        decoratorFieldWIthCards.getStage().draw();
-        decoratorFieldWIthCards.getStage().act(Gdx.graphics.getDeltaTime());
+        decoratorWithCards.getStage().draw();
+        decoratorWithCards.getStage().act(Gdx.graphics.getDeltaTime());
 
         switch (GameManager.renderMode) {
             case PrepareField:
@@ -84,8 +86,8 @@ public class HorisontalTetrisField implements Screen {
             case PushNewHints:
                 if (switcher) {
                     switcher = false;
-                    decoratorFieldWIthCards.generateHints();
-                    decoratorFieldWIthCards.pushHintCards();
+                    decoratorWithCards.generateHints();
+                    decoratorWithCards.pushHintCards();
                 }
                 break;
             case SetNewPlayer:
@@ -110,13 +112,13 @@ public class HorisontalTetrisField implements Screen {
             case ShowRightAnswer:
                 if (!switcher) {
                     switcher = true;
-                    if (isRightAnswer) decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
-                    else decoratorFieldWIthCards.showRightNameCardIfWrongAnswer();
+                    if (isRightAnswer) decoratorWithCards.pushRightNameCardIfRightAnswer();
+                    else decoratorWithCards.showRightNameCardIfWrongAnswer();
                 }
                 break;
             case MoveCamToStartPosition:
                 if (moveCameraToY(background.getHeight() / 2)) {
-                    decoratorFieldWIthCards.renewData(isRightAnswer);
+                    decoratorWithCards.renewData(isRightAnswer);
                     if (!GameManager.setNewCurrentPresident(isRightAnswer)) gameOver();
                     else {
                         portraitPanel.getStage().dispose();
@@ -129,7 +131,7 @@ public class HorisontalTetrisField implements Screen {
         }
     }
 
-    private boolean moveCameraToY(float y) {
+    boolean moveCameraToY(float y) {
         if ((y <= GameInfo.WORLD_HEIGHT / 2 + 10 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10) ||
                 (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10 &&
                         camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10) ||
@@ -153,7 +155,7 @@ public class HorisontalTetrisField implements Screen {
 
     //check for bounds
     //update player's and cameras coordinates
-    private void queryInput() {
+    void queryInput() {
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && player.getY() < background.getHeight() - player.getHeight()) {
             player.setY(player.getY() + GameInfo.STEP_FOR_TETRIS_Y);
             if ((camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 6) &&
@@ -172,21 +174,21 @@ public class HorisontalTetrisField implements Screen {
 
     }
 
-    private void updatePlayer() {
+    void updatePlayer() {
         player.setX(player.getX() + GameInfo.SLOW_STEP_FOR_TETRIS_X);
     }
 
 
-    private void setInitialPlayerPosition() {
+    void setInitialPlayerPosition() {
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
     }
 
-    private boolean checkAnswer() {
+    boolean checkAnswer() {
         return ((player.getY() + 29 >= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 &&
                 (player.getY() + 29 <= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 60)));
     }
 
-    private void gameOver() {
+    void gameOver() {
 //        game.setScreen(new MainMenu1(game));
 //        batch.dispose();
         game.setScreen(new Menu(game, new MainMenuButtons(game)));
@@ -217,7 +219,7 @@ public class HorisontalTetrisField implements Screen {
     public void dispose() {
         player.getTexture().dispose();
         background.getTexture().dispose();
-        decoratorFieldWIthCards.getStage().dispose();
+        decoratorWithCards.getStage().dispose();
         portraitPanel.getStage().dispose();
     }
 }
