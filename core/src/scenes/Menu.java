@@ -67,8 +67,8 @@ public class Menu extends ScreenAdapter {
 
     @Override
     public void dispose() {
-//        background.dispose();
-//        btns.getStage().dispose();
+        background.dispose();
+        btns.getStage().dispose();
 
     }
 

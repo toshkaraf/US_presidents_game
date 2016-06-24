@@ -44,18 +44,13 @@ public class HorisontalTetrisField implements Screen {
         this.game = game;
         decoratorFieldWIthCards = new DecoratorFieldWIthCards(game);
         portraitPanel = new PortraitPanel(game);
-//        background = decoratorFieldWIthCards.getBackgroundSprite();
         background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
                 0, 0, GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
-
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         batch = game.getBatch();
         camera = decoratorFieldWIthCards.getCamera();
-//        camera = new OrthographicCamera();
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
         viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
-
-//        viewport.apply();
 
         setInitialPlayerPosition();
     }
@@ -117,7 +112,6 @@ public class HorisontalTetrisField implements Screen {
                     switcher = true;
                     if (isRightAnswer) decoratorFieldWIthCards.pushRightNameCardIfRightAnswer();
                     else decoratorFieldWIthCards.showRightNameCardIfWrongAnswer();
-//                    game.setScreen(new Menu(game, new MainMenuButtons(game)));
                 }
                 break;
             case MoveCamToStartPosition:
@@ -136,25 +130,23 @@ public class HorisontalTetrisField implements Screen {
     }
 
     private boolean moveCameraToY(float y) {
-        if (y <= GameInfo.WORLD_HEIGHT / 2 + 10 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10)
+        if ((y <= GameInfo.WORLD_HEIGHT / 2 + 10 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10) ||
+                (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10 &&
+                        camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10) ||
+                (camera.position.y == y))
             return true;
-
-        if (camera.position.y > y && y >= GameInfo.WORLD_HEIGHT / 2 + 10) {
-            camera.position.y = camera.position.y - 10;
-            if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10)
-                return true;
+        else {
+            if (camera.position.y > y) {
+                camera.position.y = camera.position.y - 10;
+                if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10)
+                    return true;
+            }
+            if (camera.position.y < y) {
+                camera.position.y = camera.position.y + 10;
+                if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10)
+                    return true;
+            }
         }
-
-        if (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10 && camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10)
-            return true;
-        if (camera.position.y < y && y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10) {
-            camera.position.y = camera.position.y + 10;
-            if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10)
-                return true;
-        }
-
-        if (camera.position.y == y)
-            return true;
         return false;
     }
 
@@ -195,7 +187,6 @@ public class HorisontalTetrisField implements Screen {
     }
 
     private void gameOver() {
-//        MainGame.getInstance().setNewScreen(MainGame.KindsOfMenu.mainMenu);
 //        game.setScreen(new MainMenu1(game));
 //        batch.dispose();
         game.setScreen(new Menu(game, new MainMenuButtons(game)));
@@ -228,6 +219,5 @@ public class HorisontalTetrisField implements Screen {
         background.getTexture().dispose();
         decoratorFieldWIthCards.getStage().dispose();
         portraitPanel.getStage().dispose();
-
     }
 }

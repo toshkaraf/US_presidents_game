@@ -13,7 +13,7 @@ import players.President;
  */
 public class GameManager {
 
-    public enum RenderMode {PrepareField, Portrait, PullOldHints, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition}
+    public enum RenderMode {PrepareField, Portrait, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition}
 
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
@@ -75,7 +75,7 @@ public class GameManager {
     public static Array<Integer> getCloneOfPresidentsListForQuestions() {
         Array<Integer> tempArray = new Array<Integer>();
         for (Integer number : presidentsListForQuestions) {
-            tempArray.add(new Integer(number));
+            tempArray.add(number);
         }
         return tempArray;
     }

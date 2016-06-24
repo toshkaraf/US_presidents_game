@@ -51,19 +51,7 @@ public class MainMenuButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-//                game.setScreen(new Menu(game, new LearnModeButtons(game)));
-                addHideActions();
-                RunnableAction run = new RunnableAction();
-                run.setRunnable(new Runnable() {
-                    @Override
-                    public void run() {
-                        MainGame.getInstance().setNewScreen(MainGame.KindsOfMenu.learnMenu);
-                        game.setScreen(new Menu(game, new LearnModeButtons(game)));
-
-//                        stage.dispose();
-                    }
-                });
-                stage.addAction(sequence(delay(1f), run));
+                hideMenu_startNewScreen(new Menu(game, new LearnModeButtons(game)));
                 return true;
             }
         });
