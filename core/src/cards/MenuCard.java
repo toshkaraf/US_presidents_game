@@ -24,10 +24,10 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 /**
  * Created by Антон on 14.06.2016.
  */
-public class MenuCard extends ImageButton {
+public class MenuCard extends Stack {
 
     public MenuCard(Sprite card, int x, int y, String text, int fontSize) {
-        super(new SpriteDrawable(card));
+        super();
         add(new Image(new SpriteDrawable(card)));
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
         setPosition(x, y);
@@ -37,6 +37,6 @@ public class MenuCard extends ImageButton {
     }
 
     public void move(int targetX) {
-        addAction(moveTo(targetX, getY(), 1f));
+        addAction(moveTo(targetX, getY(), .5f));
     }
 }

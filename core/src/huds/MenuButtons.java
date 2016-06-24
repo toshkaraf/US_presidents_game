@@ -120,6 +120,7 @@ public abstract class MenuButtons {
             }
         });
         stage.addAction(sequence(delay(1f), run));
+
     }
 
     //
