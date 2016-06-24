@@ -9,8 +9,9 @@ public class President {
     public President() {
     }
 
+
     public President(String firstName, String secondName, String portraitFileName,
-                     int number, int initialDate, int finfleDate, String[] prompts) {
+                     int number, int initialDate, int finfleDate, int age, String[] prompts) {
         this.firstName = firstName;
         this.secondName = secondName;
         this.portraitFileName = portraitFileName;
@@ -18,11 +19,13 @@ public class President {
         this.initialDate = initialDate;
         this.finalDate = finfleDate;
         this.prompts = prompts;
+        this.age = age;
     }
 
     String firstName;
     String secondName;
     String portraitFileName;
+    int age;
     int number;
     int initialDate;
     int finalDate;
@@ -82,5 +85,18 @@ public class President {
 
     public void setPrompts(String[] prompts) {
         this.prompts = prompts;
+    }
+
+    public String getSecondName() {
+        return secondName;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+
+        this.age = age;
     }
 }

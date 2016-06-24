@@ -40,4 +40,8 @@ public class DatesCard extends Table {
     public void push(){
         addAction(Actions.moveTo(finalPositionOfCard_X, getY(), 1f));
     }
+
+    public int getFinalPositionOfCard_X (){
+        return  finalPositionOfCard_X;
+    }
 }

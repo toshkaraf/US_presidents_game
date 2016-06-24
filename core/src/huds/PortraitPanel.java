@@ -36,6 +36,7 @@ public class PortraitPanel {
     private Table nameCard;
     Texture bg = new Texture("cards/card_of_portrait.png");
     Texture bgName = new Texture("cards/card_of_president_red.png");
+    Sprite portrait;
 
 
     public PortraitPanel(MainGame game) {
@@ -60,9 +61,11 @@ public class PortraitPanel {
         portraitCard.setBackground(new SpriteDrawable(new Sprite(bg)));
         portraitCard.setBounds(portraitCard.getX(), portraitCard.getY(), bg.getWidth(), bg.getHeight());
         portraitCard.setPosition(-portraitCard.getWidth(), GameInfo.WORLD_HEIGHT / 2 - 190);
-        portraitCard.add(new Image(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getPortraitFileName()))).padBottom(70);
+        portrait = new Sprite(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getPortraitFileName()));
+        portrait.setSize(180,230);
+        portraitCard.add(new Image(new SpriteDrawable(portrait))).padBottom(70);
         portraitCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 170, portraitCard.getY(), .5f),
-                delay(1f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), .5f)));
+                delay(3f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), .5f)));
 
         nameCard = new Table();
         nameCard.setBackground(new SpriteDrawable(new Sprite(bgName)));
@@ -72,7 +75,7 @@ public class PortraitPanel {
                 GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getLastName(),
                 new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).center();
         nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), .5f),
-                delay(1f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f),new RenderModeAction(GameManager.RenderMode.PushNewHints)));
+                delay(3f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f),new RenderModeAction(GameManager.RenderMode.PushNewHints)));
     }
 
     public Stage getStage() {

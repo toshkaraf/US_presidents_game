@@ -7,15 +7,15 @@ import com.toshkaraf.MainGame;
 import cards.MenuCard;
 import helpers.GameInfo;
 import helpers.GameManager;
+import scenes.HorisontalTetrisField;
 import scenes.Menu;
-import scenes.TetrisLearnMode;
 
 /**
  * Created by Антон on 20.06.2016.
  */
-public class GameModeButtons extends MenuButtons {
+public class TrainModeButtons extends MenuButtons {
 
-    public GameModeButtons(MainGame game) {
+    public TrainModeButtons(MainGame game) {
         super(game);
     }
 
@@ -38,7 +38,7 @@ public class GameModeButtons extends MenuButtons {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 GameManager.initNewGame(1, 44, 3);
-                hideMenu_startNewScreen(new TetrisLearnMode(game));
+                hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
         });
@@ -47,7 +47,7 @@ public class GameModeButtons extends MenuButtons {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 GameManager.initNewGame(1, 44, 7);
-                hideMenu_startNewScreen(new TetrisLearnMode(game));
+                hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
         });
@@ -55,15 +55,15 @@ public class GameModeButtons extends MenuButtons {
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 GameManager.initNewGame(1, 44, 15);
-                hideMenu_startNewScreen(new TetrisLearnMode(game));
+                hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
         });
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(1, 44, 43);
-                hideMenu_startNewScreen(new TetrisLearnMode(game));
+                GameManager.initNewGame(1, 44, 0);
+                hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
         });

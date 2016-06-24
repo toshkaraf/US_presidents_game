@@ -1,20 +1,14 @@
 package huds;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.scenes.scene2d.actions.RunnableAction;
 import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
 import helpers.GameInfo;
 import helpers.GameManager;
+import scenes.HorisontalTetrisField;
 import scenes.Menu;
-import scenes.TetrisLearnMode;
-import scenes.TetrisTrainingMode;
-
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 /**
  * Created by Антон on 20.06.2016.
@@ -43,7 +37,7 @@ public class MainMenuButtons extends MenuButtons {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 GameManager.initNewGame(2,2,0);
-                hideMenu_startNewScreen(new TetrisLearnMode(game));
+                hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
         });
@@ -59,7 +53,7 @@ public class MainMenuButtons extends MenuButtons {
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 addHideActions();
-                game.setScreen(new TetrisTrainingMode(game));
+                hideMenu_startNewScreen(new Menu(game, new TrainModeButtons(game)));
                 return true;
             }
         });
@@ -67,15 +61,16 @@ public class MainMenuButtons extends MenuButtons {
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
                 addHideActions();
-                game.setScreen(new Menu(game, new GameModeButtons(game)));
+                GameManager.initNewGame(1, 44, 0);
+                hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
         });
 
         button_5.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                addHideActions();
-                game.setScreen(new TetrisTrainingMode(game));
+//                addHideActions();
+//                game.setScreen(new TetrisTrainingMode(game));
                 return true;
             }
         });

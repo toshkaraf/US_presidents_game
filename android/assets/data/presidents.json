@@ -1,9 +1,10 @@
  [
     {
-      "firstName": "George",
+      "firstName": "Gorge",
       "secondName": "Washington",
-      "portraitFileName": "portraits/01_George_Washington.png",
+      "portraitFileName": "portraits/01_Gorge_Washington.jpg",
       "number": "1",
+      "age":"57",
       "initialDate": "1789",
       "finalDate": "1797",
       "prompts": [
@@ -15,8 +16,9 @@
     {
       "firstName": "John",
       "secondName": "Adams",
-      "portraitFileName": "portraits/01_George_Washington.png",
+      "portraitFileName": "portraits/01_Gorge_Washington.jpg",
       "number": "2",
+      "age":"57",
       "initialDate": "1797",
       "finalDate": "1801",
       "prompts": [
@@ -26,10 +28,11 @@
       ]
     },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "3",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -39,10 +42,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "4",
+     "age":"57",
      "initialDate": "8",
      "finalDate": "15",
      "prompts": [
@@ -52,10 +56,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "5",
+     "age":"57",
      "initialDate": "4",
      "finalDate": "10",
      "prompts": [
@@ -65,10 +70,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "6",
+     "age":"57",
      "initialDate": "7",
      "finalDate": "11",
      "prompts": [
@@ -78,10 +84,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "7",
+     "age":"57",
      "initialDate": "1",
      "finalDate": "9",
      "prompts": [
@@ -91,10 +98,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "8",
+     "age":"57",
      "initialDate": "8",
      "finalDate": "12",
      "prompts": [
@@ -104,10 +112,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "9",
+     "age":"57",
      "initialDate": "3",
      "finalDate": "4",
      "prompts": [
@@ -117,10 +126,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "10",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -130,10 +140,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "11",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1893",
      "prompts": [
@@ -143,10 +154,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "12",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -156,10 +168,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "13",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -169,10 +182,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "14",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -182,10 +196,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "15",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -195,10 +210,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "16",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1895",
      "prompts": [
@@ -208,10 +224,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "17",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -221,10 +238,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "18",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -234,10 +252,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "19",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -247,10 +266,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "20",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -260,10 +280,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "21",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -273,10 +294,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "22",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1893",
      "prompts": [
@@ -286,10 +308,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "23",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -299,10 +322,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "24",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -312,10 +336,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "25",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -325,10 +350,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "26",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -338,10 +364,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "27",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -351,10 +378,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "28",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -364,10 +392,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "29",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -377,10 +406,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "30",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -390,10 +420,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "31",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -403,10 +434,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "32",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -416,10 +448,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "33",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -429,10 +462,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "34",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -442,10 +476,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "35",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -455,10 +490,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "36",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -468,10 +504,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "37",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -481,10 +518,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "38",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -494,10 +532,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "39",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -507,10 +546,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "40",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -520,10 +560,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "41",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -533,10 +574,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "42",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -546,10 +588,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "43",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
@@ -559,10 +602,11 @@
      ]
    },
    {
-     "firstName": "George",
+     "firstName": "Gorge",
      "secondName": "Washington",
-     "portraitFileName": "portraits/01_George_Washington.png",
+     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
      "number": "44",
+     "age":"57",
      "initialDate": "1889",
      "finalDate": "1896",
      "prompts": [
