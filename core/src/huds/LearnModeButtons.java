@@ -37,7 +37,7 @@ public class LearnModeButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(1, 11, 10);
+                GameManager.initNewGame(1, 11, 0);
                 hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
@@ -46,7 +46,7 @@ public class LearnModeButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(12, 22, 10);
+                GameManager.initNewGame(12, 22, 0);
                 hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
@@ -54,7 +54,7 @@ public class LearnModeButtons extends MenuButtons {
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(23, 33, 10);
+                GameManager.initNewGame(23, 33, 0);
                 hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }
@@ -62,7 +62,7 @@ public class LearnModeButtons extends MenuButtons {
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(34, 44, 10);
+                GameManager.initNewGame(34, 44, 0);
                 hideMenu_startNewScreen(new HorisontalTetrisField(game));
                 return true;
             }

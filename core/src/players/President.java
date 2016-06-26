@@ -25,6 +25,7 @@ public class President {
     String firstName;
     String secondName;
     String portraitFileName;
+    String party;
     int age;
     int number;
     int initialDate;
@@ -96,7 +97,14 @@ public class President {
     }
 
     public void setAge(int age) {
-
         this.age = age;
+    }
+
+    public String getParty() {
+        return party;
+    }
+
+    public void setParty(String party) {
+        this.party = party;
     }
 }

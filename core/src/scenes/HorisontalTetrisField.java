@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.input.GestureDetector;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -19,10 +21,12 @@ import huds.DecoratorWIthCards;
 import huds.MainMenuButtons;
 import huds.PortraitPanel;
 
+import static com.badlogic.gdx.input.GestureDetector.*;
+
 /**
  * Created by Антон on 01.06.2016.
  */
-public class HorisontalTetrisField implements Screen {
+public class HorisontalTetrisField implements Screen, GestureListener {
 
     SpriteBatch batch;
     Sprite background;
@@ -32,13 +36,13 @@ public class HorisontalTetrisField implements Screen {
     DecoratorWIthCards decoratorWithCards;
     PortraitPanel portraitPanel;
     boolean switcher = true;
-    boolean isRightAnswer;
+    boolean isRightAnswer, isPlayerFlinged;
     MainGame game;
+    GestureDetector listener;
 
 
     public HorisontalTetrisField(MainGame game) {
 
-        GameManager.initPresidentsListForQuestionsArray();
         GameManager.setNewCurrentPresident(true);
         this.game = game;
 
@@ -54,20 +58,22 @@ public class HorisontalTetrisField implements Screen {
         camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
         viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
 
-        setInitialPlayerPosition();
+
     }
 
     @Override
     public void show() {
-
+        listener = new GestureDetector(this);
+//        Gdx.input.setInputProcessor(listener);
+        setInitialPlayerPosition();
     }
 
     @Override
     public void render(float delta) {
         Gdx.gl.glClearColor(1, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        camera.update();
 
+        camera.update();
         batch.setProjectionMatrix(camera.projection);
         batch.setTransformMatrix(camera.view);
         batch.begin();
@@ -92,16 +98,19 @@ public class HorisontalTetrisField implements Screen {
                 break;
             case SetNewPlayer:
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
-                    queryInput();
-                    camera.update();
+                    if (isPlayerFlinged) player.setX(player.getX() + 30);
+//                    queryInput();   //do not use in android
+//                    camera.update();  //do not use in android
                     batch.setProjectionMatrix(camera.projection);
                     batch.setTransformMatrix(camera.view);
                     batch.begin();
                     batch.draw(player, player.getX(), player.getY());
                     batch.end();
                     updatePlayer();
-                } else
+                } else {
                     GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
+                    isPlayerFlinged = false;
+                }
                 break;
             case MoveCamToRightAnswer:
                 if (moveCameraToY((GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 30)) {
@@ -132,20 +141,20 @@ public class HorisontalTetrisField implements Screen {
     }
 
     boolean moveCameraToY(float y) {
-        if ((y <= GameInfo.WORLD_HEIGHT / 2 + 10 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10) ||
-                (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10 &&
-                        camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10) ||
+        if ((y <= GameInfo.WORLD_HEIGHT / 2 + 20 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 20) ||
+                (y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 20 &&
+                        camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 20) ||
                 (camera.position.y == y))
             return true;
         else {
             if (camera.position.y > y) {
-                camera.position.y = camera.position.y - 10;
-                if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 10)
+                camera.position.y = camera.position.y - 20;
+                if (camera.position.y <= y || camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 20)
                     return true;
             }
             if (camera.position.y < y) {
-                camera.position.y = camera.position.y + 10;
-                if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 10)
+                camera.position.y = camera.position.y + 20;
+                if (camera.position.y >= y || camera.position.y >= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - 20)
                     return true;
             }
         }
@@ -171,7 +180,6 @@ public class HorisontalTetrisField implements Screen {
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
             player.setX(player.getX() + GameInfo.FAll_STEP_FOR_TETRIS_X);
         }
-
     }
 
     void updatePlayer() {
@@ -181,6 +189,7 @@ public class HorisontalTetrisField implements Screen {
 
     void setInitialPlayerPosition() {
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
+        Gdx.input.setInputProcessor(listener);
     }
 
     boolean checkAnswer() {
@@ -189,8 +198,6 @@ public class HorisontalTetrisField implements Screen {
     }
 
     void gameOver() {
-//        game.setScreen(new MainMenu1(game));
-//        batch.dispose();
         game.setScreen(new Menu(game, new MainMenuButtons(game)));
         dispose();
     }
@@ -221,5 +228,72 @@ public class HorisontalTetrisField implements Screen {
         background.getTexture().dispose();
         decoratorWithCards.getStage().dispose();
         portraitPanel.getStage().dispose();
+    }
+
+    @Override
+    public boolean touchDown(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean tap(float x, float y, int count, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean longPress(float x, float y) {
+        return false;
+    }
+
+    @Override
+    public boolean fling(float velocityX, float velocityY, int button) {
+        if (velocityX > 2000) isPlayerFlinged = true;
+        return false;
+    }
+
+    @Override
+    public boolean pan(float x, float y, float deltaX, float deltaY) {
+
+        if ((x == deltaX & y == deltaY) || (deltaX == 0 & deltaY == 0)) return false;
+        else {
+            Gdx.app.log("MyLog", "x = " + x);
+            Gdx.app.log("MyLog", "y= " + y);
+            Gdx.app.log("MyLog", "deltaX = " + deltaX);
+            Gdx.app.log("MyLog", "deltaY = " + deltaY);
+            Gdx.app.log("MyLog", "___");
+            if (player.getY() <= background.getHeight() - player.getHeight() - deltaY* 1.3f && player.getY() >= 0 - deltaY* 1.3f) {
+                player.setY(player.getY() + deltaY * 1.3f);
+                {
+                    if (deltaY > 0 && (camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
+                            (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+                        camera.position.y = camera.position.y + deltaY * 1.3f;
+                    if (deltaY < 0 && (camera.position.y >= GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
+                            (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+                        camera.position.y = camera.position.y + deltaY * 1.3f;
+                }
+            }
+            return true;
+        }
+    }
+
+    @Override
+    public boolean panStop(float x, float y, int pointer, int button) {
+        return false;
+    }
+
+    @Override
+    public boolean zoom(float initialDistance, float distance) {
+        return false;
+    }
+
+    @Override
+    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2
+            pointer1, Vector2 pointer2) {
+        return false;
+    }
+
+    @Override
+    public void pinchStop() {
+
     }
 }
