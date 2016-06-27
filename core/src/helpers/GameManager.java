@@ -13,7 +13,7 @@ import players.President;
  */
 public class GameManager {
 
-    public enum RenderMode {PrepareField, Portrait, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition}
+    public enum RenderMode {PrepareField, Portrait, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveToChosenPresidentY, MoveToChosenPresidentX, MoveCamToStartPosition}
 
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 

@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -39,6 +40,7 @@ public class HorisontalTetrisField implements Screen, GestureListener {
     boolean isRightAnswer, isPlayerFlinged;
     MainGame game;
     GestureDetector listener;
+    float chosenPresidentY = 0;
 
 
     public HorisontalTetrisField(MainGame game) {
@@ -112,6 +114,24 @@ public class HorisontalTetrisField implements Screen, GestureListener {
                     isPlayerFlinged = false;
                 }
                 break;
+            case MoveToChosenPresidentY:
+                if (moveToChosenPresidentY(chosenPresidentY))
+                    GameManager.renderMode = GameManager.RenderMode.MoveToChosenPresidentX;
+                batch.setProjectionMatrix(camera.projection);
+                batch.setTransformMatrix(camera.view);
+                batch.begin();
+                batch.draw(player, player.getX(), player.getY());
+                batch.end();
+                break;
+            case MoveToChosenPresidentX:
+                if (moveCameraToX())
+                    GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
+                batch.setProjectionMatrix(camera.projection);
+                batch.setTransformMatrix(camera.view);
+                batch.begin();
+                batch.draw(player, player.getX(), player.getY());
+                batch.end();
+                break;
             case MoveCamToRightAnswer:
                 if (moveCameraToY((GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 30)) {
                     GameManager.renderMode = GameManager.RenderMode.ShowRightAnswer;
@@ -139,6 +159,7 @@ public class HorisontalTetrisField implements Screen, GestureListener {
                 break;
         }
     }
+
 
     boolean moveCameraToY(float y) {
         if ((y <= GameInfo.WORLD_HEIGHT / 2 + 20 && camera.position.y <= GameInfo.WORLD_HEIGHT / 2 + 20) ||
@@ -232,6 +253,40 @@ public class HorisontalTetrisField implements Screen, GestureListener {
 
     @Override
     public boolean touchDown(float x, float y, int pointer, int button) {
+        if (x > GameInfo.WORLD_WIDTH / 2) {
+            GameManager.renderMode = GameManager.RenderMode.MoveToChosenPresidentY;
+            chosenPresidentY = camera.position.y + GameInfo.WORLD_HEIGHT / 2 - y;
+            Gdx.app.log("MyLog", "moveToChosenPresidentY = " + y);
+            return true;
+        } else
+            return false;
+    }
+
+    private boolean moveToChosenPresidentY(float y) {
+        moveCameraToY(y);
+        if (player.getY() - player.getHeight() / 2 < y - 20) {
+            player.setY(player.getY() + 20);
+            if (player.getY() - player.getHeight() / 2 >= y - 20) {
+                player.setY(player.getY() + (player.getY() - y - player.getHeight() / 2));
+                GameManager.renderMode = GameManager.RenderMode.MoveToChosenPresidentX;
+                return true;
+            }
+        }
+        if (player.getY() - player.getHeight() / 2 > y + 20) {
+            player.setY(player.getY() - 20);
+            if (player.getY() - player.getHeight() / 2 <= y + 20) {
+                player.setY(player.getY() - (y - player.getY() - player.getHeight() / 2));
+                GameManager.renderMode = GameManager.RenderMode.MoveToChosenPresidentX;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean moveCameraToX() {
+        if (player.getX() < GameInfo.WORLD_WIDTH + player.getWidth())
+            player.setX(player.getX() + 10);
+        else return true;
         return false;
     }
 
@@ -247,7 +302,7 @@ public class HorisontalTetrisField implements Screen, GestureListener {
 
     @Override
     public boolean fling(float velocityX, float velocityY, int button) {
-        if (velocityX > 2000) isPlayerFlinged = true;
+//        if (velocityX > 1500) isPlayerFlinged = true;
         return false;
     }
 
@@ -256,23 +311,25 @@ public class HorisontalTetrisField implements Screen, GestureListener {
 
         if ((x == deltaX & y == deltaY) || (deltaX == 0 & deltaY == 0)) return false;
         else {
-            Gdx.app.log("MyLog", "x = " + x);
-            Gdx.app.log("MyLog", "y= " + y);
-            Gdx.app.log("MyLog", "deltaX = " + deltaX);
-            Gdx.app.log("MyLog", "deltaY = " + deltaY);
-            Gdx.app.log("MyLog", "___");
-            if (player.getY() <= background.getHeight() - player.getHeight() - deltaY* 1.3f && player.getY() >= 0 - deltaY* 1.3f) {
-                player.setY(player.getY() + deltaY * 1.3f);
-                {
-                    if (deltaY > 0 && (camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
-                            (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
-                        camera.position.y = camera.position.y + deltaY * 1.3f;
-                    if (deltaY < 0 && (camera.position.y >= GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
-                            (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
-                        camera.position.y = camera.position.y + deltaY * 1.3f;
+            if (x < GameInfo.WORLD_WIDTH / 2) {
+//                Gdx.app.log("MyLog", "x = " + x);
+//                Gdx.app.log("MyLog", "y= " + y);
+//                Gdx.app.log("MyLog", "deltaX = " + deltaX);
+//                Gdx.app.log("MyLog", "deltaY = " + deltaY);
+//                Gdx.app.log("MyLog", "___");
+                if (player.getY() <= background.getHeight() - player.getHeight() - deltaY * 1.3f && player.getY() >= 0 - deltaY * 1.3f) {
+                    player.setY(player.getY() + deltaY * 1.3f);
+                    {
+                        if (deltaY > 0 && (camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - deltaY * 1.3f) &&
+                                (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+                            camera.position.y = camera.position.y + deltaY * 1.3f;
+                        if (deltaY < 0 && (camera.position.y >= GameInfo.WORLD_HEIGHT / 2 - deltaY * 1.3f) &&
+                                (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+                            camera.position.y = camera.position.y + deltaY * 1.3f;
+                    }
                 }
-            }
-            return true;
+                return true;
+            } else return false;
         }
     }
 
