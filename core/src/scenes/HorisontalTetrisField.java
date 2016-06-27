@@ -2,6 +2,7 @@ package scenes;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.scenes.scene2d.InputListener;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -26,7 +28,7 @@ import static com.badlogic.gdx.input.GestureDetector.*;
 /**
  * Created by Антон on 01.06.2016.
  */
-public class HorisontalTetrisField implements Screen, GestureListener {
+public class HorisontalTetrisField implements Screen, InputProcessor {
 
     SpriteBatch batch;
     Sprite background;
@@ -39,6 +41,7 @@ public class HorisontalTetrisField implements Screen, GestureListener {
     boolean isRightAnswer, isPlayerFlinged;
     MainGame game;
     GestureDetector listener;
+    private boolean isUpMove, isDownMove;
 
 
     public HorisontalTetrisField(MainGame game) {
@@ -63,7 +66,7 @@ public class HorisontalTetrisField implements Screen, GestureListener {
 
     @Override
     public void show() {
-        listener = new GestureDetector(this);
+//        listener = new GestureDetector(this);
 //        Gdx.input.setInputProcessor(listener);
         setInitialPlayerPosition();
     }
@@ -184,12 +187,26 @@ public class HorisontalTetrisField implements Screen, GestureListener {
 
     void updatePlayer() {
         player.setX(player.getX() + GameInfo.SLOW_STEP_FOR_TETRIS_X);
+
+        if (isUpMove && player.getY() < background.getHeight() - player.getHeight()) {
+            player.setY(player.getY() + GameInfo.STEP_FOR_TETRIS_Y);
+            if ((camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - GameInfo.STEP_FOR_TETRIS_Y) &&
+                    (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+                camera.position.y = camera.position.y + GameInfo.STEP_FOR_TETRIS_Y;
+        }
+        if (isDownMove && player.getY() > 0) {
+            player.setY(player.getY() - GameInfo.STEP_FOR_TETRIS_Y);
+            if ((camera.position.y >= GameInfo.WORLD_HEIGHT / 2 + GameInfo.STEP_FOR_TETRIS_Y) &&
+                    (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+                camera.position.y = camera.position.y - GameInfo.STEP_FOR_TETRIS_Y;
+
+        }
     }
 
 
     void setInitialPlayerPosition() {
         player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
-        Gdx.input.setInputProcessor(listener);
+        Gdx.input.setInputProcessor(this);
     }
 
     boolean checkAnswer() {
@@ -231,69 +248,124 @@ public class HorisontalTetrisField implements Screen, GestureListener {
     }
 
     @Override
-    public boolean touchDown(float x, float y, int pointer, int button) {
+    public boolean keyDown(int keycode) {
         return false;
     }
 
     @Override
-    public boolean tap(float x, float y, int count, int button) {
+    public boolean keyUp(int keycode) {
         return false;
     }
 
     @Override
-    public boolean longPress(float x, float y) {
+    public boolean keyTyped(char character) {
         return false;
     }
 
     @Override
-    public boolean fling(float velocityX, float velocityY, int button) {
-        if (velocityX > 2000) isPlayerFlinged = true;
-        return false;
-    }
-
-    @Override
-    public boolean pan(float x, float y, float deltaX, float deltaY) {
-
-        if ((x == deltaX & y == deltaY) || (deltaX == 0 & deltaY == 0)) return false;
-        else {
-            Gdx.app.log("MyLog", "x = " + x);
-            Gdx.app.log("MyLog", "y= " + y);
-            Gdx.app.log("MyLog", "deltaX = " + deltaX);
-            Gdx.app.log("MyLog", "deltaY = " + deltaY);
-            Gdx.app.log("MyLog", "___");
-            if (player.getY() <= background.getHeight() - player.getHeight() - deltaY* 1.3f && player.getY() >= 0 - deltaY* 1.3f) {
-                player.setY(player.getY() + deltaY * 1.3f);
-                {
-                    if (deltaY > 0 && (camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
-                            (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
-                        camera.position.y = camera.position.y + deltaY * 1.3f;
-                    if (deltaY < 0 && (camera.position.y >= GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
-                            (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
-                        camera.position.y = camera.position.y + deltaY * 1.3f;
-                }
-            }
+    public boolean touchDown(int screenX, int screenY, int pointer, int button) {
+        //TODO convert screen to world coordinates
+        if (screenY > GameInfo.WORLD_HEIGHT/2 && screenX < GameInfo.WORLD_WIDTH) {
+            isDownMove = true;
             return true;
         }
-    }
-
-    @Override
-    public boolean panStop(float x, float y, int pointer, int button) {
+        if (screenY < GameInfo.WORLD_HEIGHT/2 && screenX < GameInfo.WORLD_WIDTH) {
+            isUpMove  = true;
+            return true;
+        }
+        if (screenX > GameInfo.WORLD_WIDTH/2) {
+            isPlayerFlinged = true;
+            return true;
+        }
         return false;
     }
 
     @Override
-    public boolean zoom(float initialDistance, float distance) {
+    public boolean touchUp(int screenX, int screenY, int pointer, int button) {
+        isUpMove = false;
+        isDownMove = false;
         return false;
     }
 
     @Override
-    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2
-            pointer1, Vector2 pointer2) {
+    public boolean touchDragged(int screenX, int screenY, int pointer) {
         return false;
     }
 
     @Override
-    public void pinchStop() {
-
+    public boolean mouseMoved(int screenX, int screenY) {
+        return false;
     }
+
+    @Override
+    public boolean scrolled(int amount) {
+        return false;
+    }
+
+//    @Override
+//    public boolean touchDown(float x, float y, int pointer, int button) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean tap(float x, float y, int count, int button) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean longPress(float x, float y) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean fling(float velocityX, float velocityY, int button) {
+//        if (velocityX > 2000) isPlayerFlinged = true;
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean pan(float x, float y, float deltaX, float deltaY) {
+//
+//        if ((x == deltaX & y == deltaY) || (deltaX == 0 & deltaY == 0)) return false;
+//        else {
+//            Gdx.app.log("MyLog", "x = " + x);
+//            Gdx.app.log("MyLog", "y= " + y);
+//            Gdx.app.log("MyLog", "deltaX = " + deltaX);
+//            Gdx.app.log("MyLog", "deltaY = " + deltaY);
+//            Gdx.app.log("MyLog", "___");
+//            if (player.getY() <= background.getHeight() - player.getHeight() - deltaY* 1.3f && player.getY() >= 0 - deltaY* 1.3f) {
+//                player.setY(player.getY() + deltaY * 1.3f);
+//                {
+//                    if (deltaY > 0 && (camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
+//                            (player.getY() >= GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+//                        camera.position.y = camera.position.y + deltaY * 1.3f;
+//                    if (deltaY < 0 && (camera.position.y >= GameInfo.WORLD_HEIGHT / 2 - deltaY* 1.3f) &&
+//                            (player.getY() <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2))
+//                        camera.position.y = camera.position.y + deltaY * 1.3f;
+//                }
+//            }
+//            return true;
+//        }
+//    }
+//
+//    @Override
+//    public boolean panStop(float x, float y, int pointer, int button) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean zoom(float initialDistance, float distance) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean pinch(Vector2 initialPointer1, Vector2 initialPointer2, Vector2
+//            pointer1, Vector2 pointer2) {
+//        return false;
+//    }
+//
+//    @Override
+//    public void pinchStop() {
+//
+//    }
 }
