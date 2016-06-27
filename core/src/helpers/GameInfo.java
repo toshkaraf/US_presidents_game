@@ -15,7 +15,7 @@ public class GameInfo {
     public static final float SLOW_STEP_FOR_TETRIS_Y = 0.1f;
     public static final float FAll_STEP_FOR_TETRIS_Y = 20f;
 
-    public static final float STEP_FOR_TETRIS_Y = 8;
+    public static final float STEP_FOR_TETRIS_Y = 10 ;
     public static final float SLOW_STEP_FOR_TETRIS_X = 0.3f;
     public static final float FAll_STEP_FOR_TETRIS_X = 20f;
 
