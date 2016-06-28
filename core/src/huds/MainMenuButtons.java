@@ -8,6 +8,7 @@ import cards.MenuCard;
 import helpers.GameInfo;
 import helpers.GameManager;
 import scenes.HorisontalTetrisField;
+import scenes.LoadingScreen;
 import scenes.Menu;
 
 /**
@@ -36,8 +37,8 @@ public class MainMenuButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                GameManager.initNewGame(2,2,0);
-                hideMenu_startNewScreen(new HorisontalTetrisField(game));
+                hideMenu_startNewScreen(new LoadingScreen(game,2,2,0 ));
+//                GameManager.initNewGame();
                 return true;
             }
         });
@@ -52,7 +53,6 @@ public class MainMenuButtons extends MenuButtons {
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                addHideActions();
                 hideMenu_startNewScreen(new Menu(game, new TrainModeButtons(game)));
                 return true;
             }
@@ -60,9 +60,8 @@ public class MainMenuButtons extends MenuButtons {
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                addHideActions();
-                GameManager.initNewGame(1, 44, 0);
-                hideMenu_startNewScreen(new HorisontalTetrisField(game));
+                hideMenu_startNewScreen(new LoadingScreen(game,1, 44, 0));
+//                GameManager.initNewGame();
                 return true;
             }
         });

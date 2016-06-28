@@ -39,13 +39,14 @@ public class GameManager {
         return presidentsArray;
     }
 
-    public static void initNewGame(int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints) {
+    public static boolean initNewGame(int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints) {
         renderMode = RenderMode.PrepareField;
         GameManager.firstPresidentInRange = firstPresidentInRange - 1;
         GameManager.lastPresidentInRange = lastPresidentInRange - 1;
         GameManager.quantityOfHints = quantityOfHints;
         if (presidentsListForQuestions.size != 0) presidentsListForQuestions.clear();
         initPresidentsListForQuestionsArray();
+        return true;
     }
 
     public static void initPresidentsListForQuestionsArray() {
