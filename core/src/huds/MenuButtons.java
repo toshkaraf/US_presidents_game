@@ -16,6 +16,7 @@ import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
 import helpers.GameInfo;
+import helpers.GameManager;
 
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
 import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
@@ -103,8 +104,9 @@ public abstract class MenuButtons {
 //        });
     }
 
-    void hideMenu_startNewScreen(final Screen screen) {
+    void hideMenu_startNewScreen(final Screen screen,  int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints ) {
         addHideActions();
+        if (lastPresidentInRange != 0) GameManager.initNewGame(firstPresidentInRange, lastPresidentInRange, quantityOfHints);
         RunnableAction run = new RunnableAction();
         run.setRunnable(new Runnable() {
             @Override

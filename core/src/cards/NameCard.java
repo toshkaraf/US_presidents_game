@@ -24,7 +24,7 @@ public class NameCard extends Table {
         this.left();
         add(new Label(GameManager.PRESIDENTS_ARRAY[numberOfPresident].getFirstName() +
                 " " + GameManager.PRESIDENTS_ARRAY[numberOfPresident].getLastName(),
-                new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).padLeft(22);
+                new Label.LabelStyle(GameInfo.CARD_FONT, Color.WHITE))).padLeft(22);
     }
 
 }

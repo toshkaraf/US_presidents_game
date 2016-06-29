@@ -1,0 +1,62 @@
+
+president_assets.png
+size: 1024,512
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+arrowUSA
+  rotate: false
+  xy: 2, 2
+  size: 142, 59
+  orig: 142, 59
+  offset: 0, 0
+  index: -1
+card_of_portrait
+  rotate: false
+  xy: 2, 63
+  size: 344, 380
+  orig: 344, 380
+  offset: 0, 0
+  index: -1
+card_of_president
+  rotate: false
+  xy: 348, 197
+  size: 396, 60
+  orig: 396, 60
+  offset: 0, 0
+  index: -1
+card_of_president_blue_date
+  rotate: false
+  xy: 348, 383
+  size: 611, 60
+  orig: 611, 60
+  offset: 0, 0
+  index: -1
+card_of_president_purple
+  rotate: false
+  xy: 348, 135
+  size: 396, 60
+  orig: 396, 60
+  offset: 0, 0
+  index: -1
+card_of_president_purple_date
+  rotate: false
+  xy: 348, 321
+  size: 611, 60
+  orig: 611, 60
+  offset: 0, 0
+  index: -1
+card_of_president_red
+  rotate: false
+  xy: 348, 73
+  size: 396, 60
+  orig: 396, 60
+  offset: 0, 0
+  index: -1
+card_of_president_red_date
+  rotate: false
+  xy: 348, 259
+  size: 611, 60
+  orig: 611, 60
+  offset: 0, 0
+  index: -1

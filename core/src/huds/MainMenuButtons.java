@@ -2,6 +2,7 @@ package huds;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
+import com.badlogic.gdx.utils.Array;
 import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
@@ -37,7 +38,7 @@ public class MainMenuButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new LoadingScreen(game,2,2,0 ));
+//                hideMenu_startNewScreen(new LoadingScreen(game,2,2,0 ));
 //                GameManager.initNewGame();
                 return true;
             }
@@ -46,22 +47,21 @@ public class MainMenuButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new LearnModeButtons(game)));
+                hideMenu_startNewScreen(new Menu(game, new LearnModeButtons (game)),0,0,0);
                 return true;
             }
         });
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new TrainModeButtons(game)));
+                hideMenu_startNewScreen(new Menu(game, new TrainModeButtons(game)),0,0,0);
                 return true;
             }
         });
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new LoadingScreen(game,1, 44, 0));
-//                GameManager.initNewGame();
+                hideMenu_startNewScreen( new HorisontalTetrisField(game),1,44,43);
                 return true;
             }
         });
