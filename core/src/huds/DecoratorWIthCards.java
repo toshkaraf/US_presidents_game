@@ -5,6 +5,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
@@ -31,6 +33,7 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 public class DecoratorWIthCards {
 
 
+    private final Sprite redCardDate, blueCardDate, purpleCardDate;
     private SpriteBatch batch;
     private MainGame game;
     private Stage stage;
@@ -50,9 +53,13 @@ public class DecoratorWIthCards {
         this.game = game;
         numberCardsArray = new Group();
         presidentCardsArray = new Group();
-        redCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_red.png")));
-        blueCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president.png")));
-        purpleCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_purple.png")));
+        TextureAtlas atlas = game.getAssetManager().get("ready_texture/president_assets.atlas");
+        redCard = new Sprite(atlas.findRegion("card_of_president_red"));
+        blueCard = new Sprite(atlas.findRegion("card_of_president"));
+        purpleCard = new Sprite(atlas.findRegion("card_of_president_purple"));
+        redCardDate = new Sprite(atlas.findRegion("card_of_president_red_date"));
+        blueCardDate = new Sprite(atlas.findRegion("card_of_president_blue_date"));
+        purpleCardDate = new Sprite(atlas.findRegion("card_of_president_purple_date"));
 
         batch = game.getBatch();
         camera = new OrthographicCamera();
@@ -66,6 +73,7 @@ public class DecoratorWIthCards {
         initCardsArrays();
     }
 
+
     void initPresidentArray() {
         for (int president = GameManager.firstPresidentInRange; president <= GameManager.lastPresidentInRange; president++)
             this.presidentsArray[president] = GameManager.TypeOfCard.BlueDate;
@@ -74,7 +82,7 @@ public class DecoratorWIthCards {
     void initCardsArrays() {
         for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
             numberCardsArray.addActor(new NumberCard(blueCard, a));
-            presidentCardsArray.addActor(new DatesCard(blueCard, GameManager.TypeOfCard.BlueDate, a));
+            presidentCardsArray.addActor(new DatesCard(blueCardDate, GameManager.TypeOfCard.BlueDate, a));
         }
         numberCardsArray.setBounds(numberCardsArray.getX(), numberCardsArray.getY(), numberCardsArray.getWidth(), numberCardsArray.getHeight());
         numberCardsArray.setPosition(-400, 0);
@@ -105,7 +113,7 @@ public class DecoratorWIthCards {
             if (presidentsArray[a] == GameManager.TypeOfCard.RedDate) {
                 DatesCard actor = presidentCardsArray.findActor("blue_date_of_" + a);
                 actor.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH, actor.getY(), 1f), delay(1f), new RenderModeAction(GameManager.RenderMode.SetNewPlayer)));
-                DatesCard newActor = new DatesCard(redCard, GameManager.TypeOfCard.RedDate, a);
+                DatesCard newActor = new DatesCard(redCardDate, GameManager.TypeOfCard.RedDate, a);
                 presidentCardsArray.addActor(newActor);
             }
         }
@@ -138,7 +146,7 @@ public class DecoratorWIthCards {
                     DatesCard pushDateCard = presidentCardsArray.findActor("blue_date_of_" + a);
                     pushDateCard.push();
                 } else {
-                    NameCard rightNameCard = new NameCard(purpleCard, GameManager.currentRightPresident);
+                    NameCard rightNameCard = new NameCard(purpleCardDate, GameManager.currentRightPresident);
                     rightNameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH - 370, rightNameCard.getY(), 1f), delay(3f),
                             moveTo(GameInfo.WORLD_WIDTH, rightNameCard.getY(), 1f),
                             new RenderModeAction(GameManager.RenderMode.MoveCamToStartPosition)));

@@ -38,7 +38,7 @@ public class TrainModeButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 3));
+//                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 3));
                 return true;
             }
         });
@@ -46,28 +46,29 @@ public class TrainModeButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 7));
+//                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 7));
                 return true;
             }
         });
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 15));
+//                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 15));
                 return true;
             }
         });
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 0));
+//                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 0));
+                hideMenu_startNewScreen(new HorisontalTetrisField(game),1,44,25);
                 return true;
             }
         });
 
         button_5.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new MainMenuButtons(game)));
+//                hideMenu_startNewScreen(new Menu(game, new MainMenuButtons(game)));
                 return true;
             }
         });

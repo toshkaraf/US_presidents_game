@@ -51,6 +51,7 @@ public class HorisontalTetrisField implements Screen, InputProcessor {
 
         if (GameManager.quantityOfHints == 0) decoratorWithCards = new DecoratorChooseFromAll(game);
         else decoratorWithCards = new DecoratorWIthCards(game);
+
         portraitPanel = new PortraitPanel(game);
 
         background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
@@ -68,6 +69,18 @@ public class HorisontalTetrisField implements Screen, InputProcessor {
     public void show() {
 //        listener = new GestureDetector(this);
 //        Gdx.input.setInputProcessor(listener);
+        if (GameManager.quantityOfHints == 0) decoratorWithCards = new DecoratorChooseFromAll(game);
+        else decoratorWithCards = new DecoratorWIthCards(game);
+
+        portraitPanel = new PortraitPanel(game);
+
+        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground_game.jpg")),
+                0, 0, GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
+        player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
+        batch = game.getBatch();
+        camera = decoratorWithCards.getCamera();
+        camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
+        viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         setInitialPlayerPosition();
     }
 

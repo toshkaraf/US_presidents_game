@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -62,7 +63,7 @@ public class PortraitPanel {
         portraitCard.setBounds(portraitCard.getX(), portraitCard.getY(), bg.getWidth(), bg.getHeight());
         portraitCard.setPosition(-portraitCard.getWidth(), GameInfo.WORLD_HEIGHT / 2 - 190);
         portrait = new Sprite(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getPortraitFileName()));
-        portrait.setSize(180,230);
+        portrait.setSize(180, 230);
         portraitCard.add(new Image(new SpriteDrawable(portrait))).padBottom(70);
         portraitCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 170, portraitCard.getY(), .5f),
                 delay(3f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), .5f)));
@@ -73,9 +74,9 @@ public class PortraitPanel {
         nameCard.setPosition(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT / 2 - 170);
         nameCard.add(new Label(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getFirstName() + " " +
                 GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getLastName(),
-                new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).center();
+                new Label.LabelStyle(GameInfo.CARD_FONT, Color.WHITE))).center();
         nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), .5f),
-                delay(3f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f),new RenderModeAction(GameManager.RenderMode.PushNewHints)));
+                delay(3f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f), new RenderModeAction(GameManager.RenderMode.PushNewHints)));
     }
 
     public Stage getStage() {

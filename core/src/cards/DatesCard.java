@@ -25,7 +25,7 @@ public class DatesCard extends Table {
         else setName("red_date_of_"+numberOfPresident);
 
         finalPositionOfCard_X = GameInfo.WORLD_WIDTH - (45 * (GameManager.PRESIDENTS_ARRAY[numberOfPresident].getFinalDate() -
-                GameManager.PRESIDENTS_ARRAY[numberOfPresident].getInitialDate()) + 1);
+                GameManager.PRESIDENTS_ARRAY[numberOfPresident].getInitialDate() + 1));
 
         setBackground(new SpriteDrawable(card));
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
@@ -33,7 +33,7 @@ public class DatesCard extends Table {
         this.left();
         add(new Label(GameManager.PRESIDENTS_ARRAY[numberOfPresident].getInitialDate() + "-" +
                 GameManager.PRESIDENTS_ARRAY[numberOfPresident].getFinalDate(),
-                new Label.LabelStyle(MyFontGenerator.getFont("fonts/arial.ttf", 20), Color.WHITE))).padLeft(25);
+                new Label.LabelStyle(GameInfo.CARD_FONT, Color.WHITE))).padLeft(25);
         push();
     }
 

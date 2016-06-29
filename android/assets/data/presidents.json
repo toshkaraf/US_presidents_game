@@ -1,618 +1,663 @@
- [
-    {
-      "firstName": "George",
-      "secondName": "Washington",
-      "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-      "number": "1",
-      "age":"57",
-      "initialDate": "1789",
-      "finalDate": "1797",
-      "prompts": [
-        "Первая половина века",
-        "Лучший президент",
-        "Классаня работа"
-      ]
-    },
-    {
-      "firstName": "John",
-      "secondName": "Adams",
-      "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-      "number": "2",
-      "age":"57",
-      "initialDate": "1797",
-      "finalDate": "1801",
-      "prompts": [
-        "Первая половина века",
-        "Лучший президент",
-        "Классаня работа"
-      ]
-    },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "3",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "4",
-     "age":"57",
-     "initialDate": "8",
-     "finalDate": "15",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "5",
-     "age":"57",
-     "initialDate": "4",
-     "finalDate": "10",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "6",
-     "age":"57",
-     "initialDate": "7",
-     "finalDate": "11",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "7",
-     "age":"57",
-     "initialDate": "1",
-     "finalDate": "9",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "8",
-     "age":"57",
-     "initialDate": "8",
-     "finalDate": "12",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "9",
-     "age":"57",
-     "initialDate": "3",
-     "finalDate": "4",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "10",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "11",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1893",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "12",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "13",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "14",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "15",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "16",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1895",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "17",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "18",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "19",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "20",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "21",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "22",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1893",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "23",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "24",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "25",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "26",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "27",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "28",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "29",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "30",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "31",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "32",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "33",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "34",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "35",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "36",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "37",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "38",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "39",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "40",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "41",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "42",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "43",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   },
-   {
-     "firstName": "George",
-     "secondName": "Washington",
-     "portraitFileName": "portraits/01_Gorge_Washington.jpg",
-     "number": "44",
-     "age":"57",
-     "initialDate": "1889",
-     "finalDate": "1896",
-     "prompts": [
-       "Первая половина века",
-       "Лучший президент",
-       "Классаня работа"
-     ]
-   }
-  ]
+[
+  {
+    "firstName": "George",
+    "secondName": "Washington",
+    "portraitFileName": "portraits/01_George_Washington.jpg",
+    "number": "1",
+    "age":"57",
+    "initialDate": "1789",
+    "finalDate": "1797",
+    "party": "None",
+    "prompts": [
+      "The first President unified the new nation and shaped the chief executive's duties. He refused to run for a third term.",
+      "On their wedding day, Martha Washington gave him a miniature portrait of herself. He wore it on a chain around his neck until his death 40 years later.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "John",
+    "secondName": "Adams",
+    "portraitFileName": "portraits/02_John_Adams.jpg",
+    "number": "2",
+    "age":"61",
+    "initialDate": "1797",
+    "finalDate": "1801",
+    "party": "Federalist",
+    "prompts": [
+      "Adams was the first President to live in the White House.",
+      "Adams had a tough job filling Washington's shoes. His advocacy of the Alien and Sedition Acts allowed him to silence critics, but made him unpopular. He lost reelection to Thomas Jefferson.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Thomas",
+    "secondName": "Jefferson",
+    "portraitFileName": "portraits/03_Thomas_Jefferson.jpg",
+    "number": "3",
+    "age":"57",
+    "initialDate": "1801",
+    "finalDate": "1809",
+    "party": "Democratic-Republican",
+    "prompts": [
+      "Considered the most brilliant President, he wrote the Declaration of Independence, founded the University of Virginia, and was an architect, a farmer, and a scientist.",
+      "Jefferson approved the Louisiana Purchase of 1803, which nearly doubled the size of the U.S.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "James",
+    "secondName": "Madison",
+    "portraitFileName": "portraits/04_James_Madison.jpg",
+    "number": "4",
+    "age":"57",
+    "initialDate": "1809",
+    "finalDate": "1817",
+    "party": "Democratic-Republican",
+    "prompts": [
+      "Madison is considered the father of the Bill of Rights.",
+      "Madison presided over the War of 1812 with Britain, during which the White House was burned. The war ended in a draw.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "James",
+    "secondName": "Monroe",
+    "portraitFileName": "portraits/05_James_Monroe.jpg",
+    "number": "5",
+    "age":"58",
+    "initialDate": "1817",
+    "finalDate": "1825",
+    "party": "Democratic-Republican",
+    "prompts": [
+      "Monroe lived out his retirement in poverty.",
+      "His term is called the \"Era of Good Feeling\" because there was little partisan fighting. He formulated the Monroe Doctrine, which declared the Americas off-limits to European meddling.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "John Quincy",
+    "secondName": "Adams",
+    "portraitFileName": "portraits/06_John Quincy_Adams.jpg",
+    "number": "6",
+    "age":"57",
+    "initialDate": "1825",
+    "finalDate": "1829",
+    "party": "Democratic-Republican",
+    "prompts": [
+      "John Adams and John Quincy Adams were the first father and son to have served as Presidents.",
+      "Accused of winning the White House through corruption, he was plagued by accusations of misdeeds throughout his presidency.",
+      "After his presidency, Adams served nine terms in the House of Representatives, until his death in 1848."
+    ]
+  },
+  {
+    "firstName": "Andrew",
+    "secondName": "Jackson",
+    "portraitFileName": "portraits/07_Andrew_Jackson.jpg",
+    "number": "7",
+    "age":"61",
+    "initialDate": "1829",
+    "finalDate": "1837",
+    "party": "Democratic",
+    "prompts": [
+      "Jackson was the first President to ride on a train.",
+      "Though he was a rich planter, Jackson was considered the common people's friend. Dubbed \"Old Hickory\" because he was so tough, Jackson greatly expanded the powers of the Presidency.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Martin",
+    "secondName": "Van Buren",
+    "portraitFileName": "portraits/08_Martin_Van Buren.jpg",
+    "number": "8",
+    "age":"54",
+    "initialDate": "1837",
+    "finalDate": "1841",
+    "party": "Democrat",
+//    Democratic-Republican
+    "prompts": [
+      "Van Buren was the first President to be born an American citizen, rather than a British subject.",
+      "Van Buren's Presidency was marred by an economic depression that led to bank failures and food riots. He was easily defeated for reelection.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "William Henry",
+    "secondName": "Harrison",
+    "portraitFileName": "portraits/09_William Henry_Harrison.jpg",
+    "number": "9",
+    "age":"68",
+    "initialDate": "1841",
+    "finalDate": "1841",
+    "party": "Whig",
+    "prompts": [
+      "Harrison delivered a marathon inaugural speech during which he caught a cold. He died a month later.",
+      "Harrison was the first President to die in office and he served the briefest term.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "John",
+    "secondName": "Tyler",
+    "portraitFileName": "portraits/10_John_Tyler.jpg",
+    "number": "10",
+    "age":"51",
+    "initialDate": "1841",
+    "finalDate": "1845",
+    "party": "Whig",
+    "prompts": [
+      "Tyler had 15 children, more than any President.",
+      "Tyler was expected to be a passive \"acting President\" while he finished Harrison's term. But he refused to be passive. He made enemies in Congress and was the first President to be threatened with impeachment. The effort failed.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "James K.",
+    "secondName": "Polk",
+    "portraitFileName": "portraits/11_James K._Polk.jpg",
+    "number": "11",
+    "age":"49",
+    "initialDate": "1845",
+    "finalDate": "1849",
+    "party": "Democratic",
+    "prompts": [
+      "Polk is the only President to have served as Speaker of the House.",
+      "Polk was the first \"dark horse\" or little-known nominee to become President. He presided over the Mexican War, which added Texas, California, and other territory to the U.S.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Zachary",
+    "secondName": "Taylor",
+    "portraitFileName": "portraits/12_Zachary_Taylor.jpg",
+    "number": "12",
+    "age":"64",
+    "initialDate": "1849",
+    "finalDate": "1850",
+    "party": "Whig",
+    "prompts": [
+      "Taylor won fame as a general in the Mexican War. His soldiers called him \"Old Rough and Ready.\"",
+      "Taylor threatened to use force to keep the South from leaving the Union. After his death, a compromise allowed slavery to continue in the South.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Millard",
+    "secondName": "Fillmore",
+    "portraitFileName": "portraits/13_Millard_Fillmore.jpg",
+    "number": "13",
+    "age":"50",
+    "initialDate": "1850",
+    "finalDate": "1853",
+    "party": "Whig",
+    "prompts": [
+      "Fillmore approved the Compromise of 1850, allowing slavery in the South. But neither North nor South was happy with it, and Fillmore was blamed for the law's failure.",
+      "In 1856, Fillmore ran for President on the anti-immigrant Know-Nothing Party ticket.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Franklin",
+    "secondName": "Pierce",
+    "portraitFileName": "portraits/14_Franklin_Pierce.jpg",
+    "number": "14",
+    "age":"48",
+    "initialDate": "1853",
+    "finalDate": "1857",
+    "party": "Democratic",
+    "prompts": [
+      "Pierce's wife hated Washington, D.C., so much, that she fainted when she found out he had been nominated for President.",
+      "Pierce supported the Kansas-Nebraska Act, which gutted the Compromise of 1850.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "James",
+    "secondName": "Buchanan",
+    "portraitFileName": "portraits/15_James_Buchanan.jpg",
+    "number": "15",
+    "age":"65",
+    "initialDate": "1857",
+    "finalDate": "1861",
+    "party": "Democratic",
+    "prompts": [
+      "Buchanan was the only bachelor to ever serve in the White House.",
+      "Buchanan tried in vain to find a compromise to keep the South from seceding from the Union, but failed.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Abraham",
+    "secondName": "Lincoln",
+    "portraitFileName": "portraits/16_Abraham_Lincoln.jpg",
+    "number": "16",
+    "age":"52",
+    "initialDate": "1861",
+    "finalDate": "1865",
+    "party": "Republican",
+    "prompts": [
+      "Lincoln led the Union into the Civil War to preserve the nation and end slavery. He was assassinated just five days after the Confederate armies surrendered.",
+      "Polls show that Lincoln is the most admired President.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Andrew",
+    "secondName": "Johnson",
+    "portraitFileName": "portraits/17_Andrew_Johnson.jpg",
+    "number": "17",
+    "age":"56",
+    "initialDate": "1865",
+    "finalDate": "1869",
+    "party": "National Union",
+    "prompts": [
+      "Succeeding Lincoln, Johnson found himself in bitter battles with Congress over Reconstruction. He was impeached and tried by the Senate, but was acquitted by one vote.",
+      "Johnson was the only southern senator to stay loyal to the Union.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Ulysses S.",
+    "secondName": "Grant",
+    "portraitFileName": "portraits/18_Ulysses S._Grant.jpg",
+    "number": "18",
+    "age":"46",
+    "initialDate": "1869",
+    "finalDate": "1877",
+    "party": "Republican",
+    "prompts": [
+      "Grant was born Hiram Ulysses Grant, but an error on his application to West Point changed his name to Ulysses Simpson Grant. He liked the initials so much that he kept the name.",
+      "Grant was the top Union military hero of the Civil War. His two terms were marred by scandals.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Rutherford B.",
+    "secondName": "Hayes",
+    "portraitFileName": "portraits/19_Rutherford B._Hayes.jpg",
+    "number": "19",
+    "age":"54",
+    "initialDate": "1877",
+    "finalDate": "1881",
+    "party": "Republican",
+    "prompts": [
+      "Hayes is one of only three Presidents to lose the popular vote but win the office. He won the election by one electoral vote.",
+      "Hayes's wife, Lucy, was the first First Lady to graduate from college.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "James A.",
+    "secondName": "Garfield",
+    "portraitFileName": "portraits/20_James A._Garfield.jpg",
+    "number": "20",
+    "age":"49",
+    "initialDate": "1881",
+    "finalDate": "1881",
+    "party": "Republican",
+    "prompts": [
+      "Garfield set out to reform the \"spoils system\" by which politicians gave their friends low-level political offices. He was assassinated by a disappointed office seeker.",
+      "Garfield was the first left-handed President.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Chester A.",
+    "secondName": "Arthur",
+    "portraitFileName": "portraits/21_Chester A._Arthur.jpg",
+    "number": "21",
+    "age":"51",
+    "initialDate": "1881",
+    "finalDate": "1885",
+    "party": "Republican",
+    "prompts": [
+      "Arthur was unknown before being elected, but surprised people by being honest and responsible. He helped create the Civil Service.",
+      "As a lawyer, Arthur defended a black woman who had been abused on a streetcar. He won the case, which led the streetcar companies to integrate.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Grover",
+    "secondName": "Cleveland",
+    "portraitFileName": "portraits/22_Grover_Cleveland.jpg",
+    "number": "22",
+    "age":"47",
+    "initialDate": "1885",
+    "finalDate": "1889",
+    "party": "Democratic",
+    "prompts": [
+      "Cleveland is the only President to be elected to two non consecutive terms.",
+      "Cleveland expanded the Civil Service and ended wasteful government programs. But an economic depression wrecked his second term.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Benjamin",
+    "secondName": "Harrison",
+    "portraitFileName": "portraits/23_Benjamin_Harrison.jpg",
+    "number": "23",
+    "age":"55",
+    "initialDate": "1889",
+    "finalDate": "1893",
+    "party": "Republican",
+    "prompts": [
+      "Harrison was caught between reformers who were fighting the spoils system and those who wanted to continue it, and was defeated after one term.",
+      "Harrison's grandfather was President William Henry Harrison.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Grover",
+    "secondName": "Cleveland",
+    "portraitFileName": "portraits/24_Grover_Cleveland.jpg",
+    "number": "24",
+    "age":"55",
+    "initialDate": "1893",
+    "finalDate": "1897",
+    "party": "Democratic",
+    "prompts": [
+      "Cleveland expanded the Civil Service and ended wasteful government programs. But an economic depression wrecked his second term.",
+      "Cleveland is the only President to be elected to two non consecutive terms.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "William",
+    "secondName": "McKinley",
+    "portraitFileName": "portraits/25_William_McKinley.jpg",
+    "number": "25",
+    "age":"54",
+    "initialDate": "1897",
+    "finalDate": "1901",
+    "party": "Republican",
+    "prompts": [
+      "McKinley led the U.S. during the Spanish-American War. The U.S. won several important overseas colonies.",
+      "Only moments after handing a girl his \"lucky\" red carnation, McKinley was assassinated.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Theodore",
+    "secondName": "Roosevelt",
+    "portraitFileName": "portraits/26_Theodore_Roosevelt.jpg",
+    "number": "26",
+    "age":"42",
+    "initialDate": "1901",
+    "finalDate": "1909",
+    "party": "Republican",
+    "prompts": [
+      "Roosevelt was one of the most activist Presidents. His many accomplishments included the building of the Panama Canal, cracking down on business monopolies, and creating many national parks.",
+      "Roosevelt was the first President to visit a foreign country while in office.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "William Howard",
+    "secondName": "Taft",
+    "portraitFileName": "portraits/27_William Howard_Taft.jpg",
+    "number": "27",
+    "age":"51",
+    "initialDate": "1909",
+    "finalDate": "1913",
+    "party": "Republican",
+    "prompts": [
+      "Taft continued many of Roosevelt's policies. A conservative, he alienated the progressive wing of his party and lost reelection.",
+      "Taft is the only President who became a Supreme Court Justice.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Woodrow",
+    "secondName": "Wilson",
+    "portraitFileName": "portraits/28_Woodrow_Wilson.jpg",
+    "number": "28",
+    "age":"56",
+    "initialDate": "1913",
+    "finalDate": "1921",
+    "party": "Democratic",
+    "prompts": [
+      "After initially opposing World War I (1914-1918), Wilson led the U.S. into the war and drafted the peace plan that ended it. Wilson then fought to create the League of Nations, the forerunner of the United Nations.",
+      "Wilson was the first President to hold a news conference.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Warren G.",
+    "secondName": "Harding",
+    "portraitFileName": "portraits/29_Warren G._Harding.jpg",
+    "number": "29",
+    "age":"55",
+    "initialDate": "1921",
+    "finalDate": "1923",
+    "party": "Republican",
+    "prompts": [
+      "Harding died in office, just as massive corruption in the Teapot Dome scandal was about to become public. Because of these scandals, Harding is regarded as the worst President.",
+      "Harding's election was the first in which women voted.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Calvin",
+    "secondName": "Coolidge",
+    "portraitFileName": "portraits/30_Calvin_Coolidge.jpg",
+    "number": "30",
+    "age":"51",
+    "initialDate": "1923",
+    "finalDate": "1929",
+    "party": "Republican",
+    "prompts": [
+      "Coolidge's term was marked by economic prosperity. However, he ignored signs that the stock market was likely to collapse.",
+      "Coolidge was known as \"Silent Cal.\" Once a reporter said to him, \"I bet my editor I could get more than two words out of you.\" Coolidge replied: \"You lose.\"",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Herbert C.",
+    "secondName": "Hoover",
+    "portraitFileName": "portraits/31_Herbert C._Hoover.jpg",
+    "number": "31",
+    "age":"54",
+    "initialDate": "1929",
+    "finalDate": "1933",
+    "party": "Republican",
+    "prompts": [
+      "The stock market crashed a few months into Hoover's term. The Great Depression that followed was widely and some say unfairly blamed on Hoover.",
+      "Hoover organized relief efforts in Europe after both World Wars.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Franklin D.",
+    "secondName": "Roosevelt",
+    "portraitFileName": "portraits/32_Franklin D._Roosevelt.jpg",
+    "number": "32",
+    "age":"51",
+    "initialDate": "1933",
+    "finalDate": "1945",
+    "party": "Democratic",
+    "prompts": [
+      "Roosevelt led the nation during the Great Depression of the 1930s and to victory in World War II (1941–1945). He also greatly expanded the size and role of the federal government through his New Deal social programs.",
+      "Roosevelt is the only President elected four times.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Harry S.",
+    "secondName": "Truman",
+    "portraitFileName": "portraits/33_Harry S._Truman.jpg",
+    "number": "33",
+    "age":"60",
+    "initialDate": "1945",
+    "finalDate": "1953",
+    "party": "Democratic",
+    "prompts": [
+      "Truman made the fateful decision to drop the atomic bomb on Japan. World War II ended days later. Truman also led the U.S. during the Korean War (1950-1953).",
+      "On his desk, Truman had a plaque that said \"The Buck Stops Here.\"",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Dwight D.",
+    "secondName": "Eisenhower",
+    "portraitFileName": "portraits/34_Dwight D._Eisenhower.jpg",
+    "number": "34",
+    "age":"62",
+    "initialDate": "1953",
+    "finalDate": "1961",
+    "party": "Republican",
+    "prompts": [
+      "A former World War II general and hero, Eisenhower helped end the Korean War and steered a moderate course during the Cold War.",
+      "One of America's most famous soldiers, \"Ike\" had wanted to go to the Naval Academy instead of West Point. He was turned down for being too old.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "John F.",
+    "secondName": "Kennedy",
+    "portraitFileName": "portraits/35_John F._Kennedy.jpg",
+    "number": "35",
+    "age":"43",
+    "initialDate": "1961",
+    "finalDate": "1963",
+    "party": "Democratic",
+    "prompts": [
+      "In 1962, the U.S. and the Soviet Union hovered on the brink of nuclear war during the Cuban Missile Crisis. Kennedy eventually forced the Soviets to back down. He was assassinated in the third year of his term.",
+      "Kennedy is the only Roman Catholic to become President.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Lyndon B.",
+    "secondName": "Johnson",
+    "portraitFileName": "portraits/36_Lyndon B._Johnson.jpg",
+    "number": "36",
+    "age":"55",
+    "initialDate": "1963",
+    "finalDate": "1969",
+    "party": "Democratic",
+    "prompts": [
+      "Johnson passed sweeping antipoverty and civil rights programs. However, he also involved the U.S. in the unpopular Vietnam War. Antiwar protests caused him to drop a reelection bid.",
+      "Johnson was sworn into office on an airplane after the Kennedy assassination.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Richard M.",
+    "secondName": "Nixon",
+    "portraitFileName": "portraits/37_Richard M._Nixon.jpg",
+    "number": "37",
+    "age":"56",
+    "initialDate": "1969",
+    "finalDate": "1974",
+    "party": "Republican",
+    "prompts": [
+      "During Nixon's first term, he improved relations with the Soviet Union and China and wound down the Vietnam War. But the Watergate scandal forced Nixon to resign before Congress could impeach him.",
+      "Nixon is the only U.S. President in history to resign his office.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Gerald R.",
+    "secondName": "Ford",
+    "portraitFileName": "portraits/38_Gerald R._Ford.jpg",
+    "number": "38",
+    "age":"61",
+    "initialDate": "1974",
+    "finalDate": "1977",
+    "party": "Republican",
+    "prompts": [
+      "Ford became Vice President after Nixon's Vice President resigned in disgrace, and President after Nixon resigned. His pardon of Nixon was unpopular, probably costing him reelection.",
+      "Ford is the only President never elected President or Vice President.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "James E. (Jimmy)",
+    "secondName": "Carter",
+    "portraitFileName": "portraits/39_James E. (Jimmy)_Carter.jpg",
+    "number": "39",
+    "age":"52",
+    "initialDate": "1977",
+    "finalDate": "1981",
+    "party": "Democratic",
+    "prompts": [
+      "Carter had success promoting Middle East peace. But soaring oil prices, high inflation, and the Iran hostage crisis made him look weak and ineffectual.",
+      "Since leaving office, Carter has traveled the world doing charity work.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Ronald W.",
+    "secondName": "Reagan",
+    "portraitFileName": "portraits/40_Ronald W._Reagan.jpg",
+    "number": "40",
+    "age":"69",
+    "initialDate": "1981",
+    "finalDate": "1989",
+    "party": "Republican",
+    "prompts": [
+      "Reagan is credited with reviving national pride after the turmoil of the 1960s and 1970s. He enjoyed great popularity, though his conservative policies were controversial.",
+      "Reagan is the only President to survive after being wounded by a would-be assassin.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "George H. W.",
+    "secondName": "Bush",
+    "portraitFileName": "portraits/41_George H. W._Bush.jpg",
+    "number": "41",
+    "age":"64",
+    "initialDate": "1989",
+    "finalDate": "1993",
+    "party": "Republican",
+    "prompts": [
+      "During Bush's term, the Soviet Union collapsed and the Cold War ended. He also led the U.S. in the 1991 Gulf War against Iraq. But economic troubles at home cost him his reelection bid.",
+      "Bush was the first sitting Vice President to be elected President since Martin Van Buren.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "William J. (Bill)",
+    "secondName": "Clinton",
+    "portraitFileName": "portraits/42_William J. (Bill)_Clinton.jpg",
+    "number": "42",
+    "age":"46",
+    "initialDate": "1993",
+    "finalDate": "2000",
+    "party": "Democratic",
+    "prompts": [
+      "Clinton achieved goals such as passage of the NAFTA trade agreement and cuts in the budget deficit. But his popularity was uneven and his second term was marred by scandal.",
+      "When he was 16, Clinton met President Kennedy at the White House. The experience inspired his interest in politics.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "George W.",
+    "secondName": "Bush",
+    "portraitFileName": "portraits/43_George W._Bush.jpg",
+    "number": "43",
+    "age":"54",
+    "initialDate": "2001",
+    "finalDate": "2008",
+    "party": "Republican",
+    "prompts": [
+      "Just eight months after being sworn in, President Bush had to unite a mournful country after the September 11th terrorist attacks. A self-proclaimed wartime commander-in-chief, President Bush, like his father, led the United States into war against Iraq.",
+      "Before focusing on national politics, George Bush was the managing partner and part owner of the Texas Rangers baseball team from 1989-1998.",
+      "Классаня работа"
+    ]
+  },
+  {
+    "firstName": "Barack",
+    "secondName": "Obama",
+    "portraitFileName": "portraits/44_Barack_Obama.jpg",
+    "number": "44",
+    "age":"47",
+    "initialDate": "2009",
+    "finalDate": "2017",
+    "party":"Democrat",
+    "prompts": [
+      "Barack Obama gained national recognition after he delivered the keynote address at the Democratic National Convention in 2004. He served as the U.S. Senator for Illinois from 2005 to 2008.",
+      "Barack Obama is the first African American president of the United States.",
+      "Классаня работа"
+    ]
+  }
+]

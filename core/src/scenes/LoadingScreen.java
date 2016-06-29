@@ -12,7 +12,8 @@ import com.toshkaraf.MainGame;
 
 import helpers.GameInfo;
 import helpers.GameManager;
-import huds.MenuButtons;
+import huds.DecoratorChooseFromAll;
+import huds.DecoratorWIthCards;
 
 /**
  * Created by Антон on 09.06.2016.
@@ -26,6 +27,7 @@ public class LoadingScreen extends ScreenAdapter {
     private Sprite player;
     private boolean isInit = false;
     private int firstPresidentInRange, lastPresidentInRange, quantityOfHints;
+    private DecoratorWIthCards decoratorWithCards;
 
     public LoadingScreen(MainGame game, int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints) {
         this.game = game;
@@ -43,31 +45,31 @@ public class LoadingScreen extends ScreenAdapter {
         background = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png"));
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         player.setPosition(GameInfo.WORLD_WIDTH / 2 - player.getWidth() / 2, GameInfo.WORLD_HEIGHT / 2 - player.getHeight() / 2);
-        player.setBounds(player.getX(), player.getY(), player.getWidth(), player.getHeight());
         player.setOrigin(player.getWidth() / 2, player.getHeight() / 2);
-        Runnable initiatorNewGame = new Runnable() {
+
+        Runnable newGameInitiator = new Runnable() {
             @Override
             public void run() {
-                if (GameManager.initNewGame(firstPresidentInRange, lastPresidentInRange, quantityOfHints));
+                GameManager.initNewGame(firstPresidentInRange, lastPresidentInRange, quantityOfHints);
+                if (GameManager.quantityOfHints == 0) decoratorWithCards = new DecoratorChooseFromAll(game);
+                else decoratorWithCards = new DecoratorWIthCards(game);
                     isInit = true;
             }
         };
-        (new Thread(initiatorNewGame)).start();
+        (new Thread(newGameInitiator)).start();
     }
 
     @Override
     public void render(float delta) {
-        if (isInit) game.setScreen(new HorisontalTetrisField(game));
+
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-        game.getBatch().setProjectionMatrix(camera.projection);
-        game.getBatch().setTransformMatrix(camera.view);
         game.getBatch().begin();
         game.getBatch().draw(background, 0, 0);
         player.draw(game.getBatch());
         game.getBatch().end();
         updatePlayer();
-
+        if (isInit) game.setScreen(new HorisontalTetrisField(game));
     }
 
     private void updatePlayer() {
