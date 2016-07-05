@@ -25,6 +25,7 @@ import huds.PortraitPanel;
  */
 public class HorisontalTetris implements Screen, InputProcessor {
 
+    Texture bg;
     SpriteBatch batch;
     Sprite background;
     Sprite player;
@@ -52,8 +53,9 @@ public class HorisontalTetris implements Screen, InputProcessor {
 
         portraitPanel = new PortraitPanel(game);
 
-        background = new Sprite(new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png")),
-                0, 0, GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
+        bg = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png"));
+        background = new Sprite(bg, 0, bg.getHeight() - Math.round(GameManager.lastPresidentInRange *60+60),
+                GameInfo.WORLD_WIDTH,Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         batch = game.getBatch();
         camera = decoratorWithCards.getCamera();
