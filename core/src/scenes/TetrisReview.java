@@ -78,7 +78,6 @@ public class TetrisReview extends HorisontalTetris {
             return true;
         } else {
             reviewPanel.pullPanel();
-//            GameManager.renderMode = GameManager.RenderMode.PlayGame;
         }
         return false;
     }
