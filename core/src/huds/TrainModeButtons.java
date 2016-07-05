@@ -6,10 +6,7 @@ import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
 import helpers.GameInfo;
-import helpers.GameManager;
-import scenes.HorisontalTetrisField;
-import scenes.LoadingScreen;
-import scenes.Menu;
+import scenes.HorisontalTetris;
 
 /**
  * Created by Антон on 20.06.2016.
@@ -38,20 +35,20 @@ public class TrainModeButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),1,44,3);                return true;
+                hideMenu_startNewScreen(new HorisontalTetris(game),1,44,3);                return true;
             }
         });
 
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),1,44,7);                return true;
+                hideMenu_startNewScreen(new HorisontalTetris(game),1,44,7);                return true;
             }
         });
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-               hideMenu_startNewScreen(new HorisontalTetrisField(game),1,44,15);
+               hideMenu_startNewScreen(new HorisontalTetris(game),1,44,15);
                 return true;
             }
         });
@@ -59,7 +56,7 @@ public class TrainModeButtons extends MenuButtons {
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
 //                hideMenu_startNewScreen(new LoadingScreen(game, 1, 44, 0));
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),1,44,0);
+                hideMenu_startNewScreen(new HorisontalTetris(game),1,44,0);
                 return true;
             }
         });

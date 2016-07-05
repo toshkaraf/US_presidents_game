@@ -69,7 +69,7 @@ public class LoadingScreen extends ScreenAdapter {
         player.draw(game.getBatch());
         game.getBatch().end();
         updatePlayer();
-        if (isInit) game.setScreen(new HorisontalTetrisField(game));
+        if (isInit) game.setScreen(new HorisontalTetris(game));
     }
 
     private void updatePlayer() {

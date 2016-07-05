@@ -2,11 +2,9 @@ package huds;
 
 //import com.awesometuts.jackthegiant.GameMain;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -19,10 +17,11 @@ import com.toshkaraf.MainGame;
 
 import helpers.GameInfo;
 import helpers.GameManager;
-import helpers.MyFontGenerator;
 import helpers.RenderModeAction;
 
-import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.delay;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.moveTo;
+import static com.badlogic.gdx.scenes.scene2d.actions.Actions.sequence;
 
 
 /**
@@ -43,12 +42,11 @@ public class PortraitPanel {
     public PortraitPanel(MainGame game) {
         this.game = game;
 
-
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
                 new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
 
-        Gdx.input.setInputProcessor(stage);
+//        Gdx.input.setInputProcessor(stage);
 
         createPortraitPanel();
 
@@ -74,9 +72,9 @@ public class PortraitPanel {
         nameCard.setPosition(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT / 2 - 170);
         nameCard.add(new Label(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getFirstName() + " " +
                 GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getLastName(),
-                new Label.LabelStyle(GameInfo.CARD_FONT, Color.WHITE))).center();
+                new Label.LabelStyle(GameInfo.DATE_FONT, Color.WHITE))).center();
         nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), .5f),
-                delay(3f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f), new RenderModeAction(GameManager.RenderMode.PushNewHints)));
+                delay(3f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f), new RenderModeAction(GameManager.RenderMode.PlayGame)));
     }
 
     public Stage getStage() {

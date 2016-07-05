@@ -44,7 +44,7 @@ public class DecoratorChooseFromAll extends DecoratorWIthCards {
 
     @Override
     public void pushHintCards() {
-        GameManager.renderMode = GameManager.RenderMode.SetNewPlayer;
+        GameManager.renderMode = GameManager.RenderMode.PlayGame;
     }
 
     @Override

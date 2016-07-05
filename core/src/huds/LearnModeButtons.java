@@ -2,13 +2,11 @@ package huds;
 
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
-import com.badlogic.gdx.utils.Array;
 import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
 import helpers.GameInfo;
-import helpers.GameManager;
-import scenes.HorisontalTetrisField;
+import scenes.HorisontalTetris;
 import scenes.Menu;
 
 /**
@@ -39,7 +37,7 @@ public class LearnModeButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),1,11,3);
+                hideMenu_startNewScreen(new HorisontalTetris(game),1,12,3);
                 return true;
             }
         });
@@ -47,21 +45,21 @@ public class LearnModeButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),12,22,3);
+                hideMenu_startNewScreen(new HorisontalTetris(game),13,25,3);
                 return true;
             }
         });
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),23,33,3);
+                hideMenu_startNewScreen(new HorisontalTetris(game),26,33,3);
                 return true;
             }
         });
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new HorisontalTetrisField(game),34,44,3);
+                hideMenu_startNewScreen(new HorisontalTetris(game),34,44,3);
                 return true;
             }
         });

@@ -5,7 +5,7 @@
 ///**
 // * Created by Антон on 09.06.2016.
 // */
-//public class TetrisGameMode extends HorisontalTetrisField {
+//public class TetrisGameMode extends HorisontalTetris {
 //    public TetrisGameMode(MainGame game) {
 //        super(game);
 //    }

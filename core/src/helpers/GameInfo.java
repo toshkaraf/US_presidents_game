@@ -6,13 +6,7 @@ import com.toshkaraf.MainGame;
 
 public class GameInfo {
 
-    public GameInfo(MainGame game) {
-//        CARD_FONT = game.getAssetManager().get("fonts/CardArialFont.fnt");
-//        CARD_FONT = new BitmapFont(Gdx.files.internal("fonts/CardArialFont.fnt"));
-    CARD_FONT = MyFontGenerator.getFont("fonts/arial.ttf",20);
-    }
-
-    public static BitmapFont CARD_FONT;
+    public static BitmapFont DATE_FONT,NAME_FONT;
 
     public static final int TETRIS_FULL_BACKGROUND_HEIGHT = 2652;
 
@@ -35,4 +29,12 @@ public class GameInfo {
     public static final int START_X_POSITION_OF_TETRIS_PLAYER = Gdx.graphics.getWidth() / 20;
 
     public static final float STEP_FOR_TETRIS_CARDS_X = 10;
+
+    public GameInfo(MainGame game) {
+//        DATE_FONT = game.getAssetManager().get("fonts/CardArialFont.fnt");
+//        DATE_FONT = new BitmapFont(Gdx.files.internal("fonts/CardArialFont.fnt"));
+        DATE_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 20);
+        NAME_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 40);
+
+    }
 }

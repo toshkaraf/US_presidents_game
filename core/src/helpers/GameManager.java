@@ -4,7 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
-import com.sun.org.apache.bcel.internal.generic.INEG;
 
 import players.President;
 
@@ -13,7 +12,7 @@ import players.President;
  */
 public class GameManager {
 
-    public enum RenderMode {PrepareField, Portrait, PushNewHints, SetNewPlayer, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition}
+    public enum RenderMode {PrepareField, Portrait, PushNewHints, PlayGame, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition, ShowReviewPanel, HideReviewPanel}
 
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
 
