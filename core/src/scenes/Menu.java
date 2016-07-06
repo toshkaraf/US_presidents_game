@@ -10,7 +10,6 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
 
 import helpers.GameInfo;
-import huds.MainMenuButtons;
 import huds.MenuButtons;
 
 /**
@@ -27,7 +26,7 @@ public class Menu extends ScreenAdapter {
     public Menu(MainGame game, MenuButtons menuButtons) {
         this.game = game;
         btns = menuButtons;
-        background = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png"));
+        background = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBgd.png"));
 
     }
 

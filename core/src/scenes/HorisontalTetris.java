@@ -19,6 +19,7 @@ import huds.DecoratorChooseFromAll;
 import huds.DecoratorWIthCards;
 import huds.MainMenuButtons;
 import huds.PortraitPanel;
+import huds.ScorePanel;
 
 /**
  * Created by Антон on 01.06.2016.
@@ -33,6 +34,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
     OrthographicCamera camera;
     DecoratorWIthCards decoratorWithCards;
     PortraitPanel portraitPanel;
+    ScorePanel scorePanel;
     boolean switcher = true;
     boolean isRightAnswer, isPlayerFlinged;
     MainGame game;
@@ -52,6 +54,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
         else decoratorWithCards = new DecoratorWIthCards(game);
 
         portraitPanel = new PortraitPanel(game);
+        scorePanel = new ScorePanel(game);
 
         bg = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png"));
         background = new Sprite(bg, 0, bg.getHeight() - Math.round(GameManager.lastPresidentInRange *60+60),
@@ -82,6 +85,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
                 }
                 break;
             case PlayGame:
+                scorePanel.getStage().draw();
                 if (player.getX() + player.getWidth() <= GameInfo.WORLD_WIDTH) {
                     if (isPlayerFlinged) player.setX(player.getX() + 30);
 //                    queryInput();   //do not use in android
@@ -106,9 +110,16 @@ public class HorisontalTetris implements Screen, InputProcessor {
             case ShowRightAnswer:
                 if (!switcher) {
                     switcher = true;
-                    if (isRightAnswer) decoratorWithCards.pushRightNameCardIfRightAnswer();
-                    else decoratorWithCards.showRightNameCardIfWrongAnswer();
-                }
+                    if (isRightAnswer) {
+                        decoratorWithCards.pushRightNameCardIfRightAnswer();
+                        scorePanel.incrementScore(100);
+                    }
+                    else {
+                        decoratorWithCards.showRightNameCardIfWrongAnswer();
+                        scorePanel.decrementLife();
+                        if (GameManager.getInstance().life == 0) gameOver();
+                    }
+                    }
                 break;
             case MoveCamToStartPosition:
                 if (moveCameraToY(background.getHeight() / 2)) {

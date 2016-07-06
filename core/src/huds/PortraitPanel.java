@@ -46,8 +46,6 @@ public class PortraitPanel {
                 new OrthographicCamera());
         stage = new Stage(gameViewport, game.getBatch());
 
-//        Gdx.input.setInputProcessor(stage);
-
         createPortraitPanel();
 
         stage.addActor(portraitCard);

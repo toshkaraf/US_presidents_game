@@ -12,6 +12,9 @@ import players.President;
  */
 public class GameManager {
 
+    public int life = 3;
+    public int score = 100;
+
     public enum RenderMode {PrepareField, Portrait, PushNewHints, PlayGame, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition, ShowReviewPanel, HideReviewPanel}
 
     public enum TypeOfCard {BlueDate, RedDate, BlueName, RedName}
