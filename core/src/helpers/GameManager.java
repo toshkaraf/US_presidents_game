@@ -1,6 +1,9 @@
 package helpers;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
@@ -14,6 +17,7 @@ public class GameManager {
 
     public int life = 3;
     public int score = 100;
+    private Music music;
 
     public enum RenderMode {PrepareField, Portrait, PushNewHints, PlayGame, MoveCamToRightAnswer, ShowRightAnswer, MoveCamToStartPosition, ShowReviewPanel, HideReviewPanel}
 
@@ -27,7 +31,17 @@ public class GameManager {
     public static int currentRightPresident; // number in array
     public static int quantityOfHints;
     public static RenderMode renderMode;
+    public GameData gameData =  new GameData();
+    private Json json = new Json();
+    private FileHandle fileHandle = Gdx.files.local("bin/GameData.json");
+    public Sound[] rightSounds = new Sound[6];
+    public Sound[] wrongSounds = new Sound[6];
+    int soundsCounter = 0;
 
+
+    public GameManager() {
+
+    }
 
     private static President[] initializePresidentsArray() {
         President[] presidentsArray = new President[44];
@@ -41,14 +55,42 @@ public class GameManager {
         return presidentsArray;
     }
 
-    public static boolean initNewGame(int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints) {
+    void initSounds(){
+        for (int i = 0; i <6; i++){
+            rightSounds[i] = Gdx.audio.newSound(Gdx.files.internal("Sounds/right_answer/" + i + ".wav"));
+            wrongSounds[i] = Gdx.audio.newSound(Gdx.files.internal("Sounds/wrong_answer/" + i + ".wav"));
+        }
+    }
+
+    public Sound getRightSound() {
+        if (soundsCounter < 5) soundsCounter++;
+        else soundsCounter = 0;
+        return rightSounds[soundsCounter];
+    }
+
+    public Sound getWrongSound() {
+        if (soundsCounter < 5) soundsCounter++;
+        else soundsCounter = 0;
+        return wrongSounds[soundsCounter];
+    }
+
+    public static boolean initNewGame() {
         renderMode = RenderMode.PrepareField;
-        GameManager.firstPresidentInRange = firstPresidentInRange - 1;
-        GameManager.lastPresidentInRange = lastPresidentInRange - 1;
-        GameManager.quantityOfHints = quantityOfHints;
+//        GameManager.firstPresidentInRange = firstPresidentInRange - 1;
+//        GameManager.lastPresidentInRange = lastPresidentInRange - 1;
+//        GameManager.quantityOfHints = quantityOfHints;
         if (presidentsListForQuestions.size != 0) presidentsListForQuestions.clear();
         initPresidentsListForQuestionsArray();
         return true;
+    }
+
+    public static void setLastPresidentInRange(int lastPresidentInRange) {
+        GameManager.lastPresidentInRange = lastPresidentInRange - 1;
+    }
+
+    public static void setFirstPresidentInRange(int firstPresidentInRange) {
+        GameManager.firstPresidentInRange = firstPresidentInRange - 1;
+
     }
 
     public static void initPresidentsListForQuestionsArray() {
@@ -83,6 +125,30 @@ public class GameManager {
             tempArray.add(number);
         }
         return tempArray;
+    }
+
+    public void playMusic() {
+        if(music == null) {
+            music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Manhattan_Beach.mp3"));
+            initSounds();
+        }
+
+        if(!music.isPlaying()) {
+            music.setLooping(true);
+            music.setVolume(.4f);
+            music.play();
+        }
+
+    }
+
+    public void stopMusic() {
+        if(music.isPlaying()) {
+            music.stop();
+            music.dispose();
+        }
+    }
+
+    public void saveData() {
     }
 
     public static GameManager getInstance() {

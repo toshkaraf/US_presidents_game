@@ -6,6 +6,7 @@ import com.toshkaraf.MainGame;
 
 import cards.MenuCard;
 import helpers.GameInfo;
+import helpers.GameManager;
 import scenes.HorisontalTetris;
 import scenes.Menu;
 import scenes.TetrisReview;
@@ -17,16 +18,17 @@ public class MainMenuButtons extends MenuButtons {
 
     public MainMenuButtons(MainGame game) {
         super(game);
+        checkMusic();
     }
 
     @Override
     void createAndPositionButtons() {
-        super.createAndPositionButtons();
         button_1 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 + 90, "REVIEW PRESIDENTS", 20);
         button_2 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 + 30, "LEARN PRESIDENTS", 20);
-        button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "TRAINING MODE", 20);
-        button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "GAME MODE", 20);
-        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "HIGH SCORE", 20);
+        button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "FULL GAME", 20);
+        button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "HIGH SCORE", 20);
+        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "PLAY / STOP MUSIC", 20);
+
     }
 
     @Override
@@ -36,7 +38,7 @@ public class MainMenuButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen( new TetrisReview(game),1,44,0);
+                hideMenu_startNewScreen(new TetrisReview(game));
                 return true;
             }
         });
@@ -44,31 +46,45 @@ public class MainMenuButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new LearnModeButtons (game)),0,0,0);
+                hideMenu_startNewScreen(new Menu(game, new LearnModeButtons(game)));
                 return true;
             }
         });
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new TrainModeButtons(game)),0,0,0);
+                hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
         });
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen( new HorisontalTetris(game),1,44,43);
+//                hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
         });
 
         button_5.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-//                addHideActions();
-//                game.setScreen(new TetrisTrainingMode(game));
+                if (GameManager.getInstance().gameData.isMusicOn()) {
+                    GameManager.getInstance().gameData.setMusicOn(false);
+                    GameManager.getInstance().stopMusic();
+                } else {
+                    GameManager.getInstance().gameData.setMusicOn(true);
+                    GameManager.getInstance().playMusic();
+                }
+                GameManager.getInstance().saveData();
                 return true;
             }
         });
     }
+
+    boolean checkMusic() {
+        if (GameManager.getInstance().gameData.isMusicOn()) {
+            GameManager.getInstance().playMusic();
+        }
+        return GameManager.getInstance().gameData.isMusicOn();
+    }
+
 }

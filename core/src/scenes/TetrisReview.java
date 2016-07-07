@@ -51,6 +51,9 @@ public class TetrisReview extends HorisontalTetris {
         }
     }
 
+    @Override
+    void drawScorePanel() {}
+
     void updateCamPosition() {
         if (isUpMove && camera.position.y <= background.getHeight() - GameInfo.WORLD_HEIGHT / 2 - GameInfo.STEP_FOR_TETRIS_Y)
             camera.position.y = camera.position.y + GameInfo.STEP_FOR_TETRIS_Y;

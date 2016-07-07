@@ -13,18 +13,18 @@ import scenes.Menu;
 /**
  * Created by Антон on 20.06.2016.
  */
-public class LearnModeButtons extends MenuButtons {
+public class DifficultyLearnButtons extends MenuButtons {
 
-    public LearnModeButtons(MainGame game) {
+    public DifficultyLearnButtons(MainGame game) {
         super(game);
     }
 
     @Override
     void createAndPositionButtons() {
-        button_1 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 + 90, "Presidents before 1850", 20);
-        button_2 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 + 30, "Presidents from 1850 to 1900", 20);
-        button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "Presidents from 1900 to 1950", 20);
-        button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "Presidents after 1950", 20);
+        button_1 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 + 90, "Choose from 2 dates", 20);
+        button_2 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 + 30, "Choose from 4 dates", 20);
+        button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "Choose from 6 dates", 20);
+        button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "Choose from all dates", 20);
         button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "Back", 20);
     }
 
@@ -36,9 +36,8 @@ public class LearnModeButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new DifficultyLearnButtons(game)));
-                GameManager.setFirstPresidentInRange(1);
-                GameManager.setLastPresidentInRange(12);
+                GameManager.quantityOfHints = 1;
+                hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
         });
@@ -46,34 +45,31 @@ public class LearnModeButtons extends MenuButtons {
         button_2.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new DifficultyLearnButtons(game)));
-                GameManager.setFirstPresidentInRange(13);
-                GameManager.setLastPresidentInRange(25);
+                GameManager.quantityOfHints = 3;
+                hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
         });
 
         button_3.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new DifficultyLearnButtons(game)));
-                GameManager.setFirstPresidentInRange(26);
-                GameManager.setLastPresidentInRange(33);
+                GameManager.quantityOfHints = 5;
+                hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
         });
 
         button_4.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new DifficultyLearnButtons(game)));
-                GameManager.setFirstPresidentInRange(34);
-                GameManager.setLastPresidentInRange(44);
+                GameManager.quantityOfHints = 0;
+                hideMenu_startNewScreen(new HorisontalTetris(game));
                 return true;
             }
         });
 
         button_5.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                hideMenu_startNewScreen(new Menu(game, new MainMenuButtons(game)));
+                hideMenu_startNewScreen(new Menu(game, new LearnModeButtons(game)));
                 return true;
             }
         });

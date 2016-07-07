@@ -33,6 +33,7 @@ public abstract class MenuButtons {
     Viewport gameViewport;
     MenuCard button_1, button_2, button_3, button_4, button_5;
     ImageButton musicBtn;
+    int firstPresidentInRange;
 
     public MenuButtons(MainGame game) {
         this.game = game;
@@ -58,17 +59,11 @@ public abstract class MenuButtons {
 //        checkMusic();
     }
 
+    abstract void createAndPositionButtons();
+
     public void show(){
         Gdx.input.setInputProcessor(stage);
         addShowActions();
-    }
-
-    void createAndPositionButtons() {
-//        musicBtn = new ImageButton(new SpriteDrawable(new Sprite(
-//                new Texture("cards/card_of_president_red.png"))));
-//
-//        musicBtn.setPosition(GameInfo.WORLD_WIDTH - 13, 13, Align.bottomRight);
-
     }
 
     void addShowActions() {
@@ -88,25 +83,10 @@ public abstract class MenuButtons {
     }
 
     void addAllListeners() {
-
-//        musicBtn.addListener(new ChangeListener() {
-//            @Override
-//            public void changed(ChangeEvent event, Actor actor) {
-//                if(GameManager.getInstance().gameData.isMusicOn()) {
-//                    GameManager.getInstance().gameData.setMusicOn(false);
-//                    GameManager.getInstance().stopMusic();
-//                } else {
-//                    GameManager.getInstance().gameData.setMusicOn(true);
-//                    GameManager.getInstance().playMusic();
-//                }
-//                GameManager.getInstance().saveData();
-//            }
-//        });
     }
 
-    void hideMenu_startNewScreen(final Screen screen,  int firstPresidentInRange, int lastPresidentInRange, int quantityOfHints ) {
+    void hideMenu_startNewScreen(final Screen screen) {
         addHideActions();
-        if (lastPresidentInRange != 0) GameManager.initNewGame(firstPresidentInRange, lastPresidentInRange, quantityOfHints);
         RunnableAction run = new RunnableAction();
         run.setRunnable(new Runnable() {
             @Override
@@ -119,13 +99,6 @@ public abstract class MenuButtons {
 
     }
 
-    //
-//    void checkMusic() {
-//        if(GameManager.getInstance().gameData.isMusicOn()) {
-//            GameManager.getInstance().playMusic();
-//        }
-//    }
-//
     public Stage getStage() {
         return this.stage;
     }

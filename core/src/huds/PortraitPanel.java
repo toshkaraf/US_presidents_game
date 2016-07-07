@@ -62,7 +62,7 @@ public class PortraitPanel {
         portrait.setSize(180, 230);
         portraitCard.add(new Image(new SpriteDrawable(portrait))).padBottom(70);
         portraitCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 170, portraitCard.getY(), .5f),
-                delay(3f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), .5f)));
+                delay(1.5f), moveTo(GameInfo.WORLD_WIDTH, portraitCard.getY(), .5f)));
 
         nameCard = new Table();
         nameCard.setBackground(new SpriteDrawable(new Sprite(bgName)));
@@ -72,7 +72,7 @@ public class PortraitPanel {
                 GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getLastName(),
                 new Label.LabelStyle(GameInfo.DATE_FONT, Color.WHITE))).center();
         nameCard.addAction(sequence(moveTo(GameInfo.WORLD_WIDTH / 2 - 198, nameCard.getY(), .5f),
-                delay(3f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f), new RenderModeAction(GameManager.RenderMode.PushNewHints)));
+                delay(1.5f), moveTo(-nameCard.getWidth(), nameCard.getY(), .5f), new RenderModeAction(GameManager.RenderMode.PushNewHints)));
     }
 
     public Stage getStage() {

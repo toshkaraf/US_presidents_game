@@ -5,7 +5,23 @@ package helpers;
  */
 public class GameData {
     int highScore;
-    boolean isMusic;
+    boolean musicOn = true;
     //TODO make enum
     String level;
+
+    public boolean isMusicOn() {
+        return musicOn;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
+    }
+
+    public void setMusicOn(boolean musicOn) {
+        this.musicOn = musicOn;
+    }
 }
