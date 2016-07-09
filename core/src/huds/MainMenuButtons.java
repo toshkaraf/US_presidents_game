@@ -18,7 +18,6 @@ public class MainMenuButtons extends MenuButtons {
 
     public MainMenuButtons(MainGame game) {
         super(game);
-        checkMusic();
     }
 
     @Override
@@ -27,7 +26,7 @@ public class MainMenuButtons extends MenuButtons {
         button_2 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 + 30, "LEARN PRESIDENTS", 20);
         button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "FULL GAME", 20);
         button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "HIGH SCORE", 20);
-        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "PLAY / STOP MUSIC", 20);
+        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "SOUND SETTINGS", 20);
 
     }
 
@@ -67,24 +66,10 @@ public class MainMenuButtons extends MenuButtons {
 
         button_5.addListener(new InputListener() {
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
-                if (GameManager.getInstance().gameData.isMusicOn()) {
-                    GameManager.getInstance().gameData.setMusicOn(false);
-                    GameManager.getInstance().stopMusic();
-                } else {
-                    GameManager.getInstance().gameData.setMusicOn(true);
-                    GameManager.getInstance().playMusic();
-                }
-                GameManager.getInstance().saveData();
+                hideMenu_startNewScreen(new Menu(game, new SoundsButtons(game)));
                 return true;
             }
         });
-    }
-
-    boolean checkMusic() {
-        if (GameManager.getInstance().gameData.isMusicOn()) {
-            GameManager.getInstance().playMusic();
-        }
-        return GameManager.getInstance().gameData.isMusicOn();
     }
 
 }

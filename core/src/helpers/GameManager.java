@@ -5,6 +5,7 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.Base64Coder;
 import com.badlogic.gdx.utils.Json;
 import com.badlogic.gdx.utils.JsonValue;
 
@@ -25,28 +26,52 @@ public class GameManager {
 
     private static GameManager ourInstance = new GameManager();
     static Array<Integer> presidentsListForQuestions = new Array<Integer>();
+    private static Json json = new Json();
+    private FileHandle fileHandle = Gdx.files.local("bin/GameData.json");
     public static final President[] PRESIDENTS_ARRAY = initializePresidentsArray();
     public static int firstPresidentInRange; // number in array (from 0)
     public static int lastPresidentInRange; // number in array
     public static int currentRightPresident; // number in array
     public static int quantityOfHints;
     public static RenderMode renderMode;
-    public GameData gameData =  new GameData();
-    private Json json = new Json();
-    private FileHandle fileHandle = Gdx.files.local("bin/GameData.json");
+    public GameData gameData = new GameData();
     public Sound[] rightSounds = new Sound[6];
     public Sound[] wrongSounds = new Sound[6];
     int soundsCounter = 0;
 
+    private GameManager() {
+    }
 
-    public GameManager() {
+    public void initializeGameData() {
+        if (!fileHandle.exists()) {
+            gameData = new GameData();
+            gameData.setHighScore(0);
+            gameData.setSounds(true);
+            gameData.setMusicOn(true);
+            saveData();
+        } else
+            loadData();
 
+        if (GameManager.getInstance().gameData.isMusicOn())
+            GameManager.getInstance().playMusic();
+        if (GameManager.getInstance().gameData.isSounds())
+            GameManager.getInstance().initSounds();
+    }
+
+    public void saveData() {
+        if (gameData != null) {
+            fileHandle.writeString(Base64Coder.encodeString(json.prettyPrint(gameData)), false);
+        }
+    }
+
+    public void loadData() {
+        gameData = json.fromJson(GameData.class, Base64Coder.decodeString(fileHandle.readString()));
     }
 
     private static President[] initializePresidentsArray() {
         President[] presidentsArray = new President[44];
 
-        Json json = new Json();
+//        Json json = new Json();
         int presidentNumber = 0;
         Array<JsonValue> list = json.fromJson(Array.class, Gdx.files.internal("data/presidents.json"));
         for (JsonValue v : list) {
@@ -55,10 +80,17 @@ public class GameManager {
         return presidentsArray;
     }
 
-    void initSounds(){
-        for (int i = 0; i <6; i++){
+    public void initSounds() {
+        for (int i = 0; i < 6; i++) {
             rightSounds[i] = Gdx.audio.newSound(Gdx.files.internal("Sounds/right_answer/" + i + ".wav"));
             wrongSounds[i] = Gdx.audio.newSound(Gdx.files.internal("Sounds/wrong_answer/" + i + ".wav"));
+        }
+    }
+
+    public void disposeSounds() {
+        for (int i = 0; i < 6; i++) {
+            rightSounds[i].dispose();
+            wrongSounds[i].dispose();
         }
     }
 
@@ -128,12 +160,12 @@ public class GameManager {
     }
 
     public void playMusic() {
-        if(music == null) {
+        if (music == null) {
             music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Manhattan_Beach.mp3"));
-            initSounds();
         }
 
-        if(!music.isPlaying()) {
+        if (!music.isPlaying()) {
+            music = Gdx.audio.newMusic(Gdx.files.internal("Sounds/Manhattan_Beach.mp3"));
             music.setLooping(true);
             music.setVolume(.4f);
             music.play();
@@ -142,13 +174,10 @@ public class GameManager {
     }
 
     public void stopMusic() {
-        if(music.isPlaying()) {
+        if (music.isPlaying()) {
             music.stop();
             music.dispose();
         }
-    }
-
-    public void saveData() {
     }
 
     public static GameManager getInstance() {

@@ -5,9 +5,16 @@ package helpers;
  */
 public class GameData {
     int highScore;
-    boolean musicOn = true;
-    //TODO make enum
-    String level;
+    boolean musicOn;
+    boolean sounds = true;
+
+    public boolean isSounds() {
+        return sounds;
+    }
+
+    public void setSounds(boolean sounds) {
+        this.sounds = sounds;
+    }
 
     public boolean isMusicOn() {
         return musicOn;

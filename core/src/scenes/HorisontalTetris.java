@@ -113,11 +113,11 @@ public class HorisontalTetris implements Screen, InputProcessor {
                 if (!switcher) {
                     switcher = true;
                     if (isRightAnswer) {
-                        GameManager.getInstance().getRightSound().play(1f);
+                        if (GameManager.getInstance().gameData.isSounds()) GameManager.getInstance().getRightSound().play(1f);
                         decoratorWithCards.pushRightNameCardIfRightAnswer();
                         scorePanel.incrementScore(100);
                     } else {
-                        GameManager.getInstance().getWrongSound().play(1f);
+                        if (GameManager.getInstance().gameData.isSounds()) GameManager.getInstance().getWrongSound().play(1f);
                         decoratorWithCards.showRightNameCardIfWrongAnswer();
                         scorePanel.decrementLife();
                         if (GameManager.getInstance().life == 0) gameOver();
@@ -240,17 +240,14 @@ public class HorisontalTetris implements Screen, InputProcessor {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

@@ -22,7 +22,7 @@ public class MainGame extends Game {
     public void create() {
         initAssetManager();
         new GameInfo(this);
-        new GameManager(); //initialize PRESIDENTS_ARRAY
+        GameManager.getInstance().initializeGameData();
         batch = new SpriteBatch();
         setScreen(new Menu(this, new MainMenuButtons(this)));
 

@@ -48,15 +48,15 @@ public abstract class MenuButtons {
 
         createAndPositionButtons();
         addAllListeners();
+        addActorsToStage();
+    }
 
+    void addActorsToStage() {
         stage.addActor(button_1);
         stage.addActor(button_2);
         stage.addActor(button_3);
         stage.addActor(button_4);
         stage.addActor(button_5);
-
-//        stage.addActor(musicBtn);
-//        checkMusic();
     }
 
     abstract void createAndPositionButtons();

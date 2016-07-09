@@ -25,7 +25,7 @@ public class LearnModeButtons extends MenuButtons {
         button_2 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 + 30, "Presidents from 1850 to 1900", 20);
         button_3 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 30, "Presidents from 1900 to 1950", 20);
         button_4 = new MenuCard(blueCard, 800, GameInfo.WORLD_HEIGHT / 2 - 90, "Presidents after 1950", 20);
-        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "Back", 20);
+        button_5 = new MenuCard(redCard, -400, GameInfo.WORLD_HEIGHT / 2 - 150, "Main menu", 20);
     }
 
     @Override
