@@ -31,7 +31,9 @@ public class DecoratorChooseFromAll extends DecoratorWIthCards {
     void initCardsArrays() {
         for (int a = GameManager.firstPresidentInRange; a <= GameManager.lastPresidentInRange; a++) {
             numberCardsArray.addActor(new NumberCard(blueCard, a));
-            presidentCardsArray.addActor(new DatesCard(redCard, GameManager.TypeOfCard.RedDate, a));
+            DatesCard dateCard = new DatesCard(redCard, GameManager.TypeOfCard.RedDate, a);
+            dateCard.push();
+            presidentCardsArray.addActor(dateCard);
         }
         numberCardsArray.setBounds(numberCardsArray.getX(), numberCardsArray.getY(), numberCardsArray.getWidth(), numberCardsArray.getHeight());
         numberCardsArray.setPosition(-400, 0);

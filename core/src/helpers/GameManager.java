@@ -108,9 +108,6 @@ public class GameManager {
 
     public static boolean initNewGame() {
         renderMode = RenderMode.PrepareField;
-//        GameManager.firstPresidentInRange = firstPresidentInRange - 1;
-//        GameManager.lastPresidentInRange = lastPresidentInRange - 1;
-//        GameManager.quantityOfHints = quantityOfHints;
         if (presidentsListForQuestions.size != 0) presidentsListForQuestions.clear();
         initPresidentsListForQuestionsArray();
         return true;

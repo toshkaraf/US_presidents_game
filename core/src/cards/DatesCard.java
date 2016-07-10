@@ -42,7 +42,6 @@ public class DatesCard extends Table {
         }
         setBounds(getX(), getY(), card.getWidth(), card.getHeight());
         setPosition(GameInfo.WORLD_WIDTH, (numberOfPresident - GameManager.firstPresidentInRange) * card.getHeight());
-//        push();
     }
 
     public void push() {

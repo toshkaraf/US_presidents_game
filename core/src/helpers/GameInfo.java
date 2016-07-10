@@ -13,13 +13,13 @@ public class GameInfo {
     public static final int WORLD_WIDTH = 800;
     public static final int WORLD_HEIGHT = 480;
 
-    public static final float STEP_FOR_MENU = 15;
+    public static final float HIGH_OF_CARD = 60;
 
     public static final float STEP_FOR_TETRIS_X = 5;
     public static final float SLOW_STEP_FOR_TETRIS_Y = 0.1f;
     public static final float FAll_STEP_FOR_TETRIS_Y = 20f;
 
-    public static final float STEP_FOR_TETRIS_Y = 10;
+    public static final float STEP_FOR_TETRIS_Y = 60;
     public static final float SLOW_STEP_FOR_TETRIS_X = 0.3f;
     public static final float FAll_STEP_FOR_TETRIS_X = 20f;
 

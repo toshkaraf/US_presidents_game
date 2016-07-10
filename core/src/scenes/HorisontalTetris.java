@@ -40,6 +40,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
     MainGame game;
     protected boolean isUpMove, isDownMove;
     private Sound victorySound;
+    private int playerMoveDelayCounter = 0;
 
 
     public HorisontalTetris(MainGame game) {
@@ -63,11 +64,13 @@ public class HorisontalTetris implements Screen, InputProcessor {
         background = new Sprite(bg, 0, bg.getHeight() - Math.round(GameManager.lastPresidentInRange * 60 + 60),
                 GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
+        player.setSize(142,60);
         batch = game.getBatch();
         camera = decoratorWithCards.getCamera();
-        camera.position.set(background.getWidth() / 2, background.getHeight() / 2, 0);
-        viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
         setInitialPlayerPosition();
+        camera.position.set(background.getWidth() / 2,player.getY(), 0);
+        viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
+
     }
 
     @Override
@@ -97,7 +100,11 @@ public class HorisontalTetris implements Screen, InputProcessor {
                     batch.begin();
                     batch.draw(player, player.getX(), player.getY());
                     batch.end();
-                    updatePlayer();
+                    updatePlayerX();
+                    if (playerMoveDelayCounter == 5) {
+                        playerMoveDelayCounter = 0;
+                        updatePlayerY();
+                    }else playerMoveDelayCounter++;
                 } else {
                     GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
                     isPlayerFlinged = false;
@@ -201,8 +208,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
         }
     }
 
-    void updatePlayer() {
-        player.setX(player.getX() + GameInfo.SLOW_STEP_FOR_TETRIS_X);
+    void updatePlayerY() {
 
         if (isUpMove && player.getY() < background.getHeight() - player.getHeight()) {
             player.setY(player.getY() + GameInfo.STEP_FOR_TETRIS_Y);
@@ -218,8 +224,12 @@ public class HorisontalTetris implements Screen, InputProcessor {
         }
     }
 
+    void updatePlayerX(){
+        player.setX(player.getX() + GameInfo.SLOW_STEP_FOR_TETRIS_X);
+    }
+
     void setInitialPlayerPosition() {
-        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER, background.getHeight() / 2 - player.getHeight() / 2);
+        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER,(GameManager.lastPresidentInRange - GameManager.firstPresidentInRange)/2*GameInfo.HIGH_OF_CARD);
         Gdx.input.setInputProcessor(this);
     }
 
