@@ -54,9 +54,9 @@ public class DecoratorWIthCards {
         redCard = new Sprite(atlas.findRegion("card_of_president_red"));
         blueCard = new Sprite(atlas.findRegion("card_of_president"));
         purpleCard = new Sprite(atlas.findRegion("card_of_president_purple"));
-//        redCardDate = new Sprite(atlas.findRegion("card_of_president_red_date"));
-//        blueCardDate = new Sprite(atlas.findRegion("card_of_president_blue_date"));
-//        purpleCardDate = new Sprite(atlas.findRegion("card_of_president_purple_date"));
+        redCard.setSize(GameInfo.CARD_WIDTH,GameInfo.CARD_HEIGHT);
+        blueCard.setSize(GameInfo.CARD_WIDTH,GameInfo.CARD_HEIGHT);
+        purpleCard.setSize(GameInfo.CARD_WIDTH,GameInfo.CARD_HEIGHT);
 
         batch = game.getBatch();
         camera = new OrthographicCamera();

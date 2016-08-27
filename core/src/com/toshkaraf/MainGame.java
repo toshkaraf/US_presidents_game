@@ -2,14 +2,11 @@ package com.toshkaraf;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.assets.AssetManager;
-import com.badlogic.gdx.assets.loaders.BitmapFontLoader;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import helpers.GameInfo;
 import helpers.GameManager;
-import huds.LearnModeButtons;
 import huds.MainMenuButtons;
 import scenes.Menu;
 

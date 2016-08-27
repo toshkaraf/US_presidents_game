@@ -8,18 +8,21 @@ public class GameInfo {
 
     public static BitmapFont DATE_FONT,NAME_FONT;
 
-    public static final int TETRIS_FULL_BACKGROUND_HEIGHT = 2652;
-
     public static final int WORLD_WIDTH = 800;
     public static final int WORLD_HEIGHT = 480;
 
-    public static final float HIGH_OF_CARD = 60;
+    public static final float RESIZE_PROPORTION_X = (float)Gdx.graphics.getWidth()/(float)WORLD_WIDTH;
+    public static final float RESIZE_PROPORTION_Y = (float)Gdx.graphics.getHeight()/(float)WORLD_HEIGHT;
+
+    public static final int TETRIS_FULL_BACKGROUND_HEIGHT = 2652;
+
+    public static final float CARD_HEIGHT = 60;
+    public static final float CARD_WIDTH = 396;
 
     public static final float STEP_FOR_TETRIS_X = 5;
-    public static final float SLOW_STEP_FOR_TETRIS_Y = 0.1f;
-    public static final float FAll_STEP_FOR_TETRIS_Y = 20f;
+    public static final float SLOW_STEP_FOR_TETRIS_Y = 20f;
 
-    public static final float STEP_FOR_TETRIS_Y = 60;
+    public static final float STEP_FOR_TETRIS_Y = GameInfo.CARD_HEIGHT;
     public static final float SLOW_STEP_FOR_TETRIS_X = 0.3f;
     public static final float FAll_STEP_FOR_TETRIS_X = 20f;
 
@@ -34,7 +37,7 @@ public class GameInfo {
 //        DATE_FONT = game.getAssetManager().get("fonts/CardArialFont.fnt");
 //        DATE_FONT = new BitmapFont(Gdx.files.internal("fonts/CardArialFont.fnt"));
         DATE_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 20);
-        NAME_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 40);
+        NAME_FONT = MyFontGenerator.getFont("fonts/arial.ttf", 30);
 
     }
 }

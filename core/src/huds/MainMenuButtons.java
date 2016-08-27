@@ -37,6 +37,8 @@ public class MainMenuButtons extends MenuButtons {
         button_1.addListener(new InputListener() {
             @Override
             public boolean touchDown(InputEvent event, float x, float y, int pointer, int buttons) {
+                GameManager.setFirstPresidentInRange(1);
+                GameManager.setLastPresidentInRange(44);
                 hideMenu_startNewScreen(new TetrisReview(game));
                 return true;
             }

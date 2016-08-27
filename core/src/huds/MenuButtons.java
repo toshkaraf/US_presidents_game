@@ -32,14 +32,20 @@ public abstract class MenuButtons {
     Stage stage;
     Viewport gameViewport;
     MenuCard button_1, button_2, button_3, button_4, button_5;
-    ImageButton musicBtn;
-    int firstPresidentInRange;
 
     public MenuButtons(MainGame game) {
         this.game = game;
 
-        redCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president_red.png")));
-        blueCard = new Sprite(new Texture(Gdx.files.internal("cards/card_of_president.png")));
+
+Texture redTex = new Texture(Gdx.files.internal("cards/card_of_president_red.png"));
+//        redTex.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        redCard = new Sprite(redTex);
+        Texture blueTEx = new Texture(Gdx.files.internal("cards/card_of_president.png"));
+        blueTEx.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
+        blueCard = new Sprite(blueTEx);
+
+        redCard.setSize(GameInfo.CARD_WIDTH,GameInfo.CARD_HEIGHT);
+        blueCard.setSize(GameInfo.CARD_WIDTH,GameInfo.CARD_HEIGHT);
 
         gameViewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT,
                 new OrthographicCamera());

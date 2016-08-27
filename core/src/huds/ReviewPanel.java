@@ -1,5 +1,6 @@
 package huds;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -55,22 +56,24 @@ public class ReviewPanel {
         Table topPart = new Table();
 //        topPart.setDebug(true);
             portrait = new Sprite(new Texture(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getPortraitFileName()));
-            portrait.setSize(180, 230);
+//            portrait.setSize(180, 230);
+            if (Gdx.graphics.getWidth()/Gdx.graphics.getHeight() > GameInfo.WORLD_WIDTH/GameInfo.WORLD_HEIGHT)
+                portrait.setSize(180/GameInfo.RESIZE_PROPORTION_X*GameInfo.RESIZE_PROPORTION_Y, 230);
+            else portrait.setSize(180, portrait.getHeight()/GameInfo.RESIZE_PROPORTION_Y*GameInfo.RESIZE_PROPORTION_X);
 
             Table mainInfo = new Table();
                 Label labelDate = new Label(GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getInitialDate() + " - " +
-                GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getFinalDate() + "\n", new Label.LabelStyle(GameInfo.DATE_FONT, Color.RED));
-                labelDate.scaleBy(2,2);
+                GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getFinalDate() + "\n", new Label.LabelStyle(GameInfo.NAME_FONT, Color.RED));
                 labelDate.setAlignment(Align.center);
                 mainInfo.add(labelDate);
                 mainInfo.row();
                 Label info = new Label("Age: " + GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getAge() +
-                "\n\nParty: " + GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getParty(),
-                new Label.LabelStyle(GameInfo.DATE_FONT, Color.WHITE));
+                "\nParty: " + GameManager.PRESIDENTS_ARRAY[GameManager.currentRightPresident].getParty(),
+                new Label.LabelStyle(GameInfo.NAME_FONT, Color.WHITE));
                 info.setAlignment(Align.center);
                 mainInfo.add(info);
             topPart.add(new Image(new SpriteDrawable(portrait))).expand();
-            topPart.add(mainInfo).expandX().padTop(80).padRight(45);
+            topPart.add(mainInfo).expandX().padTop(90).padRight(45);
         reviewCard.add(topPart).expand().fill();
         reviewCard.row();
 

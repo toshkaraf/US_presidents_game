@@ -10,6 +10,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.toshkaraf.MainGame;
@@ -41,6 +42,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
     protected boolean isUpMove, isDownMove;
     private Sound victorySound;
     private int playerMoveDelayCounter = 0;
+    Vector3 worldCoordinates;
 
 
     public HorisontalTetris(MainGame game) {
@@ -55,20 +57,17 @@ public class HorisontalTetris implements Screen, InputProcessor {
         if (GameManager.quantityOfHints == 0) decoratorWithCards = new DecoratorChooseFromAll(game);
         else decoratorWithCards = new DecoratorWIthCards(game);
 
-//        victorySound = Gdx.audio.newSound(Gdx.files.internal("Sounds/Coin Sound.wav"));
-
         portraitPanel = new PortraitPanel(game);
         scorePanel = new ScorePanel(game);
 
         bg = new Texture(Gdx.files.internal("Backgrounds/USAPresidentsBackground.png"));
-        background = new Sprite(bg, 0, bg.getHeight() - Math.round(GameManager.lastPresidentInRange * 60 + 60),
-                GameInfo.WORLD_WIDTH, Math.round(60 * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
+        background = new Sprite(bg, 0, bg.getHeight() - Math.round(GameManager.lastPresidentInRange * GameInfo.CARD_HEIGHT + GameInfo.CARD_HEIGHT),
+                GameInfo.WORLD_WIDTH, Math.round(GameInfo.CARD_HEIGHT * (GameManager.lastPresidentInRange - GameManager.firstPresidentInRange + 1)));
         player = new Sprite(new Texture(Gdx.files.internal("players/arrowUSA.png")));
         player.setSize(142,60);
         batch = game.getBatch();
         camera = decoratorWithCards.getCamera();
         setInitialPlayerPosition();
-        camera.position.set(background.getWidth() / 2,player.getY(), 0);
         viewport = new StretchViewport(GameInfo.WORLD_WIDTH, GameInfo.WORLD_HEIGHT, camera);
 
     }
@@ -103,7 +102,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
                     updatePlayerX();
                     if (playerMoveDelayCounter == 5) {
                         playerMoveDelayCounter = 0;
-                        updatePlayerY();
+                        updatePlayerAndCamY();
                     }else playerMoveDelayCounter++;
                 } else {
                     GameManager.renderMode = GameManager.RenderMode.MoveCamToRightAnswer;
@@ -208,7 +207,7 @@ public class HorisontalTetris implements Screen, InputProcessor {
         }
     }
 
-    void updatePlayerY() {
+    void updatePlayerAndCamY() {
 
         if (isUpMove && player.getY() < background.getHeight() - player.getHeight()) {
             player.setY(player.getY() + GameInfo.STEP_FOR_TETRIS_Y);
@@ -229,13 +228,14 @@ public class HorisontalTetris implements Screen, InputProcessor {
     }
 
     void setInitialPlayerPosition() {
-        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER,(GameManager.lastPresidentInRange - GameManager.firstPresidentInRange)/2*GameInfo.HIGH_OF_CARD);
+        player.setPosition(GameInfo.START_X_POSITION_OF_TETRIS_PLAYER,(GameManager.lastPresidentInRange - GameManager.firstPresidentInRange)/2*GameInfo.CARD_HEIGHT);
+        camera.position.set(background.getWidth() / 2,player.getY(), 0);
         Gdx.input.setInputProcessor(this);
     }
 
     boolean checkAnswer() {
-        return ((player.getY() + 29 >= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 &&
-                (player.getY() + 29 <= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * 60 + 60)));
+        return ((player.getY() + 29 >= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * GameInfo.CARD_HEIGHT &&
+                (player.getY() + 29 <= (GameManager.currentRightPresident - GameManager.firstPresidentInRange) * GameInfo.CARD_HEIGHT + GameInfo.CARD_HEIGHT)));
     }
 
     void gameOver() {
@@ -285,16 +285,17 @@ public class HorisontalTetris implements Screen, InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        //TODO convert screen to world coordinates
-        if (screenY > GameInfo.WORLD_HEIGHT / 2 && screenX < GameInfo.WORLD_WIDTH) {
-            isDownMove = true;
-            return true;
-        }
-        if (screenY < GameInfo.WORLD_HEIGHT / 2 && screenX < GameInfo.WORLD_WIDTH) {
-            isUpMove = true;
-            return true;
-        }
-        if (screenX > GameInfo.WORLD_WIDTH / 2) {
+        worldCoordinates = camera.unproject(new Vector3(screenX, screenY, 0));
+        if (worldCoordinates.x < GameInfo.WORLD_WIDTH/2) {
+            if (worldCoordinates.y < camera.position.y) {
+                isDownMove = true;
+                return true;
+            }
+            if (worldCoordinates.y > camera.position.y) {
+                isUpMove = true;
+                return true;
+            }
+        }else {
             isPlayerFlinged = true;
             return true;
         }

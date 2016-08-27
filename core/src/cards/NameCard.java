@@ -25,7 +25,7 @@ public class NameCard extends Table {
         this.left();
         Label label = new Label(GameManager.PRESIDENTS_ARRAY[numberOfPresident].getFirstName() +
                 " " + GameManager.PRESIDENTS_ARRAY[numberOfPresident].getLastName(),
-                new Label.LabelStyle(GameInfo.DATE_FONT, Color.BLUE));
+                new Label.LabelStyle(GameInfo.NAME_FONT, Color.BLUE));
         add(label).padRight(10);
         DatesCard datesCard = new DatesCard(card, GameManager.TypeOfCard.BlueDate, numberOfPresident);
         add(datesCard);

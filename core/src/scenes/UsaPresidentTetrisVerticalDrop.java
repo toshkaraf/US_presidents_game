@@ -57,7 +57,7 @@
 //            batch.setTransformMatrix(camera.view);
 //            batch.begin();
 //            batch.draw(background, 0, 0);
-//            updatePlayerY();
+//            updatePlayerAndCamY();
 //            batch.draw(player, player.getX(), player.getY());
 //            batch.end();
 //        } else presidentIsDone();
@@ -111,7 +111,7 @@
 //
 //    }
 //
-//    private void updatePlayerY() {
+//    private void updatePlayerAndCamY() {
 //        player.setY(player.getY() - GameInfo.SLOW_STEP_FOR_TETRIS_Y);
 //    }
 //
