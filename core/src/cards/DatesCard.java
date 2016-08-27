@@ -21,6 +21,8 @@ public class DatesCard extends Table {
     public DatesCard(Sprite card, GameManager.TypeOfCard typeOfCard, int numberOfPresident) {
         super();
 
+        card.setSize(GameInfo.CARD_WIDTH,GameInfo.CARD_HEIGHT);
+
         if (typeOfCard == GameManager.TypeOfCard.BlueDate)
             setName("blue_date_of_" + numberOfPresident);
         else setName("red_date_of_" + numberOfPresident);

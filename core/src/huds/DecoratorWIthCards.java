@@ -37,7 +37,6 @@ public class DecoratorWIthCards {
     Sprite blueCard;
     Sprite redCard;
     Sprite purpleCard;
-    private Sprite backgroundSprite;
     private Viewport gameViewport;
     Group presidentCardsArray;
     GameManager.TypeOfCard[] presidentsArray = new GameManager.TypeOfCard[44];
@@ -175,10 +174,6 @@ public class DecoratorWIthCards {
 
     public Stage getStage() {
         return stage;
-    }
-
-    public Sprite getBackgroundSprite() {
-        return backgroundSprite;
     }
 
     public OrthographicCamera getCamera() {
